@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 1004899466}
   - component: {fileID: 1004899465}
   m_Layer: 0
-  m_Name: New Sprite
+  m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -350,6 +350,7 @@ MonoBehaviour:
   playerHp: 0
   speed: 10
   jumpPower: 10
+  dashPower: 2
 --- !u!1 &1903240817
 GameObject:
   m_ObjectHideFlags: 0
