@@ -8,11 +8,13 @@ public class playerBehaviour : MonoBehaviour
     [SerializeField] int speed = 10;
     [SerializeField] int jumpPower = 10;
     [SerializeField] int dashPower = 20;
-    [SerializeField] Collider collider;
+    [SerializeField] int SkillTime = 1;
+    Vector2 gravity2D;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        gravity2D = Physics2D.gravity;
     }
 
     // Update is called once per frame
@@ -41,8 +43,15 @@ public class playerBehaviour : MonoBehaviour
         //부유 스킬
         if (SkillNum == 1) {
             Physics2D.gravity = Vector2.zero;
+            Invoke("returnGravity", SkillTime);
         }
     
+
+    }
+
+    void returnGravity(){
+        Physics2D.gravity = gravity2D;
+
     }
 
     void Move() {
