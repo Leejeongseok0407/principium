@@ -6,6 +6,7 @@ public class playerBehaviour : MonoBehaviour
 {
     [SerializeField] int playerHp;
     [SerializeField] int speed = 10;
+    [SerializeField] int jumpPower = 10;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,9 +34,6 @@ public class playerBehaviour : MonoBehaviour
         float keyHorizontal = Input.GetAxis("Horizontal");
         float keyVertical = Input.GetAxis("Vertical");
         transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
-        transform.Translate(Vector3.up * speed * Time.smoothDeltaTime * keyVertical, Space.World);
-
-
-
+        transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
     }
 }
