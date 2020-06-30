@@ -10,6 +10,7 @@ public class playerBehaviour : MonoBehaviour
     [SerializeField] int dashPower = 20;
     [SerializeField] int SkillTime = 1;
     Vector2 gravity2D;
+    bool gravityOn = true;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,7 @@ public class playerBehaviour : MonoBehaviour
         //부유 스킬
         if (SkillNum == 1) {
             Physics2D.gravity = Vector2.zero;
+            gravityOn = false;
             Invoke("returnGravity", SkillTime);
         }
     
@@ -51,13 +53,21 @@ public class playerBehaviour : MonoBehaviour
 
     void returnGravity(){
         Physics2D.gravity = gravity2D;
+        gravityOn = true;
 
     }
 
-    void Move() {
+    void Move()
+    {
         float keyHorizontal = Input.GetAxis("Horizontal");
         float keyVertical = Input.GetAxis("Vertical");
         transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
-        transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
+        if (gravityOn){
+            if(keyVertical > 0)
+            transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
+        }
+        else
+            transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
+
     }
 }
