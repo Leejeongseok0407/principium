@@ -8,6 +8,7 @@ public class playerBehaviour : MonoBehaviour
     [SerializeField] int speed = 10;
     [SerializeField] int jumpPower = 10;
     [SerializeField] int dashPower = 20;
+    [SerializeField] Collider collider;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class playerBehaviour : MonoBehaviour
         Move();
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            PlayerSkill(0);
+            PlayerSkill(1);
         }
     }
 
@@ -36,6 +37,10 @@ public class playerBehaviour : MonoBehaviour
         if (SkillNum == 0){
             float keyHorizontal = Input.GetAxis("Horizontal");
             transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
+        }
+        //부유 스킬
+        if (SkillNum == 1) {
+            Physics2D.gravity = Vector2.zero;
         }
     
     }
