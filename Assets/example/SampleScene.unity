@@ -352,6 +352,7 @@ MonoBehaviour:
   jumpPower: 10
   dashPower: 2
   SkillTime: 5
+  jumpMaxCount: 2
 --- !u!1 &1730584534
 GameObject:
   m_ObjectHideFlags: 0
@@ -485,9 +486,10 @@ GameObject:
   - component: {fileID: 1903240819}
   - component: {fileID: 1903240818}
   - component: {fileID: 1903240820}
+  - component: {fileID: 1903240821}
   m_Layer: 0
-  m_Name: flower
-  m_TagString: Untagged
+  m_Name: Ground
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -582,3 +584,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.999999, y: 7.0712886}
   m_EdgeRadius: 0
+--- !u!50 &1903240821
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1903240817}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
