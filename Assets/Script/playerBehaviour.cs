@@ -69,7 +69,7 @@ public class playerBehaviour : MonoBehaviour
             Physics2D.gravity = Vector2.zero;
             rigidbody.velocity = new Vector2(0, 0);
             gravityOn = false;
-            ani.SetBool("Fly", true);
+            ani.SetBool("IsFly", true);
             ani.SetBool("IsGround", false);
             //SkillTime뒤에 중력다시줌
             Invoke("ReturnGravity", skillTime);
@@ -82,7 +82,7 @@ public class playerBehaviour : MonoBehaviour
     {
         Physics2D.gravity = gravity2D;
         gravityOn = true;
-        ani.SetBool("Fly", false);
+        ani.SetBool("ISFly", false);
     }
 
     void Jump() {
