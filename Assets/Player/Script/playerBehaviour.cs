@@ -116,7 +116,7 @@ public class playerBehaviour : MonoBehaviour
         if (Physics2D.Raycast(transform.position , Vector2.down, transform.localScale.y, maskGround))
         {
             //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
-            Debug.DrawRay(transform.position, Vector2.dow, Color.blue, 1f);
+            Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1f);
             //Ground에 닿으면 isGround는 true
             isGrounded = true;
             //Ground에 닿으면 점프횟수가 max치로로 초기화됨
