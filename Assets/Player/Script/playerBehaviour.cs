@@ -10,10 +10,11 @@ public class playerBehaviour : MonoBehaviour
     [SerializeField] int jumpPower = 10;
     [SerializeField] int dashPower = 20;
     [SerializeField] int SkillTime = 1;
-    [SerializeField] int jumpMaxCount = 2;
-    int jumpCount;
+    [SerializeField] int maxJumpCount = 1;
+    [SerializeField] LayerMask maskGround;
     Rigidbody2D rigidbody;
     Vector2 gravity2D;
+    int jumpCount;
     bool gravityOn = true;
     bool isGrounded = false;
     float keyHorizontal;
@@ -22,7 +23,7 @@ public class playerBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        jumpCount = jumpMaxCount;
+        jumpCount = maxJumpCount;
         gravity2D = Physics2D.gravity;
         rigidbody = GetComponent<Rigidbody2D>();
     }
@@ -32,11 +33,14 @@ public class playerBehaviour : MonoBehaviour
     {
         keyHorizontal = Input.GetAxis("Horizontal");
         keyVertical = Input.GetAxis("Vertical");
+        outRay();
+        Move();
     }
     void FixedUpdate()
     {
-        Move();
 
+        Debug.Log(jumpCount);
+        Debug.Log(isGrounded);
         if (Input.GetButtonDown("SkillKey"))
         {
             PlayerSkill(1);
@@ -83,10 +87,16 @@ public class playerBehaviour : MonoBehaviour
             //키메니저에 있는 input에서 Jump input실행
             if (Input.GetButtonDown("Jump"))
             {
-                Debug.Log(jumpCount);
                 if (jumpCount > 0)
                 {
+                    //한번 점프 했을때 
+                    if (!isGrounded)
+                    {
+                        //가속도를 초기화 해줘서 점프를 낮게 하거나 안하는 것을 막아줌
+                        rigidbody.velocity = new Vector2(0, 0);
+                    }
                     rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                    isGrounded = false;
                     jumpCount--;
                 }
             }
@@ -99,18 +109,19 @@ public class playerBehaviour : MonoBehaviour
 
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("트리거");
-        if (collision.gameObject.CompareTag("Ground"))
+
+    void outRay() {
+        //레이케스트 사용 
+        //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
+        if (Physics2D.Raycast(transform.position , Vector2.down, transform.localScale.y, maskGround))
         {
-            Debug.Log("닿음");
-        }
-        if (collision.gameObject.tag == "Ground")
-        {
-            Debug.Log("땅에에 닿음");
-            isGrounded = true;    //Ground에 닿으면 isGround는 true
-            jumpCount = 2;          //Ground에 닿으면 점프횟수가 2로 초기화됨
+            //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
+            Debug.DrawRay(transform.position, Vector2.dow, Color.blue, 1f);
+            //Ground에 닿으면 isGround는 true
+            isGrounded = true;
+            //Ground에 닿으면 점프횟수가 max치로로 초기화됨
+            jumpCount = maxJumpCount;       
         }
     }
+
 }
