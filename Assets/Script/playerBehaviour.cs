@@ -12,6 +12,7 @@ public class playerBehaviour : MonoBehaviour
     [SerializeField] int skillTime = 1;
     [SerializeField] int maxJumpCount = 1;
     [SerializeField] LayerMask maskGround;
+    [SerializeField] Animator ani;
     Rigidbody2D rigidbody;
     Vector2 gravity2D;
     int jumpCount;
@@ -68,6 +69,8 @@ public class playerBehaviour : MonoBehaviour
             Physics2D.gravity = Vector2.zero;
             rigidbody.velocity = new Vector2(0, 0);
             gravityOn = false;
+            ani.SetBool("Fly", true);
+            ani.SetBool("IsGround", false);
             //SkillTime뒤에 중력다시줌
             Invoke("ReturnGravity", skillTime);
         }
@@ -79,6 +82,7 @@ public class playerBehaviour : MonoBehaviour
     {
         Physics2D.gravity = gravity2D;
         gravityOn = true;
+        ani.SetBool("Fly", false);
     }
 
     void Jump() {
@@ -88,6 +92,8 @@ public class playerBehaviour : MonoBehaviour
             //키메니저에 있는 input에서 Jump input실행
             if (Input.GetButtonDown("Jump"))
             {
+                ani.SetBool("IsJump", true);
+                ani.SetBool("IsGround", false);
                 if (jumpCount > 0)
                 {
                     //한번 점프 했을때 
@@ -99,6 +105,7 @@ public class playerBehaviour : MonoBehaviour
                     rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                     isGrounded = false;
                     jumpCount--;
+
                 }
             }
         }
@@ -124,17 +131,21 @@ public class playerBehaviour : MonoBehaviour
 
     }
 
-    void OutRay() {
+    void OutRay()
+    {
         //레이케스트 사용 
         //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
-        if (Physics2D.Raycast(transform.position , Vector2.down, transform.localScale.y, maskGround))
+        if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskGround))
         {
             //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
             Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1f);
             //Ground에 닿으면 isGround는 true
             isGrounded = true;
             //Ground에 닿으면 점프횟수가 max치로로 초기화됨
-            jumpCount = maxJumpCount;       
+            jumpCount = maxJumpCount;
+            //점프 하지 않는다는걸 알려줌
+            ani.SetBool("IsJump", false);
+            ani.SetBool("IsGround", true);
         }
     }
 
