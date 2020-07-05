@@ -9,7 +9,7 @@ public class playerBehaviour : MonoBehaviour
     [SerializeField] int speed = 10;
     [SerializeField] int jumpPower = 10;
     [SerializeField] int dashPower = 20;
-    [SerializeField] int SkillTime = 1;
+    [SerializeField] int skillTime = 1;
     [SerializeField] int maxJumpCount = 1;
     [SerializeField] LayerMask maskGround;
     Rigidbody2D rigidbody;
@@ -31,16 +31,18 @@ public class playerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        keyHorizontal = Input.GetAxis("Horizontal");
+        //Horizontal은 정수만 받게함
+        keyHorizontal = Input.GetAxisRaw("Horizontal");
         keyVertical = Input.GetAxis("Vertical");
-        outRay();
-        Move();
+        OutRay();
+        Jump();
     }
     void FixedUpdate()
     {
 
         Debug.Log(jumpCount);
         Debug.Log(isGrounded);
+        Move();
         if (Input.GetButtonDown("SkillKey"))
         {
             PlayerSkill(1);
@@ -51,36 +53,35 @@ public class playerBehaviour : MonoBehaviour
     //플레이어 스킬을 1~7까지 만드는게 좋을듯.
     //아니면 플레이어 스킬을 2~3가지 넣어서 한번에 2~3가지 실행
     //이건 기획을봐야함.
-    void PlayerSkill(int SkillNum)
+    void PlayerSkill(int skillNum)
     {
         //대쉬 스킬
-        if (SkillNum == 0)
+        if (skillNum == 0)
         {
+            //대쉬 파워만큼 앞으로 이동시킴
             transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
         }
         //부유 스킬
-        if (SkillNum == 1)
+        if (skillNum == 1)
         {
+            //중력값을 0으로 초기화 해주고, 가속도를 제거한 뒤에, bool값을 통해 스킬이 켜짐을 알려줌
             Physics2D.gravity = Vector2.zero;
+            rigidbody.velocity = new Vector2(0, 0);
             gravityOn = false;
-            Invoke("returnGravity", SkillTime);
+            //SkillTime뒤에 중력다시줌
+            Invoke("ReturnGravity", skillTime);
         }
 
 
     }
 
-    void returnGravity()
+    void ReturnGravity()
     {
         Physics2D.gravity = gravity2D;
         gravityOn = true;
     }
 
-    void Move()
-    {
-        //좌우 이동
-        transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
-
-        //상하 이동
+    void Jump() {
         //gravity가 켜져있으면 점프만
         if (gravityOn)
         {
@@ -101,7 +102,20 @@ public class playerBehaviour : MonoBehaviour
                 }
             }
         }
-        else
+    }
+
+    void Move()
+    {
+        //좌우 이동
+        transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
+
+        //값이 0이면 사라짐
+        if (keyHorizontal != 0)
+            Flip();
+
+        //상하 이동
+        //그래비티가 꺼져있을때
+        if(!gravityOn)
         {
             transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
 
@@ -110,7 +124,7 @@ public class playerBehaviour : MonoBehaviour
 
     }
 
-    void outRay() {
+    void OutRay() {
         //레이케스트 사용 
         //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
         if (Physics2D.Raycast(transform.position , Vector2.down, transform.localScale.y, maskGround))
@@ -122,6 +136,13 @@ public class playerBehaviour : MonoBehaviour
             //Ground에 닿으면 점프횟수가 max치로로 초기화됨
             jumpCount = maxJumpCount;       
         }
+    }
+
+    void Flip(){
+        //현재의 크기를 받아오고 키입력한 방향으로 보게 설정함
+        Vector3 theScale = transform.localScale;
+        theScale.x = keyHorizontal;
+        transform.localScale = theScale;
     }
 
 }

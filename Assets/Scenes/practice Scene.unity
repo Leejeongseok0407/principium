@@ -339,6 +339,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHp: 0
   speed: 10
+  jumpPower: 10
+  dashPower: 20
+  SkillTime: 1
+  maxJumpCount: 1
+  maskGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &1327254547
 Rigidbody:
   m_ObjectHideFlags: 0
