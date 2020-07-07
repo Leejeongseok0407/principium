@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class playerBehaviour : MonoBehaviour
+public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] int playerHp;
     [SerializeField] int speed = 10;

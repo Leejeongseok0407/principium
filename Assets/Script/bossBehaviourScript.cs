@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class bossBehaviourScript : MonoBehaviour
+public class BossBehaviourScript : MonoBehaviour
 {
 
     [SerializeField] public string name;

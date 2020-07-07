@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class potal : MonoBehaviour
+public class Potal : MonoBehaviour
 {
     [SerializeField] string scenename;
 

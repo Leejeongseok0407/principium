@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class startScene : MonoBehaviour
+public class StartScene : MonoBehaviour
 {
     [SerializeField] Sprite BackGround;
 
