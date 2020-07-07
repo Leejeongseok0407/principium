@@ -407,7 +407,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.778835, y: -0.51064354, z: -6.987306}
+  m_LocalPosition: {x: 2.778834, y: -0.51067835, z: -6.987306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1958606609}
@@ -919,11 +919,12 @@ MonoBehaviour:
   speed: 10
   jumpPower: 20
   dashPower: 2
-  SkillTime: 5
+  skillTime: 3
   maxJumpCount: 2
   maskGround:
     serializedVersion: 2
     m_Bits: 256
+  ani: {fileID: 1004899464}
 --- !u!4 &1061278353
 Transform:
   m_ObjectHideFlags: 0
