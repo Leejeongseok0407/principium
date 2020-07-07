@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
-public class BTNType : MonoBehaviour
+public class BtnType : MonoBehaviour
 {
     public BTNType currentType;
     public void OnBtnClick() // 버튼 UI의 OnClick 이벤트에 연결
