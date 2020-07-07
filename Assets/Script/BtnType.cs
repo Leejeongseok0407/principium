@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class BtnType : MonoBehaviour
 {
+    public BTNType currentType;
     public void OnBtnClick() // 버튼 UI의 OnClick 이벤트에 연결
     {
-        switch (string type)
+        switch (currentType)
         {
-            case start:
+            case BTNType.Start:
                 Debug.Log("처음부터");
                 break;
-            case load:
+            case BTNType.Load:
                 Debug.Log("불러오기");
                 break;
         }
