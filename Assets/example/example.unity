@@ -643,7 +643,7 @@ GameObject:
   - component: {fileID: 1207845080}
   - component: {fileID: 1207845079}
   m_Layer: 5
-  m_Name: Button1
+  m_Name: Start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,12 +712,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: 7983360ab0f77e145aa92f157286d942, type: 3}
-        m_MethodName: 
+      - m_Target: {fileID: 0}
+        m_MethodName: OnBtnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -851,7 +851,7 @@ GameObject:
   - component: {fileID: 1275439434}
   - component: {fileID: 1275439433}
   m_Layer: 5
-  m_Name: Button2
+  m_Name: Load
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 1343407923}
   - component: {fileID: 1343407922}
   m_Layer: 5
-  m_Name: Button4
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1089,7 +1089,7 @@ GameObject:
   - component: {fileID: 1546816763}
   - component: {fileID: 1546816762}
   m_Layer: 5
-  m_Name: Button3
+  m_Name: Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
