@@ -13,6 +13,9 @@ public class Slime : MonsterHaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (base.mobMove == true)
+        {
+            Patten();
+        }
     }
 }
