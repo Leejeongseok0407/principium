@@ -8,6 +8,8 @@ public enum BTNType
     Load,
     Option,
     Sound,
+    ShortCut,
+    Team,
     Back,
     Quit
 }

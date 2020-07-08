@@ -15,6 +15,24 @@ public class BtnType : MonoBehaviour
             case BTNType.Load:
                 Debug.Log("불러오기");
                 break;
+            case BTNType.Option:
+                Debug.Log("옵션");
+                break;
+            case BTNType.Sound:
+                Debug.Log("소리");
+                break;
+            case BTNType.ShortCut:
+                Debug.Log("단축키");
+                break;
+            case BTNType.Team:
+                Debug.Log("개발자");
+                break;
+            case BTNType.Back:
+                Debug.Log("뒤로가기");
+                break;
+            case BTNType.Quit:
+                Debug.Log("나가기");
+                break;
         }
     }
 }
