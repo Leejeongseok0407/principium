@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Slime : monsterHaviour
+public class Slime : MonsterHaviour
 {
     // Start is called before the first frame update
     void Start()
