@@ -41,8 +41,7 @@ public class PlayerBehaviour : MonoBehaviour
     void FixedUpdate()
     {
 
-        Debug.Log(jumpCount);
-        Debug.Log(isGrounded);
+        Debug.Log(keyHorizontal);
         Move();
         if (Input.GetButtonDown("SkillKey"))
         {
@@ -69,8 +68,8 @@ public class PlayerBehaviour : MonoBehaviour
             Physics2D.gravity = Vector2.zero;
             rigidbody.velocity = new Vector2(0, 0);
             gravityOn = false;
-            ani.SetBool("IsFly", true);
-            ani.SetBool("IsGround", false);
+            ani.SetBool("isFly", true);
+            ani.SetBool("isGround", false);
             //SkillTime뒤에 중력다시줌
             Invoke("ReturnGravity", skillTime);
         }
@@ -82,7 +81,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Physics2D.gravity = gravity2D;
         gravityOn = true;
-        ani.SetBool("ISFly", false);
+        ani.SetBool("isFly", false);
     }
 
     void Jump() {
@@ -92,8 +91,8 @@ public class PlayerBehaviour : MonoBehaviour
             //키메니저에 있는 input에서 Jump input실행
             if (Input.GetButtonDown("Jump"))
             {
-                ani.SetBool("IsJump", true);
-                ani.SetBool("IsGround", false);
+                ani.SetBool("isJump", true);
+                ani.SetBool("isGround", false);
                 if (jumpCount > 0)
                 {
                     //한번 점프 했을때 
@@ -113,16 +112,22 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Move()
     {
-        //좌우 이동
+        //좌우 이동i
         transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
 
-        //값이 0이면 사라짐
+        // 0이면 사라짐
         if (keyHorizontal != 0)
+        {
             Flip();
+            ani.SetBool("isWalk", true);
+        }
+        //키입력 없을때
+        if (keyHorizontal == 0)
+            ani.SetBool("isWalk", false);
 
         //상하 이동
         //그래비티가 꺼져있을때
-        if(!gravityOn)
+        if (!gravityOn)
         {
             transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
 
@@ -144,8 +149,8 @@ public class PlayerBehaviour : MonoBehaviour
             //Ground에 닿으면 점프횟수가 max치로로 초기화됨
             jumpCount = maxJumpCount;
             //점프 하지 않는다는걸 알려줌
-            ani.SetBool("IsJump", false);
-            ani.SetBool("IsGround", true);
+            ani.SetBool("isJump", false);
+            ani.SetBool("isGround", true);
         }
     }
 
