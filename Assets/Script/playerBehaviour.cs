@@ -6,14 +6,16 @@ using UnityEngine;
 public class PlayerBehaviour : MonoBehaviour
 {
     [SerializeField] int playerMaxHp;
-    [SerializeField] int speed = 10;
-    [SerializeField] int jumpPower = 10;
-    [SerializeField] int dashPower = 20;
-    [SerializeField] int skillTime = 1;
-    [SerializeField] int maxJumpCount = 1;
-    [SerializeField] float bounceWidth = 2f;
-    [SerializeField] float bounceHight = 7f;
+    [SerializeField] int speed;
+    [SerializeField] int jumpPower;
+    [SerializeField] int dashPower;
+    [SerializeField] int skillTime;
+    [SerializeField] int maxJumpCount;
+    [SerializeField] int noDmgTime;
+    [SerializeField] float bounceWidth;
+    [SerializeField] float bounceHight;
     [SerializeField] LayerMask maskGround;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator ani;
     Rigidbody2D rigidbody;
     Vector2 gravity2D;
@@ -24,6 +26,8 @@ public class PlayerBehaviour : MonoBehaviour
     bool isGrounded = false;
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
+    //무적인지 판단
+    bool isNoDmgTime = false;
 
     float keyHorizontal;
     float keyVertical;
@@ -182,20 +186,53 @@ public class PlayerBehaviour : MonoBehaviour
         theScale.x = keyHorizontal;
         transform.localScale = theScale;
     }
+
+    //OnCollisionEnter2D 코루틴에서 사용
+    IEnumerator NoDmgTime()
+    {
+        Debug.Log("코루틴중");
+        int countTime = 0;
+        while (countTime < noDmgTime) {
+            if (countTime % 2 == 0)
+                spriteRenderer.color = new Color32(255, 255, 255, 90);
+            else
+                spriteRenderer.color = new Color32(255, 255, 255, 180);
+            yield return new WaitForSeconds(0.2f);
+            //yield return new WaitForEndOfFrame();
+            countTime++;
+        }
+        spriteRenderer.color = new Color32(255, 255, 255, 255);
+        isNoDmgTime = false;
+        yield return null;
+    }
+
     void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        if (isNoDmgTime == false)
         {
-            Vector2 attackedVelocity = Vector2.zero;
-            if (other.gameObject.transform.position.x > transform.position.x)
-                attackedVelocity = new Vector2(-bounceWidth, bounceHight);
-            else
-                attackedVelocity = new Vector2(bounceWidth, bounceHight);
+            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            {
+                Vector2 attackedVelocity = Vector2.zero;
+                if (other.gameObject.transform.position.x > transform.position.x)
+                {
+                    rigidbody.velocity = new Vector2(0, 0);
+                    attackedVelocity = new Vector2(-bounceWidth, bounceHight);
 
-            rigidbody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-            //player hp감소 혹은 죽음 넣기
-            hp--;
-            Debug.Log("몬스터와 부딛힘 hp : " + hp);
+                }
+                else
+                {
+                    rigidbody.velocity = new Vector2(0, 0);
+                    attackedVelocity = new Vector2(bounceWidth, bounceHight);
+
+                }
+
+                rigidbody.AddForce(attackedVelocity, ForceMode2D.Impulse);
+                //player hp감소 혹은 죽음 넣기
+                hp--;
+                    isNoDmgTime = true;
+                    StartCoroutine("NoDmgTime");
+                Debug.Log("몬스터와 부딛힘 hp : " + hp);
+            }
         }
     }
 }
