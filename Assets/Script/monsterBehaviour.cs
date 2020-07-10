@@ -26,7 +26,10 @@ public class MonsterHaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        /*
+        groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
+        playerLayerMask = 1 << LayerMask.NameToLayer("Player");
+        */
     }
 
     // Update is called once per frame
