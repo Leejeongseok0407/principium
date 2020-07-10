@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [SerializeField] int playerHp;
+    [SerializeField] int playerMaxHp;
     [SerializeField] int speed = 10;
     [SerializeField] int jumpPower = 10;
     [SerializeField] int dashPower = 20;
@@ -16,14 +16,20 @@ public class PlayerBehaviour : MonoBehaviour
     Rigidbody2D rigidbody;
     Vector2 gravity2D;
     int jumpCount;
+    int hp;
+
     bool gravityOn = true;
     bool isGrounded = false;
+    //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
+    bool isDead = false;
+
     float keyHorizontal;
     float keyVertical;
 
     // Start is called before the first frame update
     void Start()
     {
+        hp = playerMaxHp;
         jumpCount = maxJumpCount;
         gravity2D = Physics2D.gravity;
         rigidbody = GetComponent<Rigidbody2D>();
@@ -136,6 +142,18 @@ public class PlayerBehaviour : MonoBehaviour
 
     }
 
+    void IsDie() {
+        if (hp == 0) {
+            if (!isDead)
+                Die();
+        }
+    }
+
+    //죽었을때 기능 추가
+    void Die() {
+
+    }
+
     void OutRay()
     {
         //레이케스트 사용 
@@ -160,5 +178,12 @@ public class PlayerBehaviour : MonoBehaviour
         theScale.x = keyHorizontal;
         transform.localScale = theScale;
     }
-
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+        {
+            //player hp감소 혹은 죽음 넣기
+            print("몬스터와 부딛힘");
+        }
+    }
 }

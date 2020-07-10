@@ -21,6 +21,7 @@ public class MonsterHaviour : MonoBehaviour
 
     [SerializeField] Rigidbody2D mobRB;
     [SerializeField] Transform mobTR;
+    [SerializeField] GameObject player;
     int layerMaskO = 1 << 8;
 
     // Start is called before the first frame update
