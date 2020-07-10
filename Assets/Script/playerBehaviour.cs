@@ -11,6 +11,8 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] int dashPower = 20;
     [SerializeField] int skillTime = 1;
     [SerializeField] int maxJumpCount = 1;
+    [SerializeField] float bounceWidth = 2f;
+    [SerializeField] float bounceHight = 7f;
     [SerializeField] LayerMask maskGround;
     [SerializeField] Animator ani;
     Rigidbody2D rigidbody;
@@ -39,15 +41,17 @@ public class PlayerBehaviour : MonoBehaviour
     void Update()
     {
         //Horizontal은 정수만 받게함
-        keyHorizontal = Input.GetAxisRaw("Horizontal");
-        keyVertical = Input.GetAxis("Vertical");
         OutRay();
         Jump();
     }
     void FixedUpdate()
     {
+        //죽었을 경우 입력 안받음
+        if (isDead == true)
+            return;
 
-        Debug.Log(keyHorizontal);
+        keyHorizontal = Input.GetAxisRaw("Horizontal");
+        keyVertical = Input.GetAxis("Vertical");
         Move();
         if (Input.GetButtonDown("SkillKey"))
         {
@@ -182,8 +186,16 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
         {
+            Vector2 attackedVelocity = Vector2.zero;
+            if (other.gameObject.transform.position.x > transform.position.x)
+                attackedVelocity = new Vector2(-bounceWidth, bounceHight);
+            else
+                attackedVelocity = new Vector2(bounceWidth, bounceHight);
+
+            rigidbody.AddForce(attackedVelocity, ForceMode2D.Impulse);
             //player hp감소 혹은 죽음 넣기
-            print("몬스터와 부딛힘");
+            hp--;
+            Debug.Log("몬스터와 부딛힘 hp : " + hp);
         }
     }
 }
