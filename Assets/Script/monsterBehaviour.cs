@@ -108,13 +108,13 @@ public class MonsterHaviour : MonoBehaviour
                         MoveToWayPoint();
                         LookForward();
                     }
-                    else if (isInWayPoint != false)
+                    else if (isInWayPoint == false)
                     {
                         BackToWayPoint();
                         LookForward();
                     }
                 }
-                else if(isTrackingPlayer == true)
+                else if (isTrackingPlayer == false)
                     MoveToWayPoint();
                     break;
                 }
@@ -200,7 +200,7 @@ public class MonsterHaviour : MonoBehaviour
             
                 isInWayPoint = false;
                 lookAtPlayer = false;
-                LookForward();
+//                LookForward();
         }
     }
 
