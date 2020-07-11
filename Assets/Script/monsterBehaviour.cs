@@ -34,10 +34,7 @@ public class MonsterHaviour : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        if (moveDirection == 1)
-            mobTR.rotation = Quaternion.Euler(0, 180, 0);
-        else
-            mobTR.rotation = Quaternion.Euler(0, 0, 0);
+        LookForward();
     }
 
     // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
@@ -48,7 +45,7 @@ public class MonsterHaviour : MonoBehaviour
             Patten();
         }
         if (lookAtPlayer == true) {
-            Look();
+            LookTarget();
         }
     }
 
@@ -57,7 +54,7 @@ public class MonsterHaviour : MonoBehaviour
 
     }
 
-    public void Look()
+    public void LookTarget()
     {
         if (target.transform.position.x >= transform.position.x)
             mobTR.rotation = Quaternion.Euler(0, 180, 0);
@@ -126,11 +123,15 @@ public class MonsterHaviour : MonoBehaviour
 
         if (lookAtPlayer == false)
         {
-            if (direction == 1)
-                mobTR.rotation = Quaternion.Euler(0, 180, 0);
-            if (direction == -1)
-                mobTR.rotation = Quaternion.Euler(0, 0, 0);
+            LookForward();
         }
+    }
+
+    void LookForward() {
+        if (direction == 1)
+            mobTR.rotation = Quaternion.Euler(0, 180, 0);
+        if (direction == -1)
+            mobTR.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     //점프하는 함수이며 장애물의 크기에 따라 점프 파워 혹은 뒤에 붙은 상수를 변경 하면 됨.
@@ -144,12 +145,24 @@ public class MonsterHaviour : MonoBehaviour
 
     //<콜라이더 충돌 체크>
 
-    void OnCollisionEnter2D(Collision2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             //player hp감소 혹은 죽음 넣기
-            print("플레이어와 부딛힘");
+            lookAtPlayer = true;
+            LookTarget();
+            Debug.Log("플레이어 인식함");
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            //player hp감소 혹은 죽음 넣기
+            lookAtPlayer = false;
+            LookForward();
+            Debug.Log("플레이어 나감");
         }
     }
 
