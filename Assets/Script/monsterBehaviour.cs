@@ -16,8 +16,8 @@ public class MonsterHaviour : MonoBehaviour
 
     [SerializeField] bool isJumpRay;
     [SerializeField] bool isTurnRay;
+    [SerializeField] bool isTrackingPlayer;
     [SerializeField] bool lookAtPlayer;
-    [SerializeField] bool trakingPlayer;
     [SerializeField] protected bool mobMove = true;
 
     [SerializeField] Rigidbody2D mobRB;
@@ -28,8 +28,10 @@ public class MonsterHaviour : MonoBehaviour
     int moveDirection = 1;
     bool directionCanChange = true;
     int layerMaskO = 1 << 8;
-    int goToWay = 0;
+    bool goToWay = false;
     Vector3 targetPosition;
+    Vector3 dirctoinV;
+
 
     // Start is called before the first frame update
     void Awake()
@@ -44,9 +46,8 @@ public class MonsterHaviour : MonoBehaviour
         {
             Patten();
         }
-        if (lookAtPlayer == true) {
-            LookTarget();
-        }
+        
+        Debug.Log(dirctoinV);
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
@@ -54,6 +55,16 @@ public class MonsterHaviour : MonoBehaviour
 
     }
 
+
+    void TrackingPlayer()
+    {
+        //단위 벡터화
+        Debug.Log("TrackingPlayer 실행중");
+        dirctoinV = new Vector3((target.transform.position.x - transform.position.x) / Mathf.Abs(target.transform.position.x - transform.position.x), 0, 0);
+        direction = dirctoinV.x;
+        transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
+
+    }
     public void LookTarget()
     {
         if (target.transform.position.x >= transform.position.x)
@@ -72,47 +83,78 @@ public class MonsterHaviour : MonoBehaviour
             //바닥을 만나면 턴 하는 패턴
             case 1:
                 Move();
+                if (lookAtPlayer == false)
+                {
+                    LookForward();
+                }
                 if (isTurnRay == true)
                     TurnRay();
                 if (isJumpRay == true)
                     JunpRay();
+
                 break;
 
             //웨이포인트 따라가는 패턴
             case 2:
-                MoveToWayPoint();
-                break;
-        }
-    }
+                if (isTrackingPlayer == true)
+                {
+                    if (lookAtPlayer == true)
+                    {
+                        LookTarget();
+                        TrackingPlayer();
+                    }
+                    else if (goToWay == false)
+                    {
+                        MoveToWayPoint();
+                        LookForward();
+                    }
+                    else
+                    {
+                        BackToWayPoint();
+                        LookForward();
+                    }
+                }
+                else
+                    MoveToWayPoint();
+                    break;
+                }
 
+        }
 
     //<움직임에 관한 함수>
 
+    //waypoint 로 돌아가는 함수
+    void BackToWayPoint() {
+        dirctoinV = new Vector3((wayPoint[0].transform.position.x - transform.position.x) / Mathf.Abs(transform.position.x - wayPoint[0].transform.position.x), 0, 0);
+        transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
+        if (!(wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x))
+        {
+            Debug.Log("gotoway false");
+            goToWay = false;
+
+        }
+        Debug.Log("BackToWayPoint");
+    }
+
     //wayPoint를 왕복하는 함수.
-    void MoveToWayPoint() {
-        Vector3 dirctoinV = new Vector3(direction, 0, 0);
+    void MoveToWayPoint()
+    {
+        Debug.Log("MoveToWayPoint");
+        dirctoinV = new Vector3(direction, 0, 0);
         transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         //방향 바꿔주는 함수
-        if ((wayPoint[0].transform.position.x >= transform.position.x  || transform.position.x >= wayPoint[1].transform.position.x))
+        if ((wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x) && goToWay == false)
         {
             Turn();
         }
-
+    
     }
 
     //움직이는 함수임 velocity(Rb의 속도)를 이용하여 방향을 바꿔줌. 단순히 이동만 생각하여서 MoveDirection을 직접적으로 변경 하지 않음. 
     //rotation을 이용해 몹이 보는 방향을 변경해줌.
     void Move()
     {
-        if (direction == 1)
-        {
-            mobRB.velocity = new Vector2(speed, mobRB.velocity.y);
-        }
-
-        if (direction == -1)
-        {
-            mobRB.velocity = new Vector2(-speed, mobRB.velocity.y);
-        }
+            mobRB.velocity = new Vector2(direction *speed, mobRB.velocity.y);
 
     }
 
@@ -120,17 +162,12 @@ public class MonsterHaviour : MonoBehaviour
     void Turn()
     {
         direction *= -1;
-
-        if (lookAtPlayer == false)
-        {
-            LookForward();
-        }
     }
 
     void LookForward() {
-        if (direction == 1)
+        if (dirctoinV.x == 1)
             mobTR.rotation = Quaternion.Euler(0, 180, 0);
-        if (direction == -1)
+        if (dirctoinV.x == -1)
             mobTR.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -152,17 +189,18 @@ public class MonsterHaviour : MonoBehaviour
             //player hp감소 혹은 죽음 넣기
             lookAtPlayer = true;
             LookTarget();
-            Debug.Log("플레이어 인식함");
         }
     }
+
     void OnTriggerExit2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            //player hp감소 혹은 죽음 넣기
-            lookAtPlayer = false;
-            LookForward();
-            Debug.Log("플레이어 나감");
+           // if (transform.position.x != wayPoint[0].transform.position.x)
+            
+                goToWay = true;
+                lookAtPlayer = false;
+                LookForward();
         }
     }
 
