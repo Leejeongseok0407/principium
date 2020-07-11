@@ -28,7 +28,7 @@ public class MonsterHaviour : MonoBehaviour
     int moveDirection = 1;
     bool directionCanChange = true;
     int layerMaskO = 1 << 8;
-    bool goToWay = false;
+    bool isInWayPoint;
     Vector3 targetPosition;
     Vector3 dirctoinV;
 
@@ -103,18 +103,18 @@ public class MonsterHaviour : MonoBehaviour
                         LookTarget();
                         TrackingPlayer();
                     }
-                    else if (goToWay == false)
+                    else if (isInWayPoint == true)
                     {
                         MoveToWayPoint();
                         LookForward();
                     }
-                    else
+                    else if (isInWayPoint != false)
                     {
                         BackToWayPoint();
                         LookForward();
                     }
                 }
-                else
+                else if(isTrackingPlayer == true)
                     MoveToWayPoint();
                     break;
                 }
@@ -130,7 +130,7 @@ public class MonsterHaviour : MonoBehaviour
         if (!(wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x))
         {
             Debug.Log("gotoway false");
-            goToWay = false;
+            isInWayPoint = true;
 
         }
         Debug.Log("BackToWayPoint");
@@ -143,7 +143,7 @@ public class MonsterHaviour : MonoBehaviour
         dirctoinV = new Vector3(direction, 0, 0);
         transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         //방향 바꿔주는 함수
-        if ((wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x) && goToWay == false)
+        if ((wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x) && isInWayPoint == true)
         {
             Turn();
         }
@@ -198,7 +198,7 @@ public class MonsterHaviour : MonoBehaviour
         {
            // if (transform.position.x != wayPoint[0].transform.position.x)
             
-                goToWay = true;
+                isInWayPoint = false;
                 lookAtPlayer = false;
                 LookForward();
         }
