@@ -227,7 +227,6 @@ public class PlayerBehaviour : MonoBehaviour
 
                 rigidbody.AddForce(attackedVelocity, ForceMode2D.Impulse);
                 //player hp감소 혹은 죽음 넣기
-                hp--;
                 hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
                 isNoDmgTime = true;
                     StartCoroutine("NoDmgTime");

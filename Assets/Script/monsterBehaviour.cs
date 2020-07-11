@@ -8,43 +8,36 @@ public class MonsterHaviour : MonoBehaviour
     [Tooltip("1은 바닥체크해서 턴하는 방법, 2는 웨이포인트 이용")]
     [SerializeField] int type;
     [SerializeField] int hp;
-    //데미지 있어야함?
     [SerializeField] int jumpDelay;
 
     [SerializeField] float speed = 1;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float direction = 1;
 
-    [SerializeField] bool canJump;
-    [SerializeField] bool canTurn;
+    [SerializeField] bool isJumpRay;
+    [SerializeField] bool isTurnRay;
+    [SerializeField] bool lookAtPlayer;
+    [SerializeField] bool trakingPlayer;
     [SerializeField] protected bool mobMove = true;
 
     [SerializeField] Rigidbody2D mobRB;
     [SerializeField] Transform mobTR;
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
+    [SerializeField] GameObject target;
     int moveDirection = 1;
     bool directionCanChange = true;
     int layerMaskO = 1 << 8;
     int goToWay = 0;
+    Vector3 targetPosition;
 
     // Start is called before the first frame update
     void Awake()
     {
-        /*
-        groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
-        playerLayerMask = 1 << LayerMask.NameToLayer("Player");
-        */
         if (moveDirection == 1)
             mobTR.rotation = Quaternion.Euler(0, 180, 0);
         else
             mobTR.rotation = Quaternion.Euler(0, 0, 0);
-
-        if (type == 2)
-        {
-            transform.position = wayPoint[0].transform.position;
-
-        }
     }
 
     // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
@@ -54,11 +47,22 @@ public class MonsterHaviour : MonoBehaviour
         {
             Patten();
         }
+        if (lookAtPlayer == true) {
+            Look();
+        }
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
     public virtual void Skill() {
 
+    }
+
+    public void Look()
+    {
+        if (target.transform.position.x >= transform.position.x)
+            mobTR.rotation = Quaternion.Euler(0, 180, 0);
+        else
+            mobTR.rotation = Quaternion.Euler(0, 0, 0);
     }
 
 
@@ -71,9 +75,9 @@ public class MonsterHaviour : MonoBehaviour
             //바닥을 만나면 턴 하는 패턴
             case 1:
                 Move();
-                if (canTurn == true)
+                if (isTurnRay == true)
                     TurnRay();
-                if (canJump == true)
+                if (isJumpRay == true)
                     JunpRay();
                 break;
 
@@ -119,17 +123,21 @@ public class MonsterHaviour : MonoBehaviour
     void Turn()
     {
         direction *= -1;
-        if(direction == 1)
-            mobTR.rotation = Quaternion.Euler(0, 180, 0);
-        if (direction == -1)
-            mobTR.rotation = Quaternion.Euler(0, 0, 0);
+
+        if (lookAtPlayer == false)
+        {
+            if (direction == 1)
+                mobTR.rotation = Quaternion.Euler(0, 180, 0);
+            if (direction == -1)
+                mobTR.rotation = Quaternion.Euler(0, 0, 0);
+        }
     }
 
     //점프하는 함수이며 장애물의 크기에 따라 점프 파워 혹은 뒤에 붙은 상수를 변경 하면 됨.
     void Jump()
     {
         mobRB.AddForce(Vector2.up * jumpPower * 5);
-        canJump = false;
+        isJumpRay = false;
         StartCoroutine(stopJump());
     }
 
@@ -187,6 +195,6 @@ public class MonsterHaviour : MonoBehaviour
     IEnumerator stopJump()
     {
         yield return new WaitForSeconds(1f);
-        canJump = true;
+        isJumpRay = true;
     }
 }
