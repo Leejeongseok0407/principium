@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MonsterHaviour : MonoBehaviour
 {
-    [Tooltip("1은 정찰만, 2는 정찰 + 점프")]
+    [SerializeField] public int dmg;
+    [Tooltip("1은 바닥체크해서 턴하는 방법, 2는 웨이포인트 이용")]
     [SerializeField] int type;
     [SerializeField] int hp;
     //데미지 있어야함?
-    [SerializeField] int dmg;
     [SerializeField] int jumpDelay;
 
     [SerializeField] float speed = 1;
@@ -21,71 +21,80 @@ public class MonsterHaviour : MonoBehaviour
 
     [SerializeField] Rigidbody2D mobRB;
     [SerializeField] Transform mobTR;
-    [Tooltip("0이 왼쪽 1이 오른쪽")]
+    [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
     int moveDirection = 1;
     bool directionCanChange = true;
     int layerMaskO = 1 << 8;
     int goToWay = 0;
-    int i;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         /*
         groundLayerMask = 1 << LayerMask.NameToLayer("Ground");
         playerLayerMask = 1 << LayerMask.NameToLayer("Player");
         */
+        if (moveDirection == 1)
+            mobTR.rotation = Quaternion.Euler(0, 180, 0);
+        else
+            mobTR.rotation = Quaternion.Euler(0, 0, 0);
+
+        if (type == 2)
+        {
+            transform.position = wayPoint[0].transform.position;
+
+        }
     }
 
-    // Update is called once per frame
+    // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
     private void Update()
     {
-        //단 몹무브 멈추면 관성으로 인해 떨어질 경우 있음.
         if (mobMove == true)
         {
             Patten();
         }
     }
 
+    //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
+    public virtual void Skill() {
 
+    }
 
 
 
     // 이동 모션을 의미함
     public void Patten()
     {
+        switch (type)
         {
-            switch (type)
-            {
-                //바닥을 만나면 턴 하는 패턴
-                case 1:
-                    Move();
-                    if (canTurn == true)
-                        TurnRay();
-                    if (canJump == true)
-                        JunpRay();
-                    break;
-                //웨이포인트 따라가는 패턴
-                case 2:
-                    WayPoint();
-                    break;
+            //바닥을 만나면 턴 하는 패턴
+            case 1:
+                Move();
+                if (canTurn == true)
+                    TurnRay();
+                if (canJump == true)
+                    JunpRay();
+                break;
 
-
-            }
+            //웨이포인트 따라가는 패턴
+            case 2:
+                MoveToWayPoint();
+                break;
         }
     }
 
 
     //<움직임에 관한 함수>
 
-    void WayPoint() {
-        Vector3 dirctoinV = new Vector3(moveDirection, 0, 0);
+    //wayPoint를 왕복하는 함수.
+    void MoveToWayPoint() {
+        Vector3 dirctoinV = new Vector3(direction, 0, 0);
         transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         //방향 바꿔주는 함수
         if ((wayPoint[0].transform.position.x >= transform.position.x  || transform.position.x >= wayPoint[1].transform.position.x))
         {
-            moveDirection *= -1;
+            Turn();
         }
 
     }
@@ -97,13 +106,11 @@ public class MonsterHaviour : MonoBehaviour
         if (direction == 1)
         {
             mobRB.velocity = new Vector2(speed, mobRB.velocity.y);
-            mobTR.rotation = Quaternion.Euler(0, 180, 0);
         }
 
         if (direction == -1)
         {
             mobRB.velocity = new Vector2(-speed, mobRB.velocity.y);
-            mobTR.rotation = Quaternion.Euler(0, 0, 0);
         }
 
     }
@@ -112,6 +119,10 @@ public class MonsterHaviour : MonoBehaviour
     void Turn()
     {
         direction *= -1;
+        if(direction == 1)
+            mobTR.rotation = Quaternion.Euler(0, 180, 0);
+        if (direction == -1)
+            mobTR.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     //점프하는 함수이며 장애물의 크기에 따라 점프 파워 혹은 뒤에 붙은 상수를 변경 하면 됨.

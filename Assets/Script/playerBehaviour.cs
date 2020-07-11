@@ -217,7 +217,6 @@ public class PlayerBehaviour : MonoBehaviour
                 {
                     rigidbody.velocity = new Vector2(0, 0);
                     attackedVelocity = new Vector2(-bounceWidth, bounceHight);
-
                 }
                 else
                 {
@@ -229,7 +228,8 @@ public class PlayerBehaviour : MonoBehaviour
                 rigidbody.AddForce(attackedVelocity, ForceMode2D.Impulse);
                 //player hp감소 혹은 죽음 넣기
                 hp--;
-                    isNoDmgTime = true;
+                hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
+                isNoDmgTime = true;
                     StartCoroutine("NoDmgTime");
                 Debug.Log("몬스터와 부딛힘 hp : " + hp);
             }
