@@ -21,7 +21,10 @@ public class MonsterHaviour : MonoBehaviour
 
     [SerializeField] Rigidbody2D mobRB;
     [SerializeField] Transform mobTR;
-    [SerializeField] GameObject[] wayPoint;
+    [Tooltip("0이 왼쪽 1이 오른쪽")]
+    [SerializeField] GameObject[] wayPoint = new GameObject[2];
+    int moveDirection = 1;
+    bool directionCanChange = true;
     int layerMaskO = 1 << 8;
     int goToWay = 0;
     int i;
@@ -77,40 +80,15 @@ public class MonsterHaviour : MonoBehaviour
     //<움직임에 관한 함수>
 
     void WayPoint() {
-        //크기wayPoint.Length;
-        //가속도        mobRB.velocity = new Vector2(speed, mobRB. velocity.y);
-        //플레이어 이동 
-        if (transform.position.x < wayPoint[i].transform.position.x)
+        Vector3 dirctoinV = new Vector3(moveDirection, 0, 0);
+        transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
+        //방향 바꿔주는 함수
+        if ((wayPoint[0].transform.position.x >= transform.position.x  || transform.position.x >= wayPoint[1].transform.position.x))
         {
-            transform.Translate(Vector3.right * speed * Time.smoothDeltaTime, Space.World);
-            StartCoroutine(changeWayPoint());
-            Debug.Log(i + "로 오른쪽 이동");
+            moveDirection *= -1;
         }
-        else if (transform.position.x > wayPoint[i].transform.position.x) { 
-            transform.Translate(Vector3.left * speed * Time.smoothDeltaTime, Space.World);
-            StartCoroutine(changeWayPoint());
-            Debug.Log(i + "로 왼쪽 이동");
-        }
-        else
-        {
-        }
+
     }
-    IEnumerator changeWayPoint()
-    {
-        yield return new WaitForSeconds(2f);
-        Debug.Log(i + " 같음");
-        i++;
-        if (i > wayPoint.Length)
-        {
-            Debug.Log(wayPoint.Length);
-            i = 0;
-        }
-        Debug.Log(wayPoint.Length);
-        yield return null;
-    }
-
-
-
 
     //움직이는 함수임 velocity(Rb의 속도)를 이용하여 방향을 바꿔줌. 단순히 이동만 생각하여서 MoveDirection을 직접적으로 변경 하지 않음. 
     //rotation을 이용해 몹이 보는 방향을 변경해줌.
