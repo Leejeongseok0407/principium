@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0821269f8301e604d9132f62cb2ee6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: 
+  scenename: example
 --- !u!4 &822159599
 Transform:
   m_ObjectHideFlags: 0
