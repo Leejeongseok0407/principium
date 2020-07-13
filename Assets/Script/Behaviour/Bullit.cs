@@ -10,7 +10,6 @@ public class Bullit : MonoBehaviour
     [SerializeField] int direction = 1;
     [SerializeField] int speed= 1;
     [SerializeField] GameObject bullitContainer;
-    Vector2 towerPosition;
     bool isFire= false;
     public int dmg = 0;
 
