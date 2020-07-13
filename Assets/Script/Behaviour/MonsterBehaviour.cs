@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class MonsterHaviour : MonoBehaviour
 {
     [SerializeField] public int dmg = 1;
-    [Tooltip("1은 바닥체크해서 턴하는 방법, 2는 웨이포인트 이용")]
+    [Tooltip("0. 고정 " +
+        "\n 1. 바닥체크(턴)" +
+        "\n 2. 웨이포인트 따라감" +
+        "\n 3. 플라이(A*있어야함)")]
     [SerializeField] int type = 0;
- //   [SerializeField] int hp = 1;
+    //   [SerializeField] int hp = 1;
 
     [SerializeField] float jumpDelay = 1;
     [SerializeField] float speed = 1;
@@ -19,16 +20,18 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] bool isJumpRay = false;
     [SerializeField] bool isTurnRay = false;
     [SerializeField] bool isTrackingPlayer = false;
-    [SerializeField] bool isLookAtPlayer = false;
+    [SerializeField] bool isCanDetectTarget = false;
     [SerializeField] bool isMobMove = true;
 
     [SerializeField] Rigidbody2D mobRB = null;
     [SerializeField] Transform mobTR = null;
+
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
-    [SerializeField] GameObject[] wayPoint = new GameObject[2];
+    GameObject[] wayPoint = new GameObject[2];
     [SerializeField] GameObject target = null;
     int layerMaskO = 1 << 8;
     bool isInWayPoint = false;
+    bool isNowLookAtPlayer = false;
     Vector3 targetPosition;
     Vector3 dirctoinV;
 
@@ -85,11 +88,12 @@ public class MonsterHaviour : MonoBehaviour
             //고정몹은 몹 무브만 없애면됨
             case 0:
                 isMobMove = false;
+                LookForward();
                 break;
             //바닥을 만나면 턴 하는 패턴
             case 1:
                 Move();
-                if (isLookAtPlayer == false)
+                if (isNowLookAtPlayer == false)
                 {
                     LookForward();
                 }
@@ -104,7 +108,7 @@ public class MonsterHaviour : MonoBehaviour
             case 2:
                 if (isTrackingPlayer == true)
                 {
-                    if (isLookAtPlayer == true)
+                    if (isNowLookAtPlayer == true)
                     {
                         LookTarget();
                         TrackingPlayer();
@@ -198,10 +202,10 @@ public class MonsterHaviour : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player") && isCanDetectTarget == true)
         {
             //player hp감소 혹은 죽음 넣기
-            isLookAtPlayer = true;
+            isNowLookAtPlayer = true;
             LookTarget();
         }
     }
@@ -211,9 +215,8 @@ public class MonsterHaviour : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             // if (transform.position.x != wayPoint[0].transform.position.x)
-
             isInWayPoint = false;
-            isLookAtPlayer = false;
+            isNowLookAtPlayer = false;
             //                LookForward();
         }
     }
