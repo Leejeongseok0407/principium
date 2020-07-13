@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e351d5a9b3de414e957f40de27b04fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dmg: 2
+  dmg: 1
   type: 2
   hp: 1
   jumpDelay: 0
@@ -241,8 +241,8 @@ MonoBehaviour:
   isJumpRay: 0
   isTurnRay: 0
   isTrackingPlayer: 1
-  lookAtPlayer: 0
-  mobMove: 1
+  isLookAtPlayer: 0
+  isMobMove: 1
   mobRB: {fileID: 46155580}
   mobTR: {fileID: 46155578}
   wayPoint:
@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0821269f8301e604d9132f62cb2ee6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scenename: 
+  scenename: example
 --- !u!4 &822159599
 Transform:
   m_ObjectHideFlags: 0

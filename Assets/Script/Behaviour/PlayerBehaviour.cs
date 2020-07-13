@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [SerializeField] int playerMaxHp;
-    [SerializeField] int speed;
-    [SerializeField] int jumpPower;
-    [SerializeField] int dashPower;
-    [SerializeField] int skillTime;
-    [SerializeField] int maxJumpCount;
-    [SerializeField] int noDmgTime;
-    [SerializeField] float bounceWidth;
-    [SerializeField] float bounceHight;
-    [SerializeField] LayerMask maskGround;
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Animator ani;
-    Rigidbody2D rigidbody;
+    [SerializeField] int playerMaxHp = 5;
+    [SerializeField] int speed = 10;
+    [SerializeField] int jumpPower = 20;
+    [SerializeField] int dashPower = 10;
+    [SerializeField] int skillTime = 5;
+    [SerializeField] int maxJumpCount = 2;
+    [SerializeField] int noDmgTime = 3;
+    [SerializeField] float bounceWidth = 5;
+    [SerializeField] float bounceHight = 10;
+    [SerializeField] LayerMask maskGround = 1;
+    [SerializeField] SpriteRenderer spriteRenderer = null;
+    [SerializeField] Animator ani= null;
+    Rigidbody2D playerRigidBody;
     Vector2 gravity2D;
     int jumpCount;
     int hp;
 
-    bool gravityOn = true;
+    bool isGravityOn = true;
     bool isGrounded = false;
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
@@ -38,14 +38,14 @@ public class PlayerBehaviour : MonoBehaviour
         hp = playerMaxHp;
         jumpCount = maxJumpCount;
         gravity2D = Physics2D.gravity;
-        rigidbody = GetComponent<Rigidbody2D>();
+        playerRigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
         //Horizontal은 정수만 받게함
-        OutRay();
+        RayCheckGorund();
         Jump();
     }
     void FixedUpdate()
@@ -54,6 +54,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (isDead == true)
             return;
 
+        //인풋메니져 참고
         keyHorizontal = Input.GetAxisRaw("Horizontal");
         keyVertical = Input.GetAxis("Vertical");
         Move();
@@ -75,13 +76,14 @@ public class PlayerBehaviour : MonoBehaviour
             //대쉬 파워만큼 앞으로 이동시킴
             transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
         }
+
         //부유 스킬
         if (skillNum == 1)
         {
             //중력값을 0으로 초기화 해주고, 가속도를 제거한 뒤에, bool값을 통해 스킬이 켜짐을 알려줌
             Physics2D.gravity = Vector2.zero;
-            rigidbody.velocity = new Vector2(0, 0);
-            gravityOn = false;
+            playerRigidBody.velocity = Vector2.zero;
+            isGravityOn = false;
             ani.SetBool("isFly", true);
             ani.SetBool("isGround", false);
             //SkillTime뒤에 중력다시줌
@@ -94,13 +96,14 @@ public class PlayerBehaviour : MonoBehaviour
     void ReturnGravity()
     {
         Physics2D.gravity = gravity2D;
-        gravityOn = true;
+        isGravityOn = true;
         ani.SetBool("isFly", false);
     }
 
-    void Jump() {
+    void Jump()
+    {
         //gravity가 켜져있으면 점프만
-        if (gravityOn)
+        if (isGravityOn == true)
         {
             //키메니저에 있는 input에서 Jump input실행
             if (Input.GetButtonDown("Jump"))
@@ -113,12 +116,11 @@ public class PlayerBehaviour : MonoBehaviour
                     if (!isGrounded)
                     {
                         //가속도를 초기화 해줘서 점프를 낮게 하거나 안하는 것을 막아줌
-                        rigidbody.velocity = new Vector2(0, 0);
+                        playerRigidBody.velocity = new Vector2(0, 0);
                     }
-                    rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                    playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                     isGrounded = false;
                     jumpCount--;
-
                 }
             }
         }
@@ -129,7 +131,7 @@ public class PlayerBehaviour : MonoBehaviour
         //좌우 이동i
         transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
 
-        // 0이면 사라짐
+
         if (keyHorizontal != 0)
         {
             Flip();
@@ -141,28 +143,31 @@ public class PlayerBehaviour : MonoBehaviour
 
         //상하 이동
         //그래비티가 꺼져있을때
-        if (!gravityOn)
+        if (!isGravityOn)
         {
-            transform.Translate(Vector3.up * jumpPower * Time.smoothDeltaTime * keyVertical, Space.World);
+            transform.Translate(Vector3.up * Time.smoothDeltaTime * keyVertical, Space.World);
 
         }
 
 
     }
 
-    void IsDie() {
-        if (hp == 0) {
+    void IsDie()
+    {
+        if (hp == 0)
+        {
             if (!isDead)
                 Die();
         }
     }
 
     //죽었을때 기능 추가
-    void Die() {
-
+    void Die()
+    {
+        isDead = true;
     }
 
-    void OutRay()
+    void RayCheckGorund()
     {
         //레이케스트 사용 
         //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
@@ -180,7 +185,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    void Flip(){
+    void Flip()
+    {
         //현재의 크기를 받아오고 키입력한 방향으로 보게 설정함
         Vector3 theScale = transform.localScale;
         theScale.x = keyHorizontal;
@@ -188,11 +194,42 @@ public class PlayerBehaviour : MonoBehaviour
     }
 
     //OnCollisionEnter2D 코루틴에서 사용
+
+
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if (isNoDmgTime == false)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            {
+                Vector2 attackedVelocity = Vector2.zero;
+                if (other.gameObject.transform.position.x > transform.position.x)
+                {
+                    playerRigidBody.velocity = new Vector2(0, 0);
+                    attackedVelocity = new Vector2(-bounceWidth, bounceHight);
+                }
+                else
+                {
+                    playerRigidBody.velocity = new Vector2(0, 0);
+                    attackedVelocity = new Vector2(bounceWidth, bounceHight);
+
+                }
+
+                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
+                //player hp감소 혹은 죽음 넣기
+                hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
+                isNoDmgTime = true;
+                StartCoroutine("NoDmgTime");
+                Debug.Log("몬스터와 부딛힘 hp : " + hp);
+            }
+        }
+    }
     IEnumerator NoDmgTime()
     {
         Debug.Log("코루틴중");
         int countTime = 0;
-        while (countTime < noDmgTime) {
+        while (countTime < noDmgTime)
+        {
             if (countTime % 2 == 0)
                 spriteRenderer.color = new Color32(255, 255, 255, 90);
             else
@@ -206,32 +243,4 @@ public class PlayerBehaviour : MonoBehaviour
         yield return null;
     }
 
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (isNoDmgTime == false)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            {
-                Vector2 attackedVelocity = Vector2.zero;
-                if (other.gameObject.transform.position.x > transform.position.x)
-                {
-                    rigidbody.velocity = new Vector2(0, 0);
-                    attackedVelocity = new Vector2(-bounceWidth, bounceHight);
-                }
-                else
-                {
-                    rigidbody.velocity = new Vector2(0, 0);
-                    attackedVelocity = new Vector2(bounceWidth, bounceHight);
-
-                }
-
-                rigidbody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-                //player hp감소 혹은 죽음 넣기
-                hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
-                isNoDmgTime = true;
-                    StartCoroutine("NoDmgTime");
-                Debug.Log("몬스터와 부딛힘 hp : " + hp);
-            }
-        }
-    }
 }

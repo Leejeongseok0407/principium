@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Slime : MonsterHaviour
 {
-    
+
+    override public void  Skill()
+    {
+
+    }
 }
