@@ -47,6 +47,7 @@ public class PlayerBehaviour : MonoBehaviour
         //Horizontal은 정수만 받게함
         RayCheckGorund();
         Jump();
+        PlayerSkill();
     }
     void FixedUpdate()
     {
@@ -58,23 +59,32 @@ public class PlayerBehaviour : MonoBehaviour
         keyHorizontal = Input.GetAxisRaw("Horizontal");
         keyVertical = Input.GetAxis("Vertical");
         Move();
-        if (Input.GetButtonDown("SkillKey"))
-        {
-            PlayerSkill(1);
-        }
+        
     }
 
+    int InputSkillNum() {
+        if (Input.GetButtonDown("SkillKey1"))
+            return 0;
+        if (Input.GetButtonDown("SkillKey2"))
+            return 1;
+        return -1;
+    }
 
     //플레이어 스킬을 1~7까지 만드는게 좋을듯.
     //아니면 플레이어 스킬을 2~3가지 넣어서 한번에 2~3가지 실행
     //이건 기획을봐야함.
-    void PlayerSkill(int skillNum)
+    void PlayerSkill()
     {
+        int skillNum = InputSkillNum();
+        
         //대쉬 스킬
         if (skillNum == 0)
         {
-            //대쉬 파워만큼 앞으로 이동시킴
-            transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
+            //대쉬 파워만큼 앞으로 이동시킴(순간이동)
+//            transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
+            //아님 빠르게 움직임
+            playerRigidBody.AddForce(Vector2.right * dashPower * keyHorizontal, ForceMode2D.Impulse);
+            //코루틴으로 velocity를 0으로 초기화 해준다면?
         }
 
         //부유 스킬
