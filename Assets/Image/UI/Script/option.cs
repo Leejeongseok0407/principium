@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class option : MonoBehaviour
 {
-    int sound = 100;
+//    int sound = 100;
 
     // Start is called before the first frame update
     void Start()

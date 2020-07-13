@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BossBehaviourScript : MonoBehaviour
 {
-
-    [SerializeField] public string name;
-    [SerializeField] public int hp;
-
+    /*
+    [SerializeField] string bossName = "";
+    [SerializeField] int hp = 0;
+    */
     // Start is called before the first frame update
     void Start()
     {

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Slime : MonsterHaviour
 {
 
-    public void Skill()
+    override public void  Skill()
     {
 
     }

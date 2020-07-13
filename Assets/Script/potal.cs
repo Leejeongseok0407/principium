@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Potal : MonoBehaviour
 {
-    [SerializeField] string scenename;
+    [SerializeField] string scenename = "";
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

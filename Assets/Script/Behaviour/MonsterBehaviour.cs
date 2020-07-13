@@ -2,33 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class MonsterHaviour : MonoBehaviour
 {
-    [SerializeField] public int dmg;
+    [SerializeField] public int dmg = 1;
     [Tooltip("1은 바닥체크해서 턴하는 방법, 2는 웨이포인트 이용")]
-    [SerializeField] int type;
-    [SerializeField] int hp;
-    [SerializeField] int jumpDelay;
+    [SerializeField] int type = 0;
+ //   [SerializeField] int hp = 1;
 
+    [SerializeField] float jumpDelay = 1;
     [SerializeField] float speed = 1;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float direction = 1;
 
-    [SerializeField] bool isJumpRay;
-    [SerializeField] bool isTurnRay;
-    [SerializeField] bool isTrackingPlayer;
-    [SerializeField] bool lookAtPlayer;
-    [SerializeField] protected bool mobMove = true;
+    [SerializeField] bool isJumpRay = false;
+    [SerializeField] bool isTurnRay = false;
+    [SerializeField] bool isTrackingPlayer = false;
+    [SerializeField] bool isLookAtPlayer = false;
+    [SerializeField] bool isMobMove = true;
 
-    [SerializeField] Rigidbody2D mobRB;
-    [SerializeField] Transform mobTR;
+    [SerializeField] Rigidbody2D mobRB = null;
+    [SerializeField] Transform mobTR = null;
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
-    [SerializeField] GameObject target;
-    int moveDirection = 1;
-    bool directionCanChange = true;
+    [SerializeField] GameObject target = null;
     int layerMaskO = 1 << 8;
-    bool isInWayPoint;
+    bool isInWayPoint = false;
     Vector3 targetPosition;
     Vector3 dirctoinV;
 
@@ -42,16 +42,17 @@ public class MonsterHaviour : MonoBehaviour
     // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
     private void Update()
     {
-        if (mobMove == true)
+        if (isMobMove == true)
         {
             Patten();
         }
-        
+
         Debug.Log(dirctoinV);
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
-    public virtual void Skill() {
+    public virtual void Skill()
+    {
 
     }
 
@@ -80,10 +81,15 @@ public class MonsterHaviour : MonoBehaviour
     {
         switch (type)
         {
+            //고정몹
+            //고정몹은 몹 무브만 없애면됨
+            case 0:
+                isMobMove = false;
+                break;
             //바닥을 만나면 턴 하는 패턴
             case 1:
                 Move();
-                if (lookAtPlayer == false)
+                if (isLookAtPlayer == false)
                 {
                     LookForward();
                 }
@@ -98,7 +104,7 @@ public class MonsterHaviour : MonoBehaviour
             case 2:
                 if (isTrackingPlayer == true)
                 {
-                    if (lookAtPlayer == true)
+                    if (isLookAtPlayer == true)
                     {
                         LookTarget();
                         TrackingPlayer();
@@ -115,16 +121,23 @@ public class MonsterHaviour : MonoBehaviour
                     }
                 }
                 else if (isTrackingPlayer == false)
+                {
                     MoveToWayPoint();
-                    break;
+                    LookForward();
                 }
+                break;
 
+            //날아다니는 몹
+            case 3:
+                break;
         }
+    }
 
     //<움직임에 관한 함수>
 
     //waypoint 로 돌아가는 함수
-    void BackToWayPoint() {
+    void BackToWayPoint()
+    {
         dirctoinV = new Vector3((wayPoint[0].transform.position.x - transform.position.x) / Mathf.Abs(transform.position.x - wayPoint[0].transform.position.x), 0, 0);
         transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         if (!(wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x))
@@ -147,14 +160,14 @@ public class MonsterHaviour : MonoBehaviour
         {
             Turn();
         }
-    
+
     }
 
     //움직이는 함수임 velocity(Rb의 속도)를 이용하여 방향을 바꿔줌. 단순히 이동만 생각하여서 MoveDirection을 직접적으로 변경 하지 않음. 
     //rotation을 이용해 몹이 보는 방향을 변경해줌.
     void Move()
     {
-            mobRB.velocity = new Vector2(direction *speed, mobRB.velocity.y);
+        mobRB.velocity = new Vector2(direction * speed, mobRB.velocity.y);
 
     }
 
@@ -164,10 +177,11 @@ public class MonsterHaviour : MonoBehaviour
         direction *= -1;
     }
 
-    void LookForward() {
-        if (dirctoinV.x == 1)
+    void LookForward()
+    {
+        if (dirctoinV.x > 0)
             mobTR.rotation = Quaternion.Euler(0, 180, 0);
-        if (dirctoinV.x == -1)
+        if (dirctoinV.x < 0)
             mobTR.rotation = Quaternion.Euler(0, 0, 0);
     }
 
@@ -187,7 +201,7 @@ public class MonsterHaviour : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             //player hp감소 혹은 죽음 넣기
-            lookAtPlayer = true;
+            isLookAtPlayer = true;
             LookTarget();
         }
     }
@@ -196,11 +210,11 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-           // if (transform.position.x != wayPoint[0].transform.position.x)
-            
-                isInWayPoint = false;
-                lookAtPlayer = false;
-//                LookForward();
+            // if (transform.position.x != wayPoint[0].transform.position.x)
+
+            isInWayPoint = false;
+            isLookAtPlayer = false;
+            //                LookForward();
         }
     }
 
@@ -245,7 +259,7 @@ public class MonsterHaviour : MonoBehaviour
     //코루틴을 이용해 1초의 대기 시간을 준뒤 점프를 풀어주었음. 이를 통해 연속 점프하는 현상이 해결됨.
     IEnumerator stopJump()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(jumpDelay);
         isJumpRay = true;
     }
 }
