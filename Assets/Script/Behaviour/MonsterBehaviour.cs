@@ -13,10 +13,10 @@ public class MonsterHaviour : MonoBehaviour
     //   [SerializeField] int hp = 1;
 
 
-    [SerializeField] float jumpDelay = 1;
-    [SerializeField] float speed = 1;
-    [SerializeField] float jumpPower = 5f;
-    [SerializeField] float direction = 1;
+    [SerializeField] protected float jumpDelay = 1;
+    [SerializeField] protected float speed = 1;
+    [SerializeField] protected float jumpPower = 5f;
+    [SerializeField] protected float direction = 1;
 
     [SerializeField] bool isCanJumpRay = false;
     [SerializeField] bool isCanTurnRay = false;
@@ -33,9 +33,9 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
 
     [SerializeField] GameObject target = null;
-    int layerMaskO = 1 << 8;
-    Vector3 targetPosition;
-    Vector3 dirctoinV;
+    protected int layerMaskO = 1 << 8;
+    protected Vector3 targetPosition;
+    protected Vector3 dirctoinV;
 
 
     // Start is called before the first frame update
@@ -56,7 +56,7 @@ public class MonsterHaviour : MonoBehaviour
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
-    public virtual void Skill()
+    virtual protected void Skill()
     {
 
     }
@@ -178,6 +178,8 @@ public class MonsterHaviour : MonoBehaviour
             isInWayPoint = false;
         Debug.Log("BackToWayPoint");
     }
+
+
 
     //wayPoint를 왕복하는 함수.
     void MoveToWayPoint()
