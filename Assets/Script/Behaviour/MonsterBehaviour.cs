@@ -6,32 +6,34 @@ public class MonsterHaviour : MonoBehaviour
 {
     [SerializeField] public int dmg = 1;
     [Tooltip("0. 고정 " +
-        "\n 1. 바닥체크(턴)" +
+        "\n 1. 바닥체크(턴, 점프)" +
         "\n 2. 웨이포인트 따라감" +
         "\n 3. 플라이(A*있어야함)")]
     [SerializeField] int type = 0;
     //   [SerializeField] int hp = 1;
+
 
     [SerializeField] float jumpDelay = 1;
     [SerializeField] float speed = 1;
     [SerializeField] float jumpPower = 5f;
     [SerializeField] float direction = 1;
 
-    [SerializeField] bool isJumpRay = false;
-    [SerializeField] bool isTurnRay = false;
-    [SerializeField] bool isTrackingPlayer = false;
+    [SerializeField] bool isCanJumpRay = false;
+    [SerializeField] bool isCanTurnRay = false;
+    [SerializeField] bool isCanTrackingPlayer = false;
     [SerializeField] bool isCanDetectTarget = false;
-    [SerializeField] bool isMobMove = true;
-
+    [SerializeField] bool isCanMobMove = true;
+    bool isInWayPoint = false;
+    bool isLookAtPlayer = false;
+    bool isCanMobMoveTmp;
     [SerializeField] Rigidbody2D mobRB = null;
     [SerializeField] Transform mobTR = null;
 
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
-    GameObject[] wayPoint = new GameObject[2];
+    [SerializeField] GameObject[] wayPoint = new GameObject[2];
+
     [SerializeField] GameObject target = null;
     int layerMaskO = 1 << 8;
-    bool isInWayPoint = false;
-    bool isNowLookAtPlayer = false;
     Vector3 targetPosition;
     Vector3 dirctoinV;
 
@@ -40,16 +42,16 @@ public class MonsterHaviour : MonoBehaviour
     void Awake()
     {
         LookForward();
+        isCanMobMoveTmp = isCanMobMove;
     }
 
     // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
     private void Update()
     {
-        if (isMobMove == true)
+        if (isCanMobMove == true)
         {
             Patten();
         }
-
         Debug.Log(dirctoinV);
     }
 
@@ -87,47 +89,70 @@ public class MonsterHaviour : MonoBehaviour
             //고정몹
             //고정몹은 몹 무브만 없애면됨
             case 0:
-                isMobMove = false;
-                LookForward();
+
+                if (isCanTrackingPlayer == true)
+                {
+                    if (isLookAtPlayer == true)
+                    {
+                        LookTarget();
+                        TrackingPlayer();
+                        isCanMobMove = true;
+                    }
+                    else if (isLookAtPlayer == false)
+                    {
+                        isCanMobMove = false;
+                        LookForward();
+                    }
+                }
+                else if (isCanTrackingPlayer == false)
+                {
+                    isCanMobMove = false;
+                    LookForward();
+                }
                 break;
             //바닥을 만나면 턴 하는 패턴
             case 1:
                 Move();
-                if (isNowLookAtPlayer == false)
+                if (isLookAtPlayer == false)
                 {
                     LookForward();
                 }
-                if (isTurnRay == true)
+                if (isCanTurnRay == true)
                     TurnRay();
-                if (isJumpRay == true)
+                if (isCanJumpRay == true)
                     JunpRay();
 
                 break;
 
             //웨이포인트 따라가는 패턴
             case 2:
-                if (isTrackingPlayer == true)
+                if (isCanTrackingPlayer == true)
                 {
-                    if (isNowLookAtPlayer == true)
+                    if (isLookAtPlayer == true)
                     {
                         LookTarget();
                         TrackingPlayer();
                     }
-                    else if (isInWayPoint == true)
+                    else 
                     {
-                        MoveToWayPoint();
-                        LookForward();
-                    }
-                    else if (isInWayPoint == false)
-                    {
-                        BackToWayPoint();
+                        if (isInWayPoint == true)
+                            MoveToWayPoint();
+                        if (isInWayPoint == false)
+                            BackToWayPoint();
                         LookForward();
                     }
                 }
-                else if (isTrackingPlayer == false)
+                else if (isCanTrackingPlayer == false)
                 {
+                    if (isLookAtPlayer == true)
+                    {
+                        LookTarget();
+                    }
+                    else
+                    {
+                        LookForward();
+                    }
                     MoveToWayPoint();
-                    LookForward();
                 }
                 break;
 
@@ -148,8 +173,9 @@ public class MonsterHaviour : MonoBehaviour
         {
             Debug.Log("gotoway false");
             isInWayPoint = true;
-
         }
+        else
+            isInWayPoint = false;
         Debug.Log("BackToWayPoint");
     }
 
@@ -160,7 +186,7 @@ public class MonsterHaviour : MonoBehaviour
         dirctoinV = new Vector3(direction, 0, 0);
         transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         //방향 바꿔주는 함수
-        if ((wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x) && isInWayPoint == true)
+        if ((wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x))
         {
             Turn();
         }
@@ -179,6 +205,7 @@ public class MonsterHaviour : MonoBehaviour
     void Turn()
     {
         direction *= -1;
+        Debug.Log("turn");
     }
 
     void LookForward()
@@ -193,7 +220,7 @@ public class MonsterHaviour : MonoBehaviour
     void Jump()
     {
         mobRB.AddForce(Vector2.up * jumpPower * 5);
-        isJumpRay = false;
+        isCanJumpRay = false;
         StartCoroutine(stopJump());
     }
 
@@ -205,8 +232,13 @@ public class MonsterHaviour : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && isCanDetectTarget == true)
         {
             //player hp감소 혹은 죽음 넣기
-            isNowLookAtPlayer = true;
+            isLookAtPlayer = true;
             LookTarget();
+            //만약 몹 안움직였을때 탐지 가능하게 할 경우
+            if (isCanTrackingPlayer == true&& isCanMobMoveTmp == false)
+            {
+                isCanMobMove = true;
+            }
         }
     }
 
@@ -214,10 +246,13 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            // if (transform.position.x != wayPoint[0].transform.position.x)
             isInWayPoint = false;
-            isNowLookAtPlayer = false;
-            //                LookForward();
+            isLookAtPlayer = false;
+            //만약 몹 안움직이는데 탐지 가능하게 할 경우
+            if (isCanTrackingPlayer == true && isCanMobMoveTmp == false)
+            {
+                isCanMobMove = false;
+            }
         }
     }
 
@@ -263,6 +298,6 @@ public class MonsterHaviour : MonoBehaviour
     IEnumerator stopJump()
     {
         yield return new WaitForSeconds(jumpDelay);
-        isJumpRay = true;
+        isCanJumpRay = true;
     }
 }

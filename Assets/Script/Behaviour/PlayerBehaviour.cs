@@ -145,7 +145,7 @@ public class PlayerBehaviour : MonoBehaviour
         //그래비티가 꺼져있을때
         if (!isGravityOn)
         {
-            transform.Translate(Vector3.up * Time.smoothDeltaTime * keyVertical, Space.World);
+            transform.Translate(Vector3.up * speed * Time.smoothDeltaTime * keyVertical, Space.World);
 
         }
 

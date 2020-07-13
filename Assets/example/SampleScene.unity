@@ -233,21 +233,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dmg: 1
   type: 2
-  hp: 1
-  jumpDelay: 0
+  jumpDelay: 1
   speed: 5
   jumpPower: 5
   direction: 1
   isJumpRay: 0
   isTurnRay: 0
-  isTrackingPlayer: 1
-  isLookAtPlayer: 0
-  isMobMove: 1
+  isTrackingPlayer: 0
+  isCanDetectTarget: 0
+  isMobMove: 0
   mobRB: {fileID: 46155580}
   mobTR: {fileID: 46155578}
-  wayPoint:
-  - {fileID: 1555957491}
-  - {fileID: 1939824244}
   target: {fileID: 1061278349}
 --- !u!1 &302414419
 GameObject:
@@ -486,7 +482,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.778835, y: -0.51051146, z: -6.987306}
+  m_LocalPosition: {x: 2.778835, y: -0.5105558, z: -6.987306}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1958606609}
