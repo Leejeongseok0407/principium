@@ -15,19 +15,31 @@ public class Tower : MonsterHaviour
         StartCoroutine("SkillAction");
     }
 
-    override protected void Skill() {
-        if (bulletIndex < bullits.Length)
-            bullits[bulletIndex++].GetComponent<Bullit>().StartFire(transform.position, bullitDistance, bullitDmg);
-        else
-        {
-            bulletIndex = 0;
-            bullits[bulletIndex++].GetComponent<Bullit>().StartFire(transform.position, bullitDistance, bullitDmg);
-        }
+    override protected bool CheckCoolTime()
+    {
+        return true;
     }
+    override protected void DoSkill()
+    {
+        if (bulletIndex >= bullits.Length)
+            bulletIndex = 0;
+        
+        bullits[bulletIndex++].GetComponent<Bullit>().StartFire(transform.position, bullitDistance, bullitDmg);
+    }
+
+    override protected void delay()
+    {
+        
+    }
+
+  
+
     IEnumerator SkillAction()
     {
-        yield return new WaitForSeconds(fireInterval);
-        Skill();
-        StartCoroutine("SkillAction");
+        while (true)
+        {
+            Skill();
+            yield return new WaitForSeconds(fireInterval);
+        }
     }
 }

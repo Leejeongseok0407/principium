@@ -56,11 +56,27 @@ public class MonsterHaviour : MonoBehaviour
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
-    virtual protected void Skill()
+    protected void Skill()
+    {
+        if (!CheckCoolTime())
+            return;
+        DoSkill();
+        delay();
+    }
+
+    virtual protected bool CheckCoolTime()
+    {
+        return false;
+    }
+
+    virtual protected void delay()
+    {
+    }
+
+    virtual protected void DoSkill()
     {
 
     }
-
 
     void TrackingPlayer()
     {

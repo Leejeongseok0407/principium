@@ -5,7 +5,17 @@ using UnityEngine;
 public class Slime : MonsterHaviour
 {
 
-    override protected void  Skill()
+    override protected bool CheckCoolTime()
+    {
+        return true;
+    }
+
+    override protected void delay()
+    {
+
+    }
+
+    override protected void DoSkill()
     {
 
     }
