@@ -24,7 +24,6 @@ public class PlayerBehaviour : MonoBehaviour
     int hp;
 
     bool isGravityOn = true;
-    bool isGrounded = false;
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
     //무적인지 판단
@@ -134,7 +133,6 @@ public class PlayerBehaviour : MonoBehaviour
                         playerRigidBody.velocity = Vector2.zero;
                     }
                     playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                    isGrounded = false;
                     jumpCount--;
                 }
             }
@@ -192,8 +190,6 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
                 Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1f);
-                //Ground에 닿으면 isGround는 true
-                isGrounded = true;
                 //Ground에 닿으면 점프횟수가 max치로로 초기화됨
                 jumpCount = maxJumpCount;
                 //점프 하지 않는다는걸 알려줌
