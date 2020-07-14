@@ -15,6 +15,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] float bounceWidth = 5;
     [SerializeField] float bounceHight = 10;
     [SerializeField] LayerMask maskGround = 1;
+    [SerializeField] LayerMask maskTransmissionGround = 2;
     [SerializeField] SpriteRenderer spriteRenderer = null;
     [SerializeField] Animator ani = null;
     Rigidbody2D playerRigidBody;
@@ -184,7 +185,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         //레이케스트 사용 
         //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
-        if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskGround))
+        if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskGround)||
+            Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskTransmissionGround))
         {
             //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
             Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1f);
@@ -236,7 +238,8 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 Vector2 attackedVelocity = Vector2.zero;
 
-                float dir = transform.position.x - other.gameObject.transform.position.x / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
+                float dir = transform.position.x - other.gameObject.transform.position.x
+                    / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
                 playerRigidBody.velocity = new Vector2(0, 0);
                 attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
                 playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
@@ -251,12 +254,17 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.layer == LayerMask.NameToLayer("TransmissionGround"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+        }
         if (isNoDmgTime == false)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
             {
                 Vector2 attackedVelocity = Vector2.zero;
-                float dir = other.gameObject.GetComponent<Bullit>().dirctoinV.x / Mathf.Abs(other.gameObject.GetComponent<Bullit>().dirctoinV.x);
+                float dir = other.gameObject.GetComponent<Bullit>().dirctoinV.x
+                    / Mathf.Abs(other.gameObject.GetComponent<Bullit>().dirctoinV.x);
 
                 playerRigidBody.velocity = new Vector2(0, 0);
                 attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
@@ -270,8 +278,12 @@ public class PlayerBehaviour : MonoBehaviour
 
             }
         }
-
-        
-
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("TransmissionGround"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+        }
     }
 }
