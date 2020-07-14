@@ -49,6 +49,7 @@ public class PlayerBehaviour : MonoBehaviour
         RayCheckGorund();
         Jump();
         PlayerSkill();
+        Debug.Log(playerRigidBody.velocity);
     }
     void FixedUpdate()
     {
@@ -127,10 +128,10 @@ public class PlayerBehaviour : MonoBehaviour
                 if (jumpCount > 0)
                 {
                     //한번 점프 했을때 
-                    if (!isGrounded)
+                    if (playerRigidBody.velocity != Vector2.zero)
                     {
                         //가속도를 초기화 해줘서 점프를 낮게 하거나 안하는 것을 막아줌
-                        playerRigidBody.velocity = new Vector2(0, 0);
+                        playerRigidBody.velocity = Vector2.zero;
                     }
                     playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
                     isGrounded = false;
@@ -183,20 +184,22 @@ public class PlayerBehaviour : MonoBehaviour
 
     void RayCheckGorund()
     {
-        //레이케스트 사용 
-        //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
-        if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskGround)||
-            Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskTransmissionGround))
-        {
-            //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
-            Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1f);
-            //Ground에 닿으면 isGround는 true
-            isGrounded = true;
-            //Ground에 닿으면 점프횟수가 max치로로 초기화됨
-            jumpCount = maxJumpCount;
-            //점프 하지 않는다는걸 알려줌
-            ani.SetBool("isJump", false);
-            ani.SetBool("isGround", true);
+        if (GetComponent<BoxCollider2D>().isTrigger == false) {
+            //레이케스트 사용 
+            //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
+            if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskGround) ||
+                Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskTransmissionGround))
+            {
+                //레이 닿을때 쏴줘서 육안으로 식별 가능하게 해줌.
+                Debug.DrawRay(transform.position, Vector2.down, Color.blue, 1f);
+                //Ground에 닿으면 isGround는 true
+                isGrounded = true;
+                //Ground에 닿으면 점프횟수가 max치로로 초기화됨
+                jumpCount = maxJumpCount;
+                //점프 하지 않는다는걸 알려줌
+                ani.SetBool("isJump", false);
+                ani.SetBool("isGround", true);
+            }
         }
     }
 
