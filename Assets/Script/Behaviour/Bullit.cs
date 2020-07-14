@@ -42,6 +42,5 @@ public class Bullit : MonoBehaviour
             isFire = false;
             Debug.Log("Stop Fire!!");
         }
-        //방향 바꿔주는 함수
     }
 }
