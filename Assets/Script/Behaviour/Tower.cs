@@ -32,7 +32,7 @@ public class Tower : MonsterHaviour
             bulletIndex = 0;
         bullits[bulletIndex++].GetComponent<Bullit>().StartFire(this.gameObject);
         //bullits[bulletIndex++].GetComponent<Bullit>().StartFire(transform.position, bullitDistance, dirctoinV.x , bullitDmg);
-        Debug.Log(dirctoinV.x + "Tower");
+
     }
 
     override protected void delay()

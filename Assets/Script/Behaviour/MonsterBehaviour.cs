@@ -51,7 +51,7 @@ public class MonsterHaviour : MonoBehaviour
         {
             Patten();
         }
-        Debug.Log(dirctoinV);
+
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
@@ -199,7 +199,7 @@ public class MonsterHaviour : MonoBehaviour
     //wayPoint를 왕복하는 함수.
     void MoveToWayPoint()
     {
-        Debug.Log("MoveToWayPoint");
+
         dirctoinV = new Vector3(direction, 0, 0);
         base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         //방향 바꿔주는 함수
@@ -222,7 +222,7 @@ public class MonsterHaviour : MonoBehaviour
     void Turn()
     {
         direction *= -1;
-        Debug.Log("turn");
+
     }
 
     protected void LookForward()

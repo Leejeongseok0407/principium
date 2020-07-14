@@ -8,34 +8,41 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] int playerMaxHp = 5;
     [SerializeField] int speed = 10;
     [SerializeField] int jumpPower = 20;
-    [SerializeField] int dashPower = 10;
+    [Tooltip("0.1초 동안 움직일 거리이니 수치 많은게 정상 ")]
+    [SerializeField] int dashSpeed = 30;
     [SerializeField] int skillTime = 5;
     [SerializeField] int maxJumpCount = 2;
     [SerializeField] int noDmgTime = 3;
     [SerializeField] float bounceWidth = 5;
     [SerializeField] float bounceHight = 10;
+
     [SerializeField] LayerMask maskGround = 1;
     [SerializeField] LayerMask maskTransmissionGround = 2;
+
     [SerializeField] SpriteRenderer spriteRenderer = null;
     [SerializeField] Animator ani = null;
     Rigidbody2D playerRigidBody;
     Vector2 gravity2D;
+    float dashTime;
     int jumpCount;
+    int dashDirction = 0;
     int hp;
 
     bool isGravityOn = true;
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
     //무적인지 판단
-    [SerializeField] bool isNoDmgTime = false;
+    bool isNoDmgTime = false;
 
     float keyHorizontal;
     float keyVertical;
+    float maxDashTime = 0.1f;
 
     // Start is called before the first frame update
     void Start()
     {
         hp = playerMaxHp;
+        dashTime = maxDashTime;
         jumpCount = maxJumpCount;
         gravity2D = Physics2D.gravity;
         playerRigidBody = GetComponent<Rigidbody2D>();
@@ -80,11 +87,13 @@ public class PlayerBehaviour : MonoBehaviour
         //대쉬 스킬
         if (skillNum == 0)
         {
-            //대쉬 파워만큼 앞으로 이동시킴(순간이동), 무적시간 생김
-            //transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
-            //이미지 부착으로 해결
+
+            StartCoroutine("Dash");
+
+            
+
             //아님 빠르게 움직임, 무적시간 X
-            playerRigidBody.AddForce(Vector2.right * dashPower * keyHorizontal, ForceMode2D.Impulse);
+            //playerRigidBody.AddForce(Vector2.right * dashSpeed * keyHorizontal, ForceMode2D.Impulse);
             //코루틴으로 velocity를 0으로 초기화 해준다면?
         }
 
@@ -238,7 +247,32 @@ public class PlayerBehaviour : MonoBehaviour
         isNoDmgTime = false;
         yield return null;
     }
+    IEnumerator Dash()
+    {
+        if (keyHorizontal < 0)
+            dashDirction = -1;
+        else
+            dashDirction = 1;
 
+        Debug.Log("코루틴중");
+        while (true)
+        {
+            if (dashTime <= 0)
+            {
+                playerRigidBody.velocity = Vector2.zero;
+                dashTime = maxDashTime;
+                dashDirction = 0;
+                Debug.Log("초기화");
+                break;
+            }
+            else
+            {
+                dashTime -= Time.deltaTime;
+                playerRigidBody.velocity = Vector2.right * dashDirction * dashSpeed;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+    }
     void OnCollisionEnter2D(Collision2D other)
     {
         if (isNoDmgTime == false)
@@ -247,13 +281,12 @@ public class PlayerBehaviour : MonoBehaviour
             {
                 Debug.Log("outchi");
                 Vector2 attackedVelocity = Vector2.zero;
-
-                float dir = transform.position.x - other.gameObject.transform.position.x
-                    / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
-                playerRigidBody.velocity = new Vector2(0, 0);
+                float dir = (transform.position.x - other.gameObject.transform.position.x)
+                              / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
+                Debug.Log(dir);
+                playerRigidBody.velocity = Vector2.zero;
                 attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
                 playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-                //player hp감소 혹은 죽음 넣기
                 hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
                 isNoDmgTime = true;
                 StartCoroutine("NoDmgTime");

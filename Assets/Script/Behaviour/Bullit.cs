@@ -27,7 +27,7 @@ public class Bullit : MonoBehaviour
     public void StartFire(GameObject tower) {
         transform.position = tower.transform.position;
         
-        Debug.Log("Go! Fire");
+
         dirctoinV.x = tower.GetComponent<Tower>().dirctoinV.x;
         distanceV.x = tower.transform.position.x + tower.GetComponent<Tower>().CallBullitDistance() * dirctoinV.x;
         dmg = tower.GetComponent<Tower>().CallBullitDmg();
@@ -52,7 +52,7 @@ public class Bullit : MonoBehaviour
         {
             transform.position = bullitContainer.transform.position;
             isFire = false;
-            Debug.Log("Stop Fire!!");
+
         }
     }
 
