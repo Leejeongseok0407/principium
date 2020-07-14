@@ -5,13 +5,13 @@ using UnityEngine;
 public class Bullit : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Vector2 dirctoinV;
+    Vector2 dirctoinV;
     Vector2 distanceV;
-    [SerializeField] int direction = 1;
-    [SerializeField] int speed= 1;
+    float direction = 1;
+    int speed = 1;
     [SerializeField] GameObject bullitContainer;
     bool isFire= false;
-    public int dmg = 0;
+    int dmg = 0;
 
     private void Start()
     {
@@ -24,23 +24,44 @@ public class Bullit : MonoBehaviour
             Fire();
     }
 
-    public void StartFire(Vector3 towerPosition, int bullitDistance, int bullitdmg) {
-        transform.position = towerPosition;
+    public void StartFire(GameObject tower) {
+        transform.position = tower.transform.position;
+        
         Debug.Log("Go! Fire");
-        distanceV.x = towerPosition.x + bullitDistance;
+        dirctoinV.x = tower.GetComponent<Tower>().dirctoinV.x;
+        distanceV.x = tower.transform.position.x + tower.GetComponent<Tower>().CallBullitDistance() * dirctoinV.x;
+        dmg = tower.GetComponent<Tower>().CallBullitDmg();
+        speed = tower.GetComponent<Tower>().CallBullitSpeed();
         isFire = true;
-        dmg = bullitdmg;
     }
+
+    void LookForward()
+    {
+        if (dirctoinV.x > 0)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        if (dirctoinV.x < 0)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
 
     public void Fire()
     {
-        dirctoinV = new Vector2(direction, 0);
+        LookForward();
         transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
-        if (distanceV.x < transform.position.x)
+        if (Mathf.Abs(distanceV.x) > transform.position.x)
         {
             transform.position = bullitContainer.transform.position;
             isFire = false;
             Debug.Log("Stop Fire!!");
         }
+    }
+
+    public int CallBullitDmg()
+    {
+        return dmg;
+    }
+    public float CallDirctionX()
+    {
+        return dirctoinV.x;
     }
 }

@@ -273,15 +273,15 @@ public class PlayerBehaviour : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
             {
                 Vector2 attackedVelocity = Vector2.zero;
-                float dir = other.gameObject.GetComponent<Bullit>().dirctoinV.x
-                    / Mathf.Abs(other.gameObject.GetComponent<Bullit>().dirctoinV.x);
+                float dir = other.gameObject.GetComponent<Bullit>().CallDirctionX()
+                    / Mathf.Abs(other.gameObject.GetComponent<Bullit>().CallDirctionX());
 
                 playerRigidBody.velocity = new Vector2(0, 0);
                 attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
 
                 playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
 
-                hp -= other.gameObject.GetComponent<Bullit>().dmg;
+                hp -= other.gameObject.GetComponent<Bullit>().CallBullitDmg();
                 isNoDmgTime = true;
                 StartCoroutine("NoDmgTime");
                 Debug.Log("총알이랑 부딛힘 hp : " + hp);

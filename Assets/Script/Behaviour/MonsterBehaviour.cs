@@ -26,8 +26,6 @@ public class MonsterHaviour : MonoBehaviour
     bool isInWayPoint = false;
     bool isLookAtPlayer = false;
     bool isCanMobMoveTmp;
-    [SerializeField] Rigidbody2D mobRB = null;
-    [SerializeField] Transform mobTR = null;
 
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
@@ -35,13 +33,14 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] GameObject target = null;
     protected int layerMaskO = 1 << 8;
     protected Vector3 targetPosition;
-    protected Vector3 dirctoinV;
+    public Vector3 dirctoinV;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         LookForward();
+        dirctoinV.x = direction;
         isCanMobMoveTmp = isCanMobMove;
     }
 
@@ -82,17 +81,17 @@ public class MonsterHaviour : MonoBehaviour
     {
         //단위 벡터화
         Debug.Log("TrackingPlayer 실행중");
-        dirctoinV = new Vector3((target.transform.position.x - transform.position.x) / Mathf.Abs(target.transform.position.x - transform.position.x), 0, 0);
+        dirctoinV = new Vector3((target.transform.position.x - base.transform.position.x) / Mathf.Abs(target.transform.position.x - base.transform.position.x), 0, 0);
         direction = dirctoinV.x;
-        transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
+        base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
 
     }
     public void LookTarget()
     {
-        if (target.transform.position.x >= transform.position.x)
-            mobTR.rotation = Quaternion.Euler(0, 180, 0);
+        if (target.transform.position.x >= base.transform.position.x)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         else
-            mobTR.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
 
@@ -183,9 +182,9 @@ public class MonsterHaviour : MonoBehaviour
     //waypoint 로 돌아가는 함수
     void BackToWayPoint()
     {
-        dirctoinV = new Vector3((wayPoint[0].transform.position.x - transform.position.x) / Mathf.Abs(transform.position.x - wayPoint[0].transform.position.x), 0, 0);
-        transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
-        if (!(wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x))
+        dirctoinV = new Vector3((wayPoint[0].transform.position.x - base.transform.position.x) / Mathf.Abs(base.transform.position.x - wayPoint[0].transform.position.x), 0, 0);
+        base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
+        if (!(wayPoint[0].transform.position.x >= base.transform.position.x || base.transform.position.x >= wayPoint[1].transform.position.x))
         {
             Debug.Log("gotoway false");
             isInWayPoint = true;
@@ -202,9 +201,9 @@ public class MonsterHaviour : MonoBehaviour
     {
         Debug.Log("MoveToWayPoint");
         dirctoinV = new Vector3(direction, 0, 0);
-        transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
+        base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         //방향 바꿔주는 함수
-        if ((wayPoint[0].transform.position.x >= transform.position.x || transform.position.x >= wayPoint[1].transform.position.x))
+        if ((wayPoint[0].transform.position.x >= base.transform.position.x || base.transform.position.x >= wayPoint[1].transform.position.x))
         {
             Turn();
         }
@@ -215,7 +214,7 @@ public class MonsterHaviour : MonoBehaviour
     //rotation을 이용해 몹이 보는 방향을 변경해줌.
     void Move()
     {
-        mobRB.velocity = new Vector2(direction * speed, mobRB.velocity.y);
+        GetComponent<Rigidbody>().velocity = new Vector2(direction * speed, GetComponent<Rigidbody>().velocity.y);
 
     }
 
@@ -226,18 +225,18 @@ public class MonsterHaviour : MonoBehaviour
         Debug.Log("turn");
     }
 
-    void LookForward()
+    protected void LookForward()
     {
         if (dirctoinV.x > 0)
-            mobTR.rotation = Quaternion.Euler(0, 180, 0);
+            transform.rotation = Quaternion.Euler(0, 180, 0);
         if (dirctoinV.x < 0)
-            mobTR.rotation = Quaternion.Euler(0, 0, 0);
+            transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     //점프하는 함수이며 장애물의 크기에 따라 점프 파워 혹은 뒤에 붙은 상수를 변경 하면 됨.
     void Jump()
     {
-        mobRB.AddForce(Vector2.up * jumpPower * 5);
+        GetComponent<Rigidbody>().AddForce(Vector2.up * jumpPower * 5);
         isCanJumpRay = false;
         StartCoroutine(stopJump());
     }
@@ -278,7 +277,7 @@ public class MonsterHaviour : MonoBehaviour
     void TurnRay()
     {
         //frontBec는 내가 앞에 쏴줄 레이어 즉 충돌 판정할곳 정해줌 
-        Vector2 frontBec = new Vector2(mobRB.position.x + direction * mobTR.localScale.x, mobRB.position.y - 0.5f);
+        Vector2 frontBec = new Vector2(GetComponent<Rigidbody>().position.x + direction * transform.localScale.x, GetComponent<Rigidbody>().position.y - 0.5f);
 
         //Debug.DrawRay(x,y,z,r)x는 기준점, y는 방향 z는 색,r은 유지시간
         Debug.DrawRay(frontBec, Vector2.down, Color.red, 1);
@@ -296,7 +295,7 @@ public class MonsterHaviour : MonoBehaviour
     void JunpRay()
     {
         //frontBec는 내가 앞에 쏴줄 레이어 즉 충돌 판정할곳 정해줌 
-        Vector2 front = new Vector2(mobRB.position.x + direction * mobTR.localScale.x, mobRB.position.y + 1f);
+        Vector2 front = new Vector2(GetComponent<Rigidbody>().position.x + direction * transform.localScale.x, GetComponent<Rigidbody>().position.y + 1f);
 
         //Debug.DrawRay(x,y,z,r)x는 기준점, y는 방향 z는 색,r은 유지시간
         Debug.DrawRay(front, Vector2.down, Color.red, 1);
