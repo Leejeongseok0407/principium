@@ -48,7 +48,6 @@ public class PlayerBehaviour : MonoBehaviour
         RayCheckGorund();
         Jump();
         PlayerSkill();
-        Debug.Log(playerRigidBody.velocity);
     }
     void FixedUpdate()
     {
@@ -85,7 +84,6 @@ public class PlayerBehaviour : MonoBehaviour
             //대쉬 파워만큼 앞으로 이동시킴(순간이동), 무적시간 생김
             //transform.Translate(Vector3.right * dashPower * keyHorizontal, Space.World);
             //이미지 부착으로 해결
-
             //아님 빠르게 움직임, 무적시간 X
             playerRigidBody.AddForce(Vector2.right * dashPower * keyHorizontal, ForceMode2D.Impulse);
             //코루틴으로 velocity를 0으로 초기화 해준다면?
@@ -122,28 +120,43 @@ public class PlayerBehaviour : MonoBehaviour
             //키메니저에 있는 input에서 Jump input실행
             if (Input.GetButtonDown("Jump"))
             {
-                ani.SetBool("isJump", true);
-                ani.SetBool("isGround", false);
-                if (jumpCount > 0)
+                if (Input.GetKey(KeyCode.DownArrow) &&
+                    Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskTransmissionGround))
                 {
-                    //한번 점프 했을때 
-                    if (playerRigidBody.velocity != Vector2.zero)
+                    DownJump();
+                }
+                else if(Input.GetKey(KeyCode.DownArrow) == false)
+                {
+                    if (jumpCount > 0)
                     {
-                        //가속도를 초기화 해줘서 점프를 낮게 하거나 안하는 것을 막아줌
-                        playerRigidBody.velocity = Vector2.zero;
+                        //한번 점프 했을때 
+                        if (playerRigidBody.velocity != Vector2.zero)
+                        {
+                            //가속도를 초기화 해줘서 점프를 낮게 하거나 안하는 것을 막아줌
+                            playerRigidBody.velocity = Vector2.zero;
+                        }
+                        playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+                        jumpCount--;
+                        ani.SetBool("isJump", true);
+                        ani.SetBool("isGround", false);
                     }
-                    playerRigidBody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                    jumpCount--;
                 }
             }
+
         }
+    }
+
+    void DownJump() {
+        transform.Translate(Vector3.down * 0.01f, Space.World);
+        GetComponent<BoxCollider2D>().isTrigger = true;
+        ani.SetBool("isJump", true);
+        ani.SetBool("isGround", false);
     }
 
     void Move()
     {
         //좌우 이동i
         transform.Translate(Vector3.right * speed * Time.smoothDeltaTime * keyHorizontal, Space.World);
-
 
         if (keyHorizontal != 0)
         {
@@ -182,7 +195,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     void RayCheckGorund()
     {
-        if (GetComponent<BoxCollider2D>().isTrigger == false) {
+        if (GetComponent<BoxCollider2D>().isTrigger == false)
+        {
             //레이케스트 사용 
             //Physics2D.Raycase(시작위치(쏘는),방향,끝나는위치,마스크)
             if (Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskGround) ||
@@ -230,11 +244,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
-        Debug.Log("outchi");
         if (isNoDmgTime == false)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
             {
+                Debug.Log("outchi");
                 Vector2 attackedVelocity = Vector2.zero;
 
                 float dir = transform.position.x - other.gameObject.transform.position.x
