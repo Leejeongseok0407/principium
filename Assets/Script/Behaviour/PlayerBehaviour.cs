@@ -54,7 +54,6 @@ public class PlayerBehaviour : MonoBehaviour
         //죽었을 경우 입력 안받음
         if (isDead == true)
             return;
-
         //인풋메니져 참고
         keyHorizontal = Input.GetAxisRaw("Horizontal");
         keyVertical = Input.GetAxis("Vertical");
@@ -101,8 +100,6 @@ public class PlayerBehaviour : MonoBehaviour
             //SkillTime뒤에 중력다시줌
             Invoke("ReturnGravity", skillTime);
         }
-
-
     }
 
     void ReturnGravity()
