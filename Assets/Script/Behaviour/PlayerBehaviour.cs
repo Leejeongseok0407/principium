@@ -249,10 +249,7 @@ public class PlayerBehaviour : MonoBehaviour
     }
     IEnumerator Dash()
     {
-        if (keyHorizontal < 0)
-            dashDirction = -1;
-        else
-            dashDirction = 1;
+        dashDirction = (int)transform.localScale.x;
 
         Debug.Log("코루틴중");
         while (true)
