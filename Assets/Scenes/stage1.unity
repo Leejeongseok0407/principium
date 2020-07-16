@@ -558,12 +558,12 @@ PrefabInstance:
     - target: {fileID: 4453834236863010664, guid: 006f37d32cd6b6347aacb0c2ccafa319,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.69
+      value: -5.03
       objectReference: {fileID: 0}
     - target: {fileID: 4453834237380923369, guid: 006f37d32cd6b6347aacb0c2ccafa319,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 12.89
+      value: 10.15
       objectReference: {fileID: 0}
     - target: {fileID: 4453834237969925315, guid: 006f37d32cd6b6347aacb0c2ccafa319,
         type: 3}
@@ -2429,6 +2429,11 @@ PrefabInstance:
         type: 3}
       propertyPath: dashSpeed
       value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 5868960193552643573, guid: 1c35190766d1e834eb92b42f3347e4e4,
+        type: 3}
+      propertyPath: bounceWidth
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c35190766d1e834eb92b42f3347e4e4, type: 3}
