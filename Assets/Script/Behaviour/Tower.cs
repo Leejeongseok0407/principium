@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Tower : MonsterHaviour
 {
+    [Header("Tower전용 변수")]
     [Tooltip("총알을 담는 컨테이너")]
     [SerializeField] GameObject[] bullits;
     [Tooltip("총알 발사 간격")]

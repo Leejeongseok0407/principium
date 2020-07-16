@@ -4,38 +4,40 @@ using UnityEngine;
 
 public class MonsterHaviour : MonoBehaviour
 {
-    [SerializeField] public int dmg = 1;
-    [Tooltip("0. 고정 " +
-        "\n 1. 바닥체크(턴, 점프)" +
-        "\n 2. 웨이포인트 따라감" +
-        "\n 3. 플라이(A*있어야함)")]
+    
+    [Header("몬스터 기본 정보")]
+    [Tooltip("0. 고정 " + "\n 1. 바닥체크(턴, 점프)" + "\n 2. 웨이포인트 따라감" + "\n 3. 플라이(A*있어야함)")]
     [SerializeField] int type = 0;
-    //   [SerializeField] int hp = 1;
-
-
-    [SerializeField] protected float jumpDelay = 1;
+    [SerializeField] public int dmg = 1;
     [SerializeField] protected float speed = 1;
-    [SerializeField] protected float jumpPower = 5f;
     [SerializeField] protected float direction = 1;
+    [SerializeField] bool isCanMobMove = true;
 
+    //레이는 차후에 필요 없으면 지움
+    [Header("레이 쏠때 만지는 변수")]
     [SerializeField] bool isCanJumpRay = false;
     [SerializeField] bool isCanTurnRay = false;
+    [SerializeField] protected float jumpDelay = 1;
+    [SerializeField] protected float jumpPower = 5f;
+
+
+    [Header("감지에 관련된 변수")]
     [SerializeField] bool isCanTrackingPlayer = false;
     [SerializeField] bool isCanDetectTarget = false;
-    [SerializeField] bool isCanMobMove = true;
-    bool isInWayPoint = false;
-    bool isLookAtPlayer = false;
-    bool isCanMobMoveTmp;
+    [SerializeField] GameObject target = null;
 
+    [Header("type == 2일때")]
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
 
-    [SerializeField] GameObject target = null;
-    protected int layerMaskO = 1 << 8;
-    protected Vector3 targetPosition;
-    public Vector3 dirctoinV;
 
-
+    bool isInWayPoint = false;
+    bool isLookAtPlayer = false;
+    bool isCanMobMoveTmp;
+    int layerMaskO = 1 << 8;
+    Vector3 targetPosition;
+    Vector3 dirctoinV;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -93,8 +95,6 @@ public class MonsterHaviour : MonoBehaviour
         else
             transform.rotation = Quaternion.Euler(0, 0, 0);
     }
-
-
 
     // 이동 모션을 의미함
     public void Patten()
@@ -177,8 +177,11 @@ public class MonsterHaviour : MonoBehaviour
         }
     }
 
-    //<움직임에 관한 함수>
+    public Vector3 ReturnDirctoinV() {
+        return dirctoinV;
+    }
 
+    //<움직임에 관한 함수>
     //waypoint 로 돌아가는 함수
     void BackToWayPoint()
     {
