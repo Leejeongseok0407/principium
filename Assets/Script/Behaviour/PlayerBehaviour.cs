@@ -5,22 +5,35 @@ using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+
+    [Header("플레이어 기본 정보")]
     [SerializeField] int playerMaxHp = 5;
     [SerializeField] int speed = 10;
     [SerializeField] int jumpPower = 20;
     [Tooltip("0.1초 동안 움직일 거리이니 수치 많은게 정상 ")]
     [SerializeField] int dashSpeed = 30;
+    [Tooltip("스킬 지속지간 (현재 부유만 참고)")]
     [SerializeField] int skillTime = 5;
     [SerializeField] int maxJumpCount = 2;
     [SerializeField] int noDmgTime = 3;
     [SerializeField] float bounceWidth = 5;
     [SerializeField] float bounceHight = 10;
 
+    [Header("플레이어 가 판단하는 레이어들")]
     [SerializeField] LayerMask maskGround = 1;
     [SerializeField] LayerMask maskTransmissionGround = 2;
 
+
+    [Header("스킬 관련")]
+    [Tooltip("0~6 스킬 번호 맞게 할당해줌")]
+    [SerializeField] float[] skillCoolTime = new float[7];
+    [SerializeField] bool[] isSkillCanActive = new bool[7];
+
+    [Header("에니메이션")]
     [SerializeField] SpriteRenderer spriteRenderer = null;
     [SerializeField] Animator ani = null;
+
+
     Rigidbody2D playerRigidBody;
     Vector2 gravity2D;
     float dashTime;
@@ -83,39 +96,27 @@ public class PlayerBehaviour : MonoBehaviour
     void PlayerSkill()
     {
         int skillNum = InputSkillNum();
-
         //대쉬 스킬
         if (skillNum == 0)
         {
-
-            StartCoroutine("Dash");
-
-            
-
-            //아님 빠르게 움직임, 무적시간 X
-            //playerRigidBody.AddForce(Vector2.right * dashSpeed * keyHorizontal, ForceMode2D.Impulse);
-            //코루틴으로 velocity를 0으로 초기화 해준다면?
+            if (isSkillCanActive[0] == true)
+            {
+                StartCoroutine(Dash());
+                StartCoroutine(CoolTime(skillNum));
+//              ani.SetBool("isDash", true);
+            }
         }
 
         //부유 스킬
         if (skillNum == 1)
         {
-            //중력값을 0으로 초기화 해주고, 가속도를 제거한 뒤에, bool값을 통해 스킬이 켜짐을 알려줌
-            Physics2D.gravity = Vector2.zero;
-            playerRigidBody.velocity = Vector2.zero;
-            isGravityOn = false;
-            ani.SetBool("isFly", true);
-            ani.SetBool("isGround", false);
-            //SkillTime뒤에 중력다시줌
-            Invoke("ReturnGravity", skillTime);
+            if (isSkillCanActive[1] == true)
+            {
+                StartCoroutine(CoolTime(skillNum));
+                StartCoroutine(Fly());
+                
+            }
         }
-    }
-
-    void ReturnGravity()
-    {
-        Physics2D.gravity = gravity2D;
-        isGravityOn = true;
-        ani.SetBool("isFly", false);
     }
 
     void Jump()
@@ -221,10 +222,16 @@ public class PlayerBehaviour : MonoBehaviour
 
     void Flip()
     {
+        if (keyHorizontal > 0)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (keyHorizontal < 0)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        /*
         //현재의 크기를 받아오고 키입력한 방향으로 보게 설정함
         Vector3 theScale = transform.localScale;
         theScale.x = keyHorizontal;
         transform.localScale = theScale;
+    */
     }
 
     //OnCollisionEnter2D 코루틴에서 사용
@@ -247,10 +254,10 @@ public class PlayerBehaviour : MonoBehaviour
         isNoDmgTime = false;
         yield return null;
     }
+
     IEnumerator Dash()
     {
-        dashDirction = (int)transform.localScale.x;
-
+        dashDirction = (int)keyHorizontal;
         Debug.Log("코루틴중");
         while (true)
         {
@@ -259,7 +266,6 @@ public class PlayerBehaviour : MonoBehaviour
                 playerRigidBody.velocity = Vector2.zero;
                 dashTime = maxDashTime;
                 dashDirction = 0;
-                Debug.Log("초기화");
                 break;
             }
             else
@@ -269,6 +275,23 @@ public class PlayerBehaviour : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
+    }
+
+    IEnumerator Fly()
+    {
+        //중력값을 0으로 초기화 해주고, 가속도를 제거한 뒤에, bool값을 통해 스킬이 켜짐을 알려줌
+        Physics2D.gravity = Vector2.zero;
+        playerRigidBody.velocity = Vector2.zero;
+        isGravityOn = false;
+        ani.SetBool("isFly", true);
+        ani.SetBool("isGround", false);
+
+        //SkillTime뒤에 중력다시줌
+        yield return new WaitForSeconds(skillTime);
+        Physics2D.gravity = gravity2D;
+        isGravityOn = true;
+        ani.SetBool("isFly", false);
+
     }
     void OnCollisionEnter2D(Collision2D other)
     {
@@ -326,4 +349,26 @@ public class PlayerBehaviour : MonoBehaviour
             GetComponent<BoxCollider2D>().isTrigger = false;
         }
     }
+
+    IEnumerator CoolTime(int index)
+    {
+        print("쿨타임 코루틴 실행");
+        float times = 0;
+        isSkillCanActive[index] = false;
+       
+
+        while (skillCoolTime[index] > times)
+        {
+            times += 0.1f;
+            //times += Time.deltaTime;
+            // 이미지 돌아가는 코드인데 여기서 한느게 아니라 ui에서 관리 해야함
+            //img.fillAmount = (times / coolTime);
+            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForFixedUpdate();
+        }
+
+        isSkillCanActive[index] = true;
+        print("쿨타임 코루틴 완료");
+    }
+
 }
