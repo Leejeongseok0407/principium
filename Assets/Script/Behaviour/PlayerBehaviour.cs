@@ -60,6 +60,8 @@ public class PlayerBehaviour : MonoBehaviour
         jumpCount = maxJumpCount;
         gravity2D = Physics2D.gravity;
         playerRigidBody = GetComponent<Rigidbody2D>();
+        GetSkill();
+        
     }
 
     // Update is called once per frame
@@ -80,6 +82,14 @@ public class PlayerBehaviour : MonoBehaviour
         keyVertical = Input.GetAxis("Vertical");
         Move();
 
+    }
+
+    void GetSkill() {
+        if (PlayerPrefs.HasKey("SkillIndex") == true)
+            for (int i = 0; i < PlayerPrefs.GetInt("SkillIndex"); i++)
+                isSkillCanActive[i] = true;
+        else
+            return;
     }
 
     int InputSkillNum()
@@ -107,7 +117,7 @@ public class PlayerBehaviour : MonoBehaviour
 //              ani.SetBool("isDash", true);
             }
         }
-
+        
         //부유 스킬
         if (skillNum == 1)
         {
