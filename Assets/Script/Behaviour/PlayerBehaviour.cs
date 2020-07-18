@@ -340,41 +340,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
         }
-        //데미지 입는 스크립트
-        /*if (isNoDmgTime == false)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
-            {
-                Vector2 attackedVelocity = Vector2.zero;
-                float dir = other.gameObject.GetComponent<Bullit>().CallDirctionX()
-                    / Mathf.Abs(other.gameObject.GetComponent<Bullit>().CallDirctionX());
-
-                playerRigidBody.velocity = new Vector2(0, 0);
-                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
-
-                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-
-                hp -= other.gameObject.GetComponent<Bullit>().CallBullitDmg();
-                StartCoroutine("NoDmgTime");
-                Debug.Log("총알이랑 부딛힘 hp : " + hp);
-            }
-
-
-            if (other.gameObject.layer == LayerMask.NameToLayer("Impediments"))
-            {
-                Vector2 attackedVelocity = Vector2.zero;
-                float dir = -playerLookDirction;
-
-                playerRigidBody.velocity = new Vector2(0, 0);
-                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
-
-                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-
-                hp -= other.gameObject.GetComponent<Impediments>().CallDmg();
-                StartCoroutine(NoDmgTime());
-                Debug.Log("방해물이랑 부딛힘 hp : " + hp);
-            }
-        }*/
+       
     }
 
     private void OnTriggerExit2D(Collider2D other)
