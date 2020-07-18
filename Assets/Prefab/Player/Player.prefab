@@ -51,10 +51,10 @@ MonoBehaviour:
   speed: 10
   jumpPower: 20
   dashSpeed: 30
-  skillTime: 3
+  skillTime: 5
   maxJumpCount: 2
   noDmgTime: 3
-  bounceWidth: 5
+  bounceWidth: 10
   bounceHight: 5
   maskGround:
     serializedVersion: 2
@@ -63,12 +63,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4096
   skillCoolTime:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 1
+  - 5
+  - 5
+  - 1
+  - 10
+  - 15
   - 0
   isSkillCanActive: 00000000000000
   spriteRenderer: {fileID: 5868960193613179875}
