@@ -340,7 +340,11 @@ public class PlayerBehaviour : MonoBehaviour
         {
             GetComponent<BoxCollider2D>().isTrigger = true;
         }
-       
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+
     }
 
     private void OnTriggerExit2D(Collider2D other)
