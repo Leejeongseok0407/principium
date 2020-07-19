@@ -7,7 +7,7 @@ public class MonsterHaviour : MonoBehaviour
     
     [Header("몬스터 기본 정보")]
     [Tooltip("0. 고정 " + "\n 1. 바닥체크(턴, 점프)" + "\n 2. 웨이포인트 따라감" + "\n 3. 플라이(A*있어야함)")]
-    [SerializeField] int type = 0;
+    [SerializeField] protected int type = 0;
     [SerializeField] public int dmg = 1;
     [SerializeField] protected float speed = 1;
     [SerializeField] protected float direction = 1;

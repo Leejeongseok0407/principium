@@ -402,12 +402,9 @@ public class PlayerBehaviour : MonoBehaviour
 
         while (skillCoolTime[index] > times)
         {
-            times += 0.1f;
-            //times += Time.deltaTime;
-            // 이미지 돌아가는 코드인데 여기서 한느게 아니라 ui에서 관리 해야함
+            times += Time.deltaTime;
             //img.fillAmount = (times / coolTime);
-            yield return new WaitForSeconds(0.1f);
-            //yield return new WaitForFixedUpdate();
+            yield return null;
         }
 
         isSkillCanActive[index] = true;
