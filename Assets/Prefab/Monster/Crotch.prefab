@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 1336108973070280829}
   - component: {fileID: 1336108973070280827}
   - component: {fileID: 1336108973070280828}
-  - component: {fileID: 1336108973070280825}
+  - component: {fileID: 3328820071161323109}
   - component: {fileID: 1336108973070280826}
   m_Layer: 9
   m_Name: Monster
@@ -146,7 +146,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.6008062, y: 0.041121602}
   m_EdgeRadius: 0
---- !u!114 &1336108973070280825
+--- !u!114 &3328820071161323109
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,12 +155,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1336108973070280830}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e351d5a9b3de414e957f40de27b04fb, type: 3}
+  m_Script: {fileID: 11500000, guid: edc9921f1350af540bc8b5be894c10cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
   dmg: 1
-  speed: 5
+  speed: 1
   direction: 1
   isCanMobMove: 1
   isCanJumpRay: 0
@@ -171,8 +171,9 @@ MonoBehaviour:
   isCanDetectTarget: 0
   target: {fileID: 0}
   wayPoint:
-  - {fileID: 1336108974116612532}
-  - {fileID: 1336108973326070067}
+  - {fileID: 0}
+  - {fileID: 0}
+  attackDelayTime: 0
 --- !u!58 &1336108973070280826
 CircleCollider2D:
   m_ObjectHideFlags: 0

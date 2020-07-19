@@ -24,7 +24,7 @@ public class MonsterHaviour : MonoBehaviour
     [Header("감지에 관련된 변수")]
     [SerializeField] bool isCanTrackingPlayer = false;
     [SerializeField] bool isCanDetectTarget = false;
-    [SerializeField] GameObject target = null;
+    [SerializeField] protected GameObject target = null;
 
     [Header("type == 2일때")]
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
@@ -61,8 +61,11 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (!CheckCoolTime())
             return;
-        DoSkill();
-        delay();
+        if (!target.GetComponent<PlayerBehaviour>().ReturnNoDmgTime())
+        {
+            DoSkill();
+            delay();
+        }
     }
 
     virtual protected bool CheckCoolTime()

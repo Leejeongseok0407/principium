@@ -130,6 +130,8 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
+
+
     void Jump()
     {
         //gravity가 켜져있으면 점프만
@@ -243,12 +245,11 @@ public class PlayerBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 180, 0);
             playerLookDirction = -1;
         }
-        /*
-        //현재의 크기를 받아오고 키입력한 방향으로 보게 설정함
-        Vector3 theScale = transform.localScale;
-        theScale.x = keyHorizontal;
-        transform.localScale = theScale;
-    */
+        
+    }
+
+    public bool ReturnNoDmgTime() {
+        return isNoDmgTime;
     }
 
     //OnCollisionEnter2D 코루틴에서 사용
@@ -312,7 +313,7 @@ public class PlayerBehaviour : MonoBehaviour
         ani.SetBool("isFly", false);
 
     }
-    void OnCollisionEnter2D(Collision2D other)
+    void OnCollisionStay2D(Collision2D other)
     {
         if (isNoDmgTime == false)
         {

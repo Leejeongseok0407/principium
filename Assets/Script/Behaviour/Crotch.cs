@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Crotch : MonsterHaviour
 {
+    [Header("아귀몹 정보")]
+    [Tooltip("쿨타임 \n (애니메이션 재생 시간보다 길어야함)")]
+    [SerializeField] float attackCoolTime;
+    [Tooltip("입 닫는 시간")]
     [SerializeField] float attackDelayTime;
+    [SerializeField] Animator ani = null;
     bool coolTime;
    
    private void Start()
@@ -15,6 +20,7 @@ public class Crotch : MonsterHaviour
 
     override protected bool CheckCoolTime()
     {
+        GetComponent<BoxCollider2D>().isTrigger = true;
         return coolTime;
     }
 
@@ -24,26 +30,49 @@ public class Crotch : MonsterHaviour
 
     override protected void DoSkill()
     {
-        Attack();
+
         StartCoroutine(AttackDelay());
+        StartCoroutine(Attack());
     }
 
-    void Attack() {
-        Debug.Log("Attack!");
-    }
-
-    IEnumerator AttackDelay() {
+    IEnumerator Attack()
+    {
         float times = 0;
-        coolTime = false;
+        Debug.Log("Start Attack");
+        ani.SetTrigger("Attack");
         while (attackDelayTime > times)
         {
             times += Time.deltaTime;
             yield return null;
         }
+        Debug.Log("End Attack");
+        GetComponent<BoxCollider2D>().isTrigger = false;
+        yield return new WaitForSeconds(0.1f);
+        GetComponent<BoxCollider2D>().isTrigger = true;
+        ani.SetTrigger("Default");
+        Debug.Log("Default");
+    }
+
+
+
+
+
+
+    IEnumerator AttackDelay() {
+        float times = 0;
+        coolTime = false;
+        Debug.Log("Start Delay");
+        while (attackCoolTime > times)
+        {
+            times += Time.deltaTime;
+            yield return null;
+        }
+        Debug.Log("End Delay");
         coolTime = true;
     }
 
-    void OnTriggerExit2D(Collider2D other)
+
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
@@ -51,8 +80,4 @@ public class Crotch : MonsterHaviour
         }
     }
 
-    private bool IsShoot()
-    {
-        return true;
-    }
 }
