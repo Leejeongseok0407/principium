@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class OptionTrigger : MonoBehaviour
 {
-    public GameObject optionCanvas;
+    public GameObject OptionCanvas;
 
     public void OptionDown()
     {
         Time.timeScale = 0;
-        optionCanvas.SetActive(true);
+        OptionCanvas.SetActive(true);
     }
 }
