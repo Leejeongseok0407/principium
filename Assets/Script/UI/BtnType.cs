@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BtnType : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class BtnType : MonoBehaviour
         switch (currentType)
         {
             case BTNType.Start:
-                Debug.Log("처음부터");
+                SceneManager.LoadScene("stage1");
                 break;
             case BTNType.Load:
                 Debug.Log("불러오기");
@@ -31,7 +32,7 @@ public class BtnType : MonoBehaviour
                 Debug.Log("뒤로가기");
                 break;
             case BTNType.Quit:
-                Debug.Log("나가기");
+                Application.Quit();
                 break;
         }
     }
