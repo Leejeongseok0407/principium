@@ -33,14 +33,5 @@ public class OptionTrigger : MonoBehaviour
         SceneManager.LoadScene("start Scene");
     }
 
-    public void StartGame() // 시작화면에서 게임 처음부터 시작하는 버튼
-    {
-        SceneManager.LoadScene("stage1");
-    }
-    public void ExitGame() // 시작화면에서 게임 종료하기
-    {
-        Application.Quit();
-    }
-
 }
 
