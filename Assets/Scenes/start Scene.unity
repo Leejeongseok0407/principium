@@ -505,10 +505,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1026298236}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7983360ab0f77e145aa92f157286d942, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3f6fb352cfb9549b0838d102750234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentType: 7
+  OptionCanvas: {fileID: 1026298236}
 --- !u!114 &1026298239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,7 +553,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1026298238}
-        m_MethodName: OnBtnClick
+        m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -915,10 +915,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1733657647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7983360ab0f77e145aa92f157286d942, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3f6fb352cfb9549b0838d102750234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentType: 0
+  OptionCanvas: {fileID: 1733657647}
 --- !u!114 &1733657650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963,7 +963,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1733657649}
-        m_MethodName: OnBtnClick
+        m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1281,10 +1281,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1755060292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7983360ab0f77e145aa92f157286d942, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3f6fb352cfb9549b0838d102750234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentType: 2
+  OptionCanvas: {fileID: 1755060292}
 --- !u!114 &1755060295
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1329,7 +1329,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1755060294}
-        m_MethodName: OnBtnClick
+        m_MethodName: OptionDown
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1755060294}
+        m_MethodName: Update
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

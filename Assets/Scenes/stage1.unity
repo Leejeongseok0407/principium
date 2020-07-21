@@ -40377,10 +40377,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 969455193}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7983360ab0f77e145aa92f157286d942, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3f6fb352cfb9549b0838d102750234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentType: 6
+  OptionCanvas: {fileID: 969455193}
 --- !u!114 &969455196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40425,7 +40425,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 969455195}
-        m_MethodName: OnBtnClick
+        m_MethodName: LoadingStartScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -73233,12 +73233,12 @@ PrefabInstance:
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.69154
+      value: -1.6904967
       objectReference: {fileID: 0}
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -84.799736
+      value: -83.51158
       objectReference: {fileID: 0}
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
