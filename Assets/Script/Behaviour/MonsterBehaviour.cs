@@ -12,6 +12,7 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] protected float speed = 1;
     [SerializeField] protected float direction = 1;
     [SerializeField] bool isCanMobMove = true;
+    [SerializeField] protected Animator originAni;
 
     //레이는 차후에 필요 없으면 지움
     [Header("레이 쏠때 만지는 변수")]
@@ -91,6 +92,16 @@ public class MonsterHaviour : MonoBehaviour
         base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
 
     }
+    virtual protected void TarckingPlayerAni()
+    {
+
+    }
+    virtual protected void MissingPlayerAni()
+    {
+
+    }
+    
+
     public void LookTarget()
     {
         if (target.transform.position.x >= base.transform.position.x)
@@ -107,7 +118,6 @@ public class MonsterHaviour : MonoBehaviour
             //고정몹
             //고정몹은 몹 무브만 없애면됨
             case 0:
-
                 if (isCanTrackingPlayer == true)
                 {
                     if (isLookAtPlayer == true)
@@ -250,13 +260,14 @@ public class MonsterHaviour : MonoBehaviour
 
     //<콜라이더 충돌 체크>
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && isCanDetectTarget == true)
         {
             //player hp감소 혹은 죽음 넣기
             isLookAtPlayer = true;
             LookTarget();
+            TarckingPlayerAni();
             //만약 몹 안움직였을때 탐지 가능하게 할 경우
             if (isCanTrackingPlayer == true&& isCanMobMoveTmp == false)
             {
@@ -271,6 +282,7 @@ public class MonsterHaviour : MonoBehaviour
         {
             isInWayPoint = false;
             isLookAtPlayer = false;
+            MissingPlayerAni();
             //만약 몹 안움직이는데 탐지 가능하게 할 경우
             if (isCanTrackingPlayer == true && isCanMobMoveTmp == false)
             {

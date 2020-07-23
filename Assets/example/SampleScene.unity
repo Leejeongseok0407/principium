@@ -1676,78 +1676,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1336108973070280825, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1061278349}
-    - target: {fileID: 1336108973070280828, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1336108973070280828, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: m_Offset.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1336108973070280828, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1336108973070280828, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: m_Size.y
-      value: 0.14007688
-      objectReference: {fileID: 0}
-    - target: {fileID: 1336108973070280828, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: m_Offset.y
-      value: -1.6449616
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: attackDelayTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: backDefultTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: attackCoolTime
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1061278349}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: isCanTrackingPlayer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: isCanDetectTarget
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: ani
-      value: 
-      objectReference: {fileID: 6699934951048556281}
-    - target: {fileID: 3328820071161323109, guid: 714ec33845a9bff4f8e83d01940a19d3,
-        type: 3}
-      propertyPath: backDefaultTime
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1336108973070280825, guid: 714ec33845a9bff4f8e83d01940a19d3, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 714ec33845a9bff4f8e83d01940a19d3, type: 3}
 --- !u!1001 &5868960192969647973
 PrefabInstance:
@@ -1818,31 +1752,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c35190766d1e834eb92b42f3347e4e4, type: 3}
---- !u!1 &6699934951048556280 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1336108973393802058, guid: 714ec33845a9bff4f8e83d01940a19d3,
-    type: 3}
-  m_PrefabInstance: {fileID: 5652056424673467826}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &6699934951048556281
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6699934951048556280}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a4dc66f7e95b1d04493e9a89b0de9960, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &6699934952774182805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1336108973009697319, guid: 714ec33845a9bff4f8e83d01940a19d3,
