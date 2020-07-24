@@ -20,12 +20,16 @@ public class Crotch : MonsterHaviour
 
     override protected bool CheckCoolTime()
     {
+        if (target.GetComponent<PlayerBehaviour>().ReturnNoDmgTime())
+            return false;
         GetComponent<BoxCollider2D>().isTrigger = true;
         return coolTime;
     }
 
+
     override protected void delay()
     {
+
     }
 
     override protected void DoSkill()

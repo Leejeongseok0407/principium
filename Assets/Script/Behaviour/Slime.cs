@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Tower : MonsterHaviour
+public class Slime : MonsterHaviour
 {
     [Header("Tower전용 변수")]
     [Tooltip("총알을 담는 컨테이너")]
@@ -29,6 +29,7 @@ public class Tower : MonsterHaviour
     }
     override protected void DoSkill()
     {
+        Debug.Log(bulletIndex);
         if (bulletIndex >= bullits.Length)
             bulletIndex = 0;
         bullits[bulletIndex++].GetComponent<Bullit>().StartFire(this.gameObject);
@@ -40,6 +41,7 @@ public class Tower : MonsterHaviour
     {
         
     }
+
     public int CallBullitSpeed()
     {
         return bullitSpeed;

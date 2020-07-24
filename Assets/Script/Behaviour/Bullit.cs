@@ -26,10 +26,10 @@ public class Bullit : MonoBehaviour
 
     public void StartFire(GameObject tower) {
         transform.position = tower.transform.position;
-        dirctoinV.x = tower.GetComponent<Tower>().ReturnDirctoinV().x;
-        distanceV.x = tower.transform.localPosition.x + tower.GetComponent<Tower>().CallBullitDistance() * dirctoinV.x;
-        dmg = tower.GetComponent<Tower>().CallBullitDmg();
-        speed = tower.GetComponent<Tower>().CallBullitSpeed();
+        dirctoinV.x = tower.GetComponent<Slime>().ReturnDirctoinV().x;
+        distanceV.x = tower.transform.localPosition.x + tower.GetComponent<Slime>().CallBullitDistance() * dirctoinV.x;
+        dmg = tower.GetComponent<Slime>().CallBullitDmg();
+        speed = tower.GetComponent<Slime>().CallBullitSpeed();
         isFire = true;
     }
 

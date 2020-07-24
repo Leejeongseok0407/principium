@@ -7,11 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5811654609807766246, guid: f84e787d23017644db5909b91d7b13e0,
-        type: 3}
-      propertyPath: bullitContainer
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5811654609807766264, guid: f84e787d23017644db5909b91d7b13e0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -70,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 5811654609807766267, guid: f84e787d23017644db5909b91d7b13e0,
         type: 3}
       propertyPath: m_Name
-      value: Bullit
+      value: Bullit Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f84e787d23017644db5909b91d7b13e0, type: 3}

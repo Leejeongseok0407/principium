@@ -46,7 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
     //무적인지 판단
-    bool isNoDmgTime = false;
+    [SerializeField] bool isNoDmgTime = false;
 
     float keyHorizontal;
     float keyVertical;
@@ -267,7 +267,7 @@ public class PlayerBehaviour : MonoBehaviour
             else
                 spriteRenderer.color = new Color32(255, 255, 255, 180);
             yield return new WaitForSeconds(0.1f);
-            //yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
             countTime += 0.1f;
         }
         spriteRenderer.color = new Color32(255, 255, 255, 255);

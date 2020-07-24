@@ -62,11 +62,8 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (!CheckCoolTime())
             return;
-        if (!target.GetComponent<PlayerBehaviour>().ReturnNoDmgTime())
-        {
-            DoSkill();
-            delay();
-        }
+        DoSkill();
+        delay();
     }
 
     virtual protected bool CheckCoolTime()
