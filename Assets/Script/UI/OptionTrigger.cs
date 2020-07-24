@@ -13,10 +13,10 @@ public class OptionTrigger : MonoBehaviour
 
     public void Update()
     {
-        OnOffOption();
+        GetKeyDownOption();
     }
+
     //일단 첫번쨰 길면 함수로 뺴욤
-    //두번째 Update는 시시떄때로 호출하니까 플레이에 큰 지장이 없으면 FixedUpdate로 해주는게 좋아요
     //FixedUpdate는 한 프레임당 호출 1번, Update는 그냥 겁나 호출
     //세번째 함수가 혜진씨가 생각한 대로 호출되는게 아니라 두번 연속으로 호출해서 키고 바로 꺼진거에요
     //혜진씨의도는 알겠는데 컴퓨터는 라인으로 따라간다고 생각하면 이해하기 편해요 보
@@ -24,21 +24,31 @@ public class OptionTrigger : MonoBehaviour
     //결국 켜졌다가 바로 꺼졌겠죠?
     //이러는 경우 Debug.log("쓰고싶은말");을 통해서 콘솔창에 이 표시가 나오는지 확인해봐요 제가 나중에 알켜dream 동방오셈
     //원래 함수는 아래썼으니까 뭐가 바뀐건지 비교해봐요
-    //여기 밑에 보면 activeSelf라는 거 보이죠? 저도 몰라서 찾아봤는데 이런 기능이 있더라고요 그 OptionCanvas의 Active값을 반환해주는건데 이걸 통해서 제어하면 될거같아요
+    //여기 밑에 보면 activeSelf라는 거 보이죠? 저도 몰라서 찾아봤는데 이런 기능이 있더라고요
+    //그 OptionCanvas의 Active값을 반환해주는건데 이걸 통해서 제어하면 될거같아요
     //읽으면 주석 삭제 ㄱㄱ
-    void OnOffOption()
+
+    void GetKeyDownOption()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Time.timeScale = 0;
-            OptionCanvas.SetActive(true);
-            if (OptionCanvas.activeSelf == true) // ESC 한번 더 누르면 옵션 창 나가기
-            {
-                OptionCanvas.SetActive(false);
-                Time.timeScale = 1;
-            }
+            OnOffOption();
         }
     }
+
+    public void OnOffOption() {
+        if (OptionCanvas.activeSelf == false) // ESC 한번 더 누르면 옵션 창 나가기
+        {
+            Time.timeScale = 0;
+            OptionCanvas.SetActive(true);
+        }
+        else if(OptionCanvas.activeSelf == true) // ESC 한번 더 누르면 옵션 창 나가기
+        {
+            OptionCanvas.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
     /*
         void OnOffOption() {
             if (Input.GetKeyDown(KeyCode.Escape))

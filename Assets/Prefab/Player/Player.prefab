@@ -70,7 +70,7 @@ MonoBehaviour:
   - 10
   - 15
   - 0
-  isSkillCanActive: 00000000000000
+  isSkillCanActive: 01000000000000
   spriteRenderer: {fileID: 5868960193613179875}
   ani: {fileID: 5868960193613179885}
 --- !u!50 &5868960193552643562
