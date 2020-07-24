@@ -25,7 +25,7 @@ public class MonsterHaviour : MonoBehaviour
     [Header("감지에 관련된 변수")]
     [SerializeField] bool isCanTrackingPlayer = false;
     [SerializeField] bool isCanDetectTarget = false;
-    [SerializeField] protected GameObject target = null;
+    protected GameObject target;
 
     [Header("type == 2일때")]
     [Tooltip("0이 왼쪽 1이 오른쪽, 몬스터는 0부터 시작함")]
@@ -45,6 +45,7 @@ public class MonsterHaviour : MonoBehaviour
         LookForward();
         dirctoinV.x = direction;
         isCanMobMoveTmp = isCanMobMove;
+        target = GameObject.Find("Player"); 
     }
 
     // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
