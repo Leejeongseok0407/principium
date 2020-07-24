@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterHaviour : MonoBehaviour
 {
-    
+
     [Header("몬스터 기본 정보")]
     [Tooltip("0. 고정 " + "\n 1. 바닥체크(턴, 점프)" + "\n 2. 웨이포인트 따라감" + "\n 3. 플라이(A*있어야함)")]
     [SerializeField] protected int type = 0;
@@ -33,12 +33,12 @@ public class MonsterHaviour : MonoBehaviour
 
 
     bool isInWayPoint = false;
-    bool isLookAtPlayer = false;
+    [SerializeField] bool isLookAtPlayer = false;
     bool isCanMobMoveTmp;
     int layerMaskO = 1 << 8;
     Vector3 targetPosition;
     Vector3 dirctoinV;
-    
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -50,11 +50,7 @@ public class MonsterHaviour : MonoBehaviour
     // 상속을 위한 클래스 이므로 아래에 전부 오버라이딩 해줘야함.
     private void Update()
     {
-        if (isCanMobMove == true)
-        {
             Patten();
-        }
-
     }
 
     //virtual은 상속을 위한 함수로 새로운 스크립트에서 오버라이딩 해줘야함.
@@ -91,20 +87,11 @@ public class MonsterHaviour : MonoBehaviour
     }
     virtual protected void TarckingPlayerAni()
     {
-
+        //       originAni.SetTrigger("이름");
     }
     virtual protected void MissingPlayerAni()
     {
 
-    }
-    
-
-    public void LookTarget()
-    {
-        if (target.transform.position.x >= base.transform.position.x)
-            transform.rotation = Quaternion.Euler(0, 180, 0);
-        else
-            transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     // 이동 모션을 의미함
@@ -115,75 +102,86 @@ public class MonsterHaviour : MonoBehaviour
             //고정몹
             //고정몹은 몹 무브만 없애면됨
             case 0:
-                if (isCanTrackingPlayer == true)
-                {
-                    if (isLookAtPlayer == true)
-                    {
-                        LookTarget();
-                        TrackingPlayer();
-                        isCanMobMove = true;
-                    }
-                    else if (isLookAtPlayer == false)
-                    {
-                        isCanMobMove = false;
-                        LookForward();
-                    }
-                }
-                else if (isCanTrackingPlayer == false)
-                {
-                    isCanMobMove = false;
-                    LookForward();
-                }
+                patten0();
                 break;
             //바닥을 만나면 턴 하는 패턴
-            case 1:
-                Move();
-                if (isLookAtPlayer == false)
-                {
-                    LookForward();
-                }
-                if (isCanTurnRay == true)
-                    TurnRay();
-                if (isCanJumpRay == true)
-                    JunpRay();
+            /*  case 1:
+                  Move();
+                  if (isLookAtPlayer == false)
+                  {
+                      LookForward();
+                  }
+                  if (isCanTurnRay == true)
+                      TurnRay();
+                  if (isCanJumpRay == true)
+                      JunpRay();
 
-                break;
+                  break;*/
 
             //웨이포인트 따라가는 패턴
             case 2:
-                if (isCanTrackingPlayer == true)
-                {
-                    if (isLookAtPlayer == true)
-                    {
-                        LookTarget();
-                        TrackingPlayer();
-                    }
-                    else 
-                    {
-                        if (isInWayPoint == true)
-                            MoveToWayPoint();
-                        if (isInWayPoint == false)
-                            BackToWayPoint();
-                        LookForward();
-                    }
-                }
-                else if (isCanTrackingPlayer == false)
-                {
-                    if (isLookAtPlayer == true)
-                    {
-                        LookTarget();
-                    }
-                    else
-                    {
-                        LookForward();
-                    }
-                    MoveToWayPoint();
-                }
+                patten2();
                 break;
 
             //날아다니는 몹
             case 3:
                 break;
+        }
+    }
+    void patten0() {
+        if (isCanTrackingPlayer == true)
+        {
+            Debug.Log(0);
+            if (isLookAtPlayer == true)
+            {
+                Debug.Log(1);
+                LookTarget();
+                TrackingPlayer();
+                isCanMobMove = true;
+            }
+            else if (isLookAtPlayer == false)
+            {
+                Debug.Log(2);
+                isCanMobMove = false;
+               LookForward();
+            }
+        }
+        else if (isCanTrackingPlayer == false)
+        {
+            Debug.Log(3);
+            isCanMobMove = false;
+            LookForward();
+        }
+    }
+
+    void patten2() {
+        if (isCanTrackingPlayer == true)
+        {
+            if (isLookAtPlayer == true)
+            {
+                LookTarget();
+                TrackingPlayer();
+            }
+            else if (isLookAtPlayer == false)
+            {
+                if (isInWayPoint == true)
+                    MoveToWayPoint();
+                if (isInWayPoint == false)
+                    BackToWayPoint();
+                LookForward();
+            }
+        }
+        else if (isCanTrackingPlayer == false)
+        {
+            if (isLookAtPlayer == true)
+            {
+                LookTarget();
+            }
+            else
+            {
+                LookForward();
+            }
+            MoveToWayPoint();
         }
     }
 
@@ -238,8 +236,17 @@ public class MonsterHaviour : MonoBehaviour
 
     }
 
+    public void LookTarget()
+    {
+        Debug.Log("LOOKTAGET");
+        if (target.transform.position.x >= base.transform.position.x)
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        else
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
     protected void LookForward()
     {
+        Debug.Log("LOOK");
         if (dirctoinV.x > 0)
             transform.rotation = Quaternion.Euler(0, 180, 0);
         if (dirctoinV.x < 0)
