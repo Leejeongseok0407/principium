@@ -86,7 +86,7 @@ public class MonsterHaviour : MonoBehaviour
     void TrackingPlayer()
     {
         //단위 벡터화
-        Debug.Log("TrackingPlayer 실행중");
+
         dirctoinV = new Vector3((target.transform.position.x - base.transform.position.x) / Mathf.Abs(target.transform.position.x - base.transform.position.x), 0, 0);
         direction = dirctoinV.x;
         base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
@@ -131,24 +131,21 @@ public class MonsterHaviour : MonoBehaviour
     void patten0() {
         if (isCanTrackingPlayer == true)
         {
-            Debug.Log(0);
             if (isLookAtPlayer == true)
             {
-                Debug.Log(1);
+
                 LookTarget();
                 TrackingPlayer();
                 isCanMobMove = true;
             }
             else if (isLookAtPlayer == false)
             {
-                Debug.Log(2);
                 isCanMobMove = false;
                LookForward();
             }
         }
         else if (isCanTrackingPlayer == false)
         {
-            Debug.Log(3);
             isCanMobMove = false;
             LookForward();
         }
@@ -197,12 +194,10 @@ public class MonsterHaviour : MonoBehaviour
         base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
         if (!(wayPoint[0].transform.position.x >= base.transform.position.x || base.transform.position.x >= wayPoint[1].transform.position.x))
         {
-            Debug.Log("gotoway false");
             isInWayPoint = true;
         }
         else
             isInWayPoint = false;
-        Debug.Log("BackToWayPoint");
     }
 
 
@@ -238,7 +233,6 @@ public class MonsterHaviour : MonoBehaviour
 
     public void LookTarget()
     {
-        Debug.Log("LOOKTAGET");
         if (target.transform.position.x >= base.transform.position.x)
             transform.rotation = Quaternion.Euler(0, 180, 0);
         else
@@ -246,7 +240,6 @@ public class MonsterHaviour : MonoBehaviour
     }
     protected void LookForward()
     {
-        Debug.Log("LOOK");
         if (dirctoinV.x > 0)
             transform.rotation = Quaternion.Euler(0, 180, 0);
         if (dirctoinV.x < 0)

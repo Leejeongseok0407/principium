@@ -29,7 +29,6 @@ public class Slime : MonsterHaviour
     }
     override protected void DoSkill()
     {
-        Debug.Log(bulletIndex);
         if (bulletIndex >= bullits.Length)
             bulletIndex = 0;
         bullits[bulletIndex++].GetComponent<Bullit>().StartFire(this.gameObject);

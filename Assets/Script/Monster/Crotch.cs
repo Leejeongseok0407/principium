@@ -42,19 +42,17 @@ public class Crotch : MonsterHaviour
     IEnumerator Attack()
     {
         float times = 0;
-        Debug.Log("Start Attack");
+
         ani.SetTrigger("Attack");
         while (attackDelayTime > times)
         {
             times += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("End Attack");
         GetComponent<BoxCollider2D>().isTrigger = false;
         yield return new WaitForSeconds(0.1f);
         GetComponent<BoxCollider2D>().isTrigger = true;
         ani.SetTrigger("Default");
-        Debug.Log("Default");
     }
 
 
@@ -65,13 +63,11 @@ public class Crotch : MonsterHaviour
     IEnumerator AttackDelay() {
         float times = 0;
         coolTime = false;
-        Debug.Log("Start Delay");
         while (attackCoolTime > times)
         {
             times += Time.deltaTime;
             yield return null;
         }
-        Debug.Log("End Delay");
         coolTime = true;
     }
 
