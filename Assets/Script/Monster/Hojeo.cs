@@ -22,7 +22,7 @@ public class Hojeo : MonsterHaviour
 
     }
 
-    override protected void TarckingPlayerAni()
+    override protected void DetectPlayerAni()
     {
         originAni.SetTrigger("TarckingPlayer");
     }

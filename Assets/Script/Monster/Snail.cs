@@ -19,7 +19,7 @@ public class Snail : MonsterHaviour
     {
 
     }
-    override protected void TarckingPlayerAni()
+    override protected void DetectPlayerAni()
     {
         originAni.SetTrigger("DetectPlayer");
     }

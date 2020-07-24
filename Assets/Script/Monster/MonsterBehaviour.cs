@@ -75,7 +75,14 @@ public class MonsterHaviour : MonoBehaviour
     {
 
     }
+    virtual protected void DetectPlayerAni()
+    {
+        //       originAni.SetTrigger("이름");
+    }
+    virtual protected void MissingPlayerAni()
+    {
 
+    }
     void TrackingPlayer()
     {
         //단위 벡터화
@@ -85,14 +92,7 @@ public class MonsterHaviour : MonoBehaviour
         base.transform.Translate(dirctoinV * speed * Time.smoothDeltaTime, Space.World);
 
     }
-    virtual protected void TarckingPlayerAni()
-    {
-        //       originAni.SetTrigger("이름");
-    }
-    virtual protected void MissingPlayerAni()
-    {
-
-    }
+    
 
     // 이동 모션을 의미함
     public void Patten()
@@ -271,7 +271,7 @@ public class MonsterHaviour : MonoBehaviour
             //player hp감소 혹은 죽음 넣기
             isLookAtPlayer = true;
             LookTarget();
-            TarckingPlayerAni();
+            DetectPlayerAni();
             //만약 몹 안움직였을때 탐지 가능하게 할 경우
             if (isCanTrackingPlayer == true&& isCanMobMoveTmp == false)
             {
