@@ -163,6 +163,7 @@ MonoBehaviour:
   speed: 1
   direction: 1
   isCanMobMove: 1
+  ani: {fileID: 6699934951048556281}
   isCanJumpRay: 0
   isCanTurnRay: 0
   jumpDelay: 1
@@ -173,9 +174,9 @@ MonoBehaviour:
   wayPoint:
   - {fileID: 0}
   - {fileID: 0}
+  isLookAtPlayer: 0
   attackCoolTime: 3
   attackDelayTime: 0.5
-  ani: {fileID: 6699934951048556281}
 --- !u!58 &1336108973070280826
 CircleCollider2D:
   m_ObjectHideFlags: 0

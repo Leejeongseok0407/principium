@@ -12,7 +12,7 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] protected float speed = 1;
     [SerializeField] protected float direction = 1;
     [SerializeField] bool isCanMobMove = true;
-    [SerializeField] protected Animator originAni;
+    [SerializeField] protected Animator ani;
 
     //레이는 차후에 필요 없으면 지움
     [Header("레이 쏠때 만지는 변수")]

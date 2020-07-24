@@ -51,7 +51,7 @@ MonoBehaviour:
   speed: 3
   direction: -1
   isCanMobMove: 0
-  originAni: {fileID: 206163055}
+  ani: {fileID: 206163055}
   isCanJumpRay: 0
   isCanTurnRay: 0
   jumpDelay: 1
@@ -62,6 +62,7 @@ MonoBehaviour:
   wayPoint:
   - {fileID: 0}
   - {fileID: 0}
+  isLookAtPlayer: 0
   bullits:
   - {fileID: 2498596774831244438}
   - {fileID: 8217918768603225494}

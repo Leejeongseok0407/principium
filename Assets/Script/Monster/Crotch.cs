@@ -9,7 +9,6 @@ public class Crotch : MonsterHaviour
     [SerializeField] float attackCoolTime;
     [Tooltip("입 닫는 시간")]
     [SerializeField] float attackDelayTime;
-    [SerializeField] Animator ani = null;
     bool coolTime;
    
    private void Start()

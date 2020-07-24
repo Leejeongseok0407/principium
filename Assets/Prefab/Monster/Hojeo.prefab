@@ -235,7 +235,7 @@ MonoBehaviour:
   speed: 5
   direction: 1
   isCanMobMove: 1
-  originAni: {fileID: 7255698036235752742}
+  ani: {fileID: 7255698036235752742}
   isCanJumpRay: 0
   isCanTurnRay: 0
   jumpDelay: 1
@@ -246,6 +246,7 @@ MonoBehaviour:
   wayPoint:
   - {fileID: 4453834236863010671}
   - {fileID: 4453834237380923368}
+  isLookAtPlayer: 0
 --- !u!61 &4453834237636712103
 BoxCollider2D:
   m_ObjectHideFlags: 0

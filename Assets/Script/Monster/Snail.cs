@@ -21,10 +21,10 @@ public class Snail : MonsterHaviour
     }
     override protected void DetectPlayerAni()
     {
-        originAni.SetTrigger("DetectPlayer");
+        ani.SetTrigger("DetectPlayer");
     }
     override protected void MissingPlayerAni()
     {
-        originAni.SetTrigger("MissingPlayer");
+        ani.SetTrigger("MissingPlayer");
     }
 }
