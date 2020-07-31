@@ -46,7 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
     //무적인지 판단
-    [SerializeField] bool isNoDmgTime = false;
+    bool isNoDmgTime = false;
 
     float keyHorizontal;
     float keyVertical;
@@ -213,6 +213,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         isDead = true;
         Debug.Log("die");
+        ani.SetTrigger("DieTrigger");
+        noDmgTime = 0;
 
     }
 
@@ -262,6 +264,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     void OnCollisionStay2D(Collision2D other)
     {
+        if (isDead)
+            return;
         if (isNoDmgTime == false)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
@@ -307,6 +311,8 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other)
     {
+        if (isDead)
+            return;
         if (isNoDmgTime == false)
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
@@ -348,17 +354,16 @@ public class PlayerBehaviour : MonoBehaviour
         isNoDmgTime = true;
         Debug.Log("코루틴중");
         float countTime = 0;
-
         while (countTime < noDmgTime)
-        {
-            if (countTime % 0.2 < 0.1f)
-                spriteRenderer.color = new Color32(255, 255, 255, 90);
-            else
-                spriteRenderer.color = new Color32(255, 255, 255, 180);
-            yield return new WaitForSeconds(0.1f);
-            yield return new WaitForEndOfFrame();
-            countTime += 0.1f;
-        }
+            {
+                if (countTime % 0.2 < 0.1f)
+                    spriteRenderer.color = new Color32(255, 255, 255, 90);
+                else
+                    spriteRenderer.color = new Color32(255, 255, 255, 180);
+                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForEndOfFrame();
+                countTime += 0.1f;
+            }
         spriteRenderer.color = new Color32(255, 255, 255, 255);
         isNoDmgTime = false;
         yield return null;
@@ -405,7 +410,6 @@ public class PlayerBehaviour : MonoBehaviour
 
     IEnumerator CoolTime(int index)
     {
-        print("쿨타임 코루틴 실행");
         float times = 0;
         isSkillCanActive[index] = false;
        
@@ -418,7 +422,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         isSkillCanActive[index] = true;
-        print("쿨타임 코루틴 완료");
     }
 
 }
