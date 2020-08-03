@@ -7,7 +7,8 @@ public class Potal : MonoBehaviour
 {
     [SerializeField] string scenename;
     [SerializeField] int getSkillNum = 0;
-    [SerializeField] GameObject pressKey;
+    [Tooltip("이미지를 표출시켜주고 싶으면 삽입 (없어도됨)")]
+    [SerializeField] GameObject pressSprite;
     [SerializeField] Animator ani;
 
     private void Start()
@@ -21,8 +22,8 @@ public class Potal : MonoBehaviour
     }
 
     void pressKeyActive(bool set) {
-        if (pressKey != null)
-            pressKey.SetActive(set);
+        if (pressSprite != null)
+            pressSprite.SetActive(set);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
