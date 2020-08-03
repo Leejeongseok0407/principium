@@ -67,6 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //죽었을 경우 입력 안받음
         if (isDead == true)
             return;
         //Horizontal은 정수만 받게함

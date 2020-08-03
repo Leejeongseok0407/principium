@@ -8,6 +8,7 @@ public class Potal : MonoBehaviour
     [SerializeField] string scenename;
     [SerializeField] int getSkillNum = 0;
     [SerializeField] GameObject pressKey;
+    [SerializeField] Animator ani;
 
     private void Start()
     {
@@ -23,6 +24,7 @@ public class Potal : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
+            ani.SetBool("PlayerEnter",true);
             pressKey.SetActive(true);
         }
     }
@@ -30,16 +32,23 @@ public class Potal : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
+        {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 if (PlayerPrefs.GetInt("SkillIndex") == getSkillNum - 1)
                     AddSkill();
                 SceneManager.LoadScene(scenename);
             }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (collision.gameObject.tag == "Player")
+        {
+            ani.SetBool("PlayerEnter", false);
             pressKey.SetActive(false);
+        }
     }
+
 }
