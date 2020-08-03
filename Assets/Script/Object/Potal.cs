@@ -12,7 +12,7 @@ public class Potal : MonoBehaviour
 
     private void Start()
     {
-        pressKey.SetActive(false);
+        pressKeyActive(false);
     }
 
     public void AddSkill() {
@@ -20,12 +20,17 @@ public class Potal : MonoBehaviour
         Debug.Log("getSkill");
     }
 
+    void pressKeyActive(bool set) {
+        if (pressKey != null)
+            pressKey.SetActive(set);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             ani.SetBool("PlayerEnter",true);
-            pressKey.SetActive(true);
+            pressKeyActive(true);
         }
     }
 
@@ -47,7 +52,7 @@ public class Potal : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             ani.SetBool("PlayerEnter", false);
-            pressKey.SetActive(false);
+            pressKeyActive(false);
         }
     }
 

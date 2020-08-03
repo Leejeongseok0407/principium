@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scenename: example
   getSkillNum: 0
-  pressKey: {fileID: 1113097683502842279}
+  pressKey: {fileID: 0}
   ani: {fileID: 6408831747590335815}
 --- !u!61 &1113097683401078413
 BoxCollider2D:
@@ -92,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1113097683502842278
 Transform:
   m_ObjectHideFlags: 0
