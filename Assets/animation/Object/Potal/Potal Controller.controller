@@ -9,7 +9,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: PlyerEnter
+    m_ConditionEvent: PlayerEnter
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 7191177066854265274}
@@ -59,7 +59,7 @@ AnimatorController:
   m_Name: Potal Controller
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: PlyerEnter
+  - m_Name: PlayerEnter
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -114,7 +114,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: PlyerEnter
+    m_ConditionEvent: PlayerEnter
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 1769110689540475173}
