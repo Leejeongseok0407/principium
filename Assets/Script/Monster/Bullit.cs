@@ -15,6 +15,7 @@ public class Bullit : MonoBehaviour
 
     private void Start()
     {
+        gameObject.SetActive(false);
         transform.position = bullitContainer.transform.position;
     }
 
@@ -25,6 +26,7 @@ public class Bullit : MonoBehaviour
     }
 
     public void StartFire(GameObject tower) {
+        gameObject.SetActive(true);
         transform.position = tower.transform.position;
         dirctoinV.x = tower.GetComponent<Slime>().ReturnDirctoinV().x;
         distanceV.x = tower.transform.localPosition.x + tower.GetComponent<Slime>().CallBullitDistance() * dirctoinV.x;
@@ -49,6 +51,7 @@ public class Bullit : MonoBehaviour
         if (Mathf.Abs(distanceV.x) < Mathf.Abs(transform.localPosition.x))
         {
             transform.position = bullitContainer.transform.position;
+            gameObject.SetActive(false);
             isFire = false;
         }
     }
