@@ -1,43 +1,28 @@
 fileFormatVersion: 2
-guid: bd42a4925764a024e81f79ea6d2c828b
+guid: 42d26e603d3b9b648beb895460c23779
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4659033272934388738
-    second: PlyerDie_0
+      213: -7104748058796970311
+    second: potalWiteclip_0
   - first:
-      213: -8516733590347268919
-    second: PlyerDie_1
+      213: -2928808679989852525
+    second: potalWiteclip_1
   - first:
-      213: 2060322172347463053
-    second: PlyerDie_2
+      213: 3639142395743901407
+    second: potalWiteclip_2
   - first:
-      213: 7163134999128833444
-    second: PlyerDie_3
+      213: 6507679836195061983
+    second: potalWiteclip_3
   - first:
-      213: -7898339797682290310
-    second: PlyerDie_4
+      213: 3231997550895098080
+    second: potalWiteclip_4
   - first:
-      213: -1873049947858318162
-    second: PlyerDie_5
+      213: 4745206593268641247
+    second: potalWiteclip_5
   - first:
-      213: -2822534542558112400
-    second: PlyerDie_6
-  - first:
-      213: -1644737143668302297
-    second: PlyerDie_7
-  - first:
-      213: -1681416617849197035
-    second: PlyerDie_4
-  - first:
-      213: 8096464418548628160
-    second: PlyerDie_5
-  - first:
-      213: 3805228120491293447
-    second: PlyerDie_6
-  - first:
-      213: 5623439612637440333
-    second: PlyerDie_11
+      213: 6681234852562014104
+    second: potalWiteclip_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -135,148 +120,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlyerDie_0
+      name: potalWiteclip_0
       rect:
         serializedVersion: 2
-        x: 110
-        y: 489
-        width: 454
-        height: 564
+        x: 123
+        y: 315
+        width: 201
+        height: 482
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 204dafdb31638a040800000000000000
-      internalID: 4659033272934388738
+      spriteID: 9bea2c8784dd66d90800000000000000
+      internalID: -7104748058796970311
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_2
+      name: potalWiteclip_2
       rect:
         serializedVersion: 2
-        x: 1277
-        y: 583
-        width: 509
-        height: 450
+        x: 422
+        y: 300
+        width: 201
+        height: 500
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d85b1a5891cb79c10800000000000000
-      internalID: 2060322172347463053
+      spriteID: fd611695ab4d08230800000000000000
+      internalID: 3639142395743901407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_7
+      name: potalWiteclip_3
       rect:
         serializedVersion: 2
-        x: 1859
-        y: 18
-        width: 641
-        height: 222
+        x: 716
+        y: 287
+        width: 194
+        height: 528
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72e92c23848bc29e0800000000000000
-      internalID: -1644737143668302297
+      spriteID: fd00164f45cef4a50800000000000000
+      internalID: 6507679836195061983
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_4
+      name: potalWiteclip_4
       rect:
         serializedVersion: 2
-        x: 49
-        y: 29
-        width: 514
-        height: 340
+        x: 1004
+        y: 289
+        width: 217
+        height: 511
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ee8ad9e786aa8e0800000000000000
-      internalID: -1681416617849197035
+      spriteID: 0e8e80016ac5adc20800000000000000
+      internalID: 3231997550895098080
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_5
+      name: potalWiteclip_5
       rect:
         serializedVersion: 2
-        x: 632
-        y: 31
-        width: 556
-        height: 257
+        x: 1308
+        y: 316
+        width: 202
+        height: 482
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ca3e24ed7b6c5070800000000000000
-      internalID: 8096464418548628160
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlyerDie_6
-      rect:
-        serializedVersion: 2
-        x: 1230
-        y: 23
-        width: 576
-        height: 238
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 70bf53b80d2eec430800000000000000
-      internalID: 3805228120491293447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlyerDie_1
-      rect:
-        serializedVersion: 2
-        x: 653
-        y: 585
-        width: 495
-        height: 490
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ccb6b45ceb7ec980800000000000000
-      internalID: -8516733590347268919
+      spriteID: fdd6e91614c5ad140800000000000000
+      internalID: 4745206593268641247
       vertices: []
       indices: 
       edges: []

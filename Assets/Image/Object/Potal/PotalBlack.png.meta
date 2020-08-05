@@ -1,43 +1,25 @@
 fileFormatVersion: 2
-guid: bd42a4925764a024e81f79ea6d2c828b
+guid: 765ecf61c9100f74daf17b7cd8722132
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4659033272934388738
-    second: PlyerDie_0
+      213: 4805836368496582858
+    second: PotalBlack_0
   - first:
-      213: -8516733590347268919
-    second: PlyerDie_1
+      213: -7933798069986099123
+    second: PotalBlack_1
   - first:
-      213: 2060322172347463053
-    second: PlyerDie_2
+      213: 3016939515822934166
+    second: PotalBlack_2
   - first:
-      213: 7163134999128833444
-    second: PlyerDie_3
+      213: 6702688582675045984
+    second: PotalBlack_3
   - first:
-      213: -7898339797682290310
-    second: PlyerDie_4
+      213: 4158008826236183676
+    second: PotalBlack_4
   - first:
-      213: -1873049947858318162
-    second: PlyerDie_5
-  - first:
-      213: -2822534542558112400
-    second: PlyerDie_6
-  - first:
-      213: -1644737143668302297
-    second: PlyerDie_7
-  - first:
-      213: -1681416617849197035
-    second: PlyerDie_4
-  - first:
-      213: 8096464418548628160
-    second: PlyerDie_5
-  - first:
-      213: 3805228120491293447
-    second: PlyerDie_6
-  - first:
-      213: 5623439612637440333
-    second: PlyerDie_11
+      213: 838182475335531128
+    second: PotalBlack_5
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -135,148 +117,106 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PlyerDie_0
+      name: PotalBlack_0
       rect:
         serializedVersion: 2
-        x: 110
-        y: 489
-        width: 454
-        height: 564
+        x: 122
+        y: 315
+        width: 203
+        height: 483
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 204dafdb31638a040800000000000000
-      internalID: 4659033272934388738
+      spriteID: ac064e8f6b2c1b240800000000000000
+      internalID: 4805836368496582858
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_2
+      name: PotalBlack_2
       rect:
         serializedVersion: 2
-        x: 1277
-        y: 583
-        width: 509
-        height: 450
+        x: 422
+        y: 299
+        width: 202
+        height: 502
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d85b1a5891cb79c10800000000000000
-      internalID: 2060322172347463053
+      spriteID: 698077551825ed920800000000000000
+      internalID: 3016939515822934166
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_7
+      name: PotalBlack_3
       rect:
         serializedVersion: 2
-        x: 1859
-        y: 18
-        width: 641
-        height: 222
+        x: 715
+        y: 286
+        width: 196
+        height: 529
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72e92c23848bc29e0800000000000000
-      internalID: -1644737143668302297
+      spriteID: 06e996ae0cbb40d50800000000000000
+      internalID: 6702688582675045984
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_4
+      name: PotalBlack_4
       rect:
         serializedVersion: 2
-        x: 49
-        y: 29
-        width: 514
-        height: 340
+        x: 1003
+        y: 288
+        width: 218
+        height: 513
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 51ee8ad9e786aa8e0800000000000000
-      internalID: -1681416617849197035
+      spriteID: c742fb45ff634b930800000000000000
+      internalID: 4158008826236183676
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PlyerDie_5
+      name: PotalBlack_5
       rect:
         serializedVersion: 2
-        x: 632
-        y: 31
-        width: 556
-        height: 257
+        x: 1307
+        y: 315
+        width: 203
+        height: 483
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ca3e24ed7b6c5070800000000000000
-      internalID: 8096464418548628160
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlyerDie_6
-      rect:
-        serializedVersion: 2
-        x: 1230
-        y: 23
-        width: 576
-        height: 238
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 70bf53b80d2eec430800000000000000
-      internalID: 3805228120491293447
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: PlyerDie_1
-      rect:
-        serializedVersion: 2
-        x: 653
-        y: 585
-        width: 495
-        height: 490
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9ccb6b45ceb7ec980800000000000000
-      internalID: -8516733590347268919
+      spriteID: 87af45b3582d1ab00800000000000000
+      internalID: 838182475335531128
       vertices: []
       indices: 
       edges: []

@@ -46,7 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
     //이걸 키면 모든 몬스터 멈추고 플레이어만 죽게 설정
     bool isDead = false;
     //무적인지 판단
-    [SerializeField] bool isNoDmgTime = false;
+    bool isNoDmgTime = false;
 
     float keyHorizontal;
     float keyVertical;
@@ -67,6 +67,9 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //죽었을 경우 입력 안받음
+        if (isDead == true)
+            return;
         //Horizontal은 정수만 받게함
         RayCheckGorund();
         Jump();
@@ -200,17 +203,20 @@ public class PlayerBehaviour : MonoBehaviour
 
     void IsDie()
     {
-        if (hp == 0)
-        {
-            if (!isDead)
-                Die();
-        }
+        if (!isDead)
+            Die();
     }
 
-    //죽었을때 기능 추가
+    //죽었을때
+    //차후 기능 추가
+    //UI상 플레이어가 사망하고 시간 멈추는거 구현 부탁드립니다
     void Die()
     {
         isDead = true;
+        Debug.Log("die");
+        ani.SetTrigger("DieTrigger");
+        noDmgTime = 0;
+
     }
 
     void RayCheckGorund()
@@ -252,24 +258,113 @@ public class PlayerBehaviour : MonoBehaviour
         return isNoDmgTime;
     }
 
-    //OnCollisionEnter2D 코루틴에서 사용
+    //트리거
+    //몬스터는 Collision에 닿을 경우 튕겨 나가고
+    //오브젝트는 trigger에 닿으면 튕겨 나감
+    //몬스터는 실체가 있고 오브젝트는 실체가 없다고 생각하여 이렇게 구상 하였음.
 
+    void OnCollisionStay2D(Collision2D other)
+    {
+        if (isDead)
+            return;
+        if (isNoDmgTime == false)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
+            {
+                Debug.Log("outchi");
+                Vector2 attackedVelocity = Vector2.zero;
+                float dir = (transform.position.x - other.gameObject.transform.position.x)
+                              / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
+                Debug.Log(dir);
+                playerRigidBody.velocity = Vector2.zero;
+                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
+                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
+                hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
+                StartCoroutine("NoDmgTime");
+                Debug.Log("몬스터와 부딛힘 hp : " + hp);
+            }
+        }
+        if (hp <= 0)
+            IsDie();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        //벽 통과 스크립트
+        if (other.gameObject.layer == LayerMask.NameToLayer("TransmissionGround"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = true;
+        }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("TransmissionGround"))
+        {
+            GetComponent<BoxCollider2D>().isTrigger = false;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if (isDead)
+            return;
+        if (isNoDmgTime == false)
+        {
+            if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
+            {
+                Vector2 attackedVelocity = Vector2.zero;
+                float dir = other.gameObject.GetComponent<Bullit>().CallDirctionX()
+                    / Mathf.Abs(other.gameObject.GetComponent<Bullit>().CallDirctionX());
+
+                playerRigidBody.velocity = new Vector2(0, 0);
+                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
+
+                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
+
+                hp -= other.gameObject.GetComponent<Bullit>().CallBullitDmg();
+                StartCoroutine("NoDmgTime");
+                Debug.Log("총알이랑 부딛힘 hp : " + hp);
+            }
+            if (other.gameObject.layer == LayerMask.NameToLayer("Impediments"))
+            {
+                Vector2 attackedVelocity = Vector2.zero;
+                float dir = -playerLookDirction;
+
+                playerRigidBody.velocity = new Vector2(0, 0);
+                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
+
+                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
+
+                hp -= other.gameObject.GetComponent<Impediments>().CallDmg();
+                StartCoroutine(NoDmgTime());
+                Debug.Log("방해물이랑 부딛힘 hp : " + hp);
+            }
+        }
+        if (hp <= 0)
+            IsDie();
+    }
+    //코루틴에 사용되는 IEnumerator
     IEnumerator NoDmgTime()
     {
         isNoDmgTime = true;
         Debug.Log("코루틴중");
         float countTime = 0;
-
         while (countTime < noDmgTime)
-        {
-            if (countTime % 0.2 < 0.1f)
-                spriteRenderer.color = new Color32(255, 255, 255, 90);
-            else
-                spriteRenderer.color = new Color32(255, 255, 255, 180);
-            yield return new WaitForSeconds(0.1f);
-            yield return new WaitForEndOfFrame();
-            countTime += 0.1f;
-        }
+            {
+                if (countTime % 0.2 < 0.1f)
+                    spriteRenderer.color = new Color32(255, 255, 255, 90);
+                else
+                    spriteRenderer.color = new Color32(255, 255, 255, 180);
+                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForEndOfFrame();
+                countTime += 0.1f;
+            }
         spriteRenderer.color = new Color32(255, 255, 255, 255);
         isNoDmgTime = false;
         yield return null;
@@ -313,90 +408,9 @@ public class PlayerBehaviour : MonoBehaviour
         ani.SetBool("isFly", false);
 
     }
-    void OnCollisionStay2D(Collision2D other)
-    {
-        if (isNoDmgTime == false)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
-            {
-                Debug.Log("outchi");
-                Vector2 attackedVelocity = Vector2.zero;
-                float dir = (transform.position.x - other.gameObject.transform.position.x)
-                              / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
-                Debug.Log(dir);
-                playerRigidBody.velocity = Vector2.zero;
-                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
-                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-                hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
-                StartCoroutine("NoDmgTime");
-                Debug.Log("몬스터와 부딛힘 hp : " + hp);
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        //벽 통과 스크립트
-        if (other.gameObject.layer == LayerMask.NameToLayer("TransmissionGround"))
-        {
-            GetComponent<BoxCollider2D>().isTrigger = true;
-        }
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ground"))
-        {
-            GetComponent<BoxCollider2D>().isTrigger = false;
-        }
-
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.gameObject.layer == LayerMask.NameToLayer("TransmissionGround"))
-        {
-            GetComponent<BoxCollider2D>().isTrigger = false;
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (isNoDmgTime == false)
-        {
-            if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
-            {
-                Vector2 attackedVelocity = Vector2.zero;
-                float dir = other.gameObject.GetComponent<Bullit>().CallDirctionX()
-                    / Mathf.Abs(other.gameObject.GetComponent<Bullit>().CallDirctionX());
-
-                playerRigidBody.velocity = new Vector2(0, 0);
-                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
-
-                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-
-                hp -= other.gameObject.GetComponent<Bullit>().CallBullitDmg();
-                StartCoroutine("NoDmgTime");
-                Debug.Log("총알이랑 부딛힘 hp : " + hp);
-            }
-
-
-            if (other.gameObject.layer == LayerMask.NameToLayer("Impediments"))
-            {
-                Vector2 attackedVelocity = Vector2.zero;
-                float dir = -playerLookDirction;
-
-                playerRigidBody.velocity = new Vector2(0, 0);
-                attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
-
-                playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
-
-                hp -= other.gameObject.GetComponent<Impediments>().CallDmg();
-                StartCoroutine(NoDmgTime());
-                Debug.Log("방해물이랑 부딛힘 hp : " + hp);
-            }
-        }
-    }
 
     IEnumerator CoolTime(int index)
     {
-        print("쿨타임 코루틴 실행");
         float times = 0;
         isSkillCanActive[index] = false;
        
@@ -409,7 +423,6 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         isSkillCanActive[index] = true;
-        print("쿨타임 코루틴 완료");
     }
 
 }
