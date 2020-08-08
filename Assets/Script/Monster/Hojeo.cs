@@ -24,12 +24,14 @@ public class Hojeo : MonsterHaviour
 
     override protected void DetectPlayerAni()
     {
-        ani.SetTrigger("TarckingPlayer");
+        ani.SetBool("TrackingPlayer", true);
+        ani.SetBool("MissingPlayer", false);
     }
 
     override protected void MissingPlayerAni()
     {
-        ani.SetTrigger("MissingPlyer");
+        ani.SetBool("TrackingPlayer", false);
+        ani.SetBool("MissingPlayer", true);
     }
 
 }
