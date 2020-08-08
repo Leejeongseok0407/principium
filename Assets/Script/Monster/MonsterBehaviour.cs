@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterHaviour : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] protected float direction = 1;
     [SerializeField] bool isCanMobMove = true;
     [SerializeField] protected Animator ani;
+    [SerializeField] protected GameObject find;
+    [SerializeField] protected GameObject miss;
+    [SerializeField] protected GameObject backGround;
 
     //레이는 차후에 필요 없으면 지움
     [Header("레이 쏠때 만지는 변수")]
@@ -32,11 +36,13 @@ public class MonsterHaviour : MonoBehaviour
     [SerializeField] GameObject[] wayPoint = new GameObject[2];
 
 
+
+
+
     bool isInWayPoint = false;
     [SerializeField] bool isLookAtPlayer = false;
     bool isCanMobMoveTmp;
     int layerMaskO = 1 << 8;
-    Vector3 targetPosition;
     Vector3 dirctoinV;
 
     // Start is called before the first frame update
@@ -129,19 +135,19 @@ public class MonsterHaviour : MonoBehaviour
                 break;
         }
     }
+
     void patten0() {
         if (isCanTrackingPlayer == true)
         {
             if (isLookAtPlayer == true)
             {
-
                 LookTarget();
                 TrackingPlayer();
                 isCanMobMove = true;
             }
             else if (isLookAtPlayer == false)
             {
-                isCanMobMove = false;
+               isCanMobMove = false;
                LookForward();
             }
         }
@@ -153,33 +159,36 @@ public class MonsterHaviour : MonoBehaviour
     }
 
     void patten2() {
-        if (isCanTrackingPlayer == true)
+        if (isCanMobMove == true)
         {
-            if (isLookAtPlayer == true)
+            if (isCanTrackingPlayer == true)
             {
-                LookTarget();
-                TrackingPlayer();
+                if (isLookAtPlayer == true)
+                {
+                    LookTarget();
+                    TrackingPlayer();
+                }
+                else if (isLookAtPlayer == false)
+                {
+                    if (isInWayPoint == true)
+                        MoveToWayPoint();
+                    if (isInWayPoint == false)
+                        BackToWayPoint();
+                    LookForward();
+                }
             }
-            else if (isLookAtPlayer == false)
+            else if (isCanTrackingPlayer == false)
             {
-                if (isInWayPoint == true)
-                    MoveToWayPoint();
-                if (isInWayPoint == false)
-                    BackToWayPoint();
-                LookForward();
+                if (isLookAtPlayer == true)
+                {
+                    LookTarget();
+                }
+                else
+                {
+                    LookForward();
+                }
+                MoveToWayPoint();
             }
-        }
-        else if (isCanTrackingPlayer == false)
-        {
-            if (isLookAtPlayer == true)
-            {
-                LookTarget();
-            }
-            else
-            {
-                LookForward();
-            }
-            MoveToWayPoint();
         }
     }
 
@@ -257,6 +266,11 @@ public class MonsterHaviour : MonoBehaviour
 
 
     //<콜라이더 충돌 체크>
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            StartCoroutine("FindEmotion");
+    }
 
     void OnTriggerStay2D(Collider2D other)
     {
@@ -278,10 +292,9 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            Debug.Log("EXit");
+            StartCoroutine("Miss");
             isInWayPoint = false;
             isLookAtPlayer = false;
-            MissingPlayerAni();
             //만약 몹 안움직이는데 탐지 가능하게 할 경우
             if (isCanTrackingPlayer == true && isCanMobMoveTmp == false)
             {
@@ -327,6 +340,38 @@ public class MonsterHaviour : MonoBehaviour
         }
     }
 
+    IEnumerator FindEmotion()
+    {
+        miss.SetActive(false);
+        backGround.SetActive(true);
+        find.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        backGround.SetActive(false);
+    }
+
+    IEnumerator MissEmotion()
+    {
+        find.SetActive(false);
+        backGround.SetActive(true);
+        miss.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        backGround.SetActive(false);
+        isCanMobMove = true;
+    }
+
+    //멈춘다음 좌우 살피고 다시 원래대로.
+    IEnumerator Miss()
+    {
+        isCanMobMove = false;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        yield return new WaitForSeconds(0.5f);
+        transform.rotation = Quaternion.Euler(0, 180, 0);
+        yield return new WaitForSeconds(0.5f);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        StartCoroutine("MissEmotion");
+        MissingPlayerAni();
+
+    }
 
     //코루틴을 이용해 1초의 대기 시간을 준뒤 점프를 풀어주었음. 이를 통해 연속 점프하는 현상이 해결됨.
     IEnumerator stopJump()
