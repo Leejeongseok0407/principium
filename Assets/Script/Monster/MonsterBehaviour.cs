@@ -258,7 +258,7 @@ public class MonsterHaviour : MonoBehaviour
 
     //<콜라이더 충돌 체크>
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player") && isCanDetectTarget == true)
         {
@@ -278,6 +278,7 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            Debug.Log("EXit");
             isInWayPoint = false;
             isLookAtPlayer = false;
             MissingPlayerAni();

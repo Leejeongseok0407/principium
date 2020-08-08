@@ -172,9 +172,9 @@ MonoBehaviour:
   type: 0
   dmg: 1
   speed: 1
-  direction: 1
+  direction: -1
   isCanMobMove: 1
-  ani: {fileID: 0}
+  ani: {fileID: 7255698036235752742}
   isCanJumpRay: 0
   isCanTurnRay: 0
   jumpDelay: 1
@@ -198,7 +198,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.6914053, y: 1.3788631}
+  m_Offset: {x: 0, y: 1.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -209,7 +209,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 22.426664, y: 4.6529527}
+  m_Size: {x: 15, y: 5}
   m_EdgeRadius: 0
 --- !u!58 &4453834237636712097
 CircleCollider2D:

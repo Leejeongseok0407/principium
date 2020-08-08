@@ -19,7 +19,7 @@ public class Trigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(inPlayer); if (inPlayer == true && Input.GetKeyDown(KeyCode.UpArrow))
+        if (inPlayer == true && Input.GetKeyDown(KeyCode.UpArrow))
         {
             Debug.Log("Set");
             WallKeyActive(!wall.activeSelf);
