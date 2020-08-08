@@ -242,7 +242,6 @@ MonoBehaviour:
   jumpPower: 5
   isCanTrackingPlayer: 1
   isCanDetectTarget: 1
-  target: {fileID: 0}
   wayPoint:
   - {fileID: 4453834236863010671}
   - {fileID: 4453834237380923368}
@@ -260,7 +259,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -3.406454, y: 1.3788631}
+  m_Offset: {x: -0.6576009, y: 0.021334887}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -271,7 +270,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 6.2397366, y: 4.6529527}
+  m_Size: {x: 5.9415436, y: 1.4158015}
   m_EdgeRadius: 0
 --- !u!70 &283583990
 CapsuleCollider2D:
