@@ -72,5 +72,10 @@ public class OptionTrigger : MonoBehaviour
         SceneManager.LoadScene("start Scene");
     }
 
+    public void RunBack()
+    {
+        OptionDetail.SetActive(false);
+        Time.timeScale = 1;
+    }
 }
 
