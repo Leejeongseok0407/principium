@@ -62,5 +62,11 @@ using UnityEngine.UI;
 
      } 
 
+
+    public void HPdown(int dmg)
+    {
+        Hearts.hp -= 1;
+    }
+
  } 
 
