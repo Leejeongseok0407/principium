@@ -121,14 +121,14 @@ AnimatorController:
   m_Name: HojeoController
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: TarckingPlayer
-    m_Type: 9
+  - m_Name: TrackingPlayer
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
-  - m_Name: MissingPlyer
-    m_Type: 9
+  - m_Name: MissingPlayer
+    m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -204,7 +204,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: MissingPlyer
+    m_ConditionEvent: MissingPlayer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4883525447388485300}
@@ -229,7 +229,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: TarckingPlayer
+    m_ConditionEvent: TrackingPlayer
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8017088750933811545}

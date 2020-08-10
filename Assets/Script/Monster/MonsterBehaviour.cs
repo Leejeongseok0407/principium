@@ -238,8 +238,15 @@ public class MonsterHaviour : MonoBehaviour
     void Turn()
     {
         direction *= -1;
-
     }
+
+    void TurnEmotion() {
+        if (transform.rotation.x == 0)
+            backGround.transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            backGround.transform.rotation = Quaternion.Euler(0, 0, 0);
+    }
+
 
     public void LookTarget()
     {
@@ -269,7 +276,8 @@ public class MonsterHaviour : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
-            StartCoroutine("FindEmotion");
+            if (backGround != null)
+                StartCoroutine("FindEmotion");
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -292,7 +300,8 @@ public class MonsterHaviour : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            StartCoroutine("Miss");
+            if (backGround != null)
+                StartCoroutine("Miss");
             isInWayPoint = false;
             isLookAtPlayer = false;
             //만약 몹 안움직이는데 탐지 가능하게 할 경우
@@ -364,10 +373,13 @@ public class MonsterHaviour : MonoBehaviour
     {
         isCanMobMove = false;
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        TurnEmotion();
         yield return new WaitForSeconds(0.5f);
         transform.rotation = Quaternion.Euler(0, 180, 0);
+        TurnEmotion();
         yield return new WaitForSeconds(0.5f);
         transform.rotation = Quaternion.Euler(0, 0, 0);
+        TurnEmotion();
         StartCoroutine("MissEmotion");
         MissingPlayerAni();
 
