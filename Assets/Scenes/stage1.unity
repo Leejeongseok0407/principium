@@ -29847,6 +29847,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpImg: []
   life1: {fileID: 734576610}
   life2: {fileID: 1400682449}
   life3: {fileID: 845465296}
@@ -30663,6 +30664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpImg: []
   life1: {fileID: 734576610}
   life2: {fileID: 1400682449}
   life3: {fileID: 845465296}
@@ -30817,6 +30819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpImg: []
   life1: {fileID: 734576610}
   life2: {fileID: 1400682449}
   life3: {fileID: 845465296}
@@ -32331,6 +32334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpImg: []
   life1: {fileID: 734576610}
   life2: {fileID: 1400682449}
   life3: {fileID: 845465296}
@@ -81563,6 +81567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hpImg: []
   life1: {fileID: 734576610}
   life2: {fileID: 1400682449}
   life3: {fileID: 845465296}
@@ -86806,7 +86811,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2029461304
 RectTransform:
   m_ObjectHideFlags: 0

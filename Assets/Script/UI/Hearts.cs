@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI; 
 
  public class Hearts : MonoBehaviour
-{ 
-
+{
+    [SerializeField] GameObject[] hpImg;
      public static int hp = 5; 
 
      public GameObject life1; 
@@ -34,6 +34,10 @@ using UnityEngine.UI;
      void Update()
     {
         
+        for(int i=5;i>hp ;i--)
+
+
+
         switch(hp)
 
         {
