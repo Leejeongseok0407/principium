@@ -13,11 +13,10 @@ using UnityEngine.UI;
     {
         hp = player.gameObject.GetComponent<PlayerBehaviour>().ReturnPlayerHp();
         DisActiveHpImage(hp);
-    } 
-
-    public void HPdown(int dmg)
+    }
+    public void HPUpdate(int nowHp)
     {
-        hp -= dmg;
+        hp = nowHp;
         DisActiveHpImage(hp);
     }
 

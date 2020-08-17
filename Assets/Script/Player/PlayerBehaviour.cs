@@ -33,6 +33,9 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer = null;
     [SerializeField] Animator ani = null;
 
+    [Header("UI")]
+    [SerializeField] GameObject UiManager;
+
 
     Rigidbody2D playerRigidBody;
     Vector2 gravity2D;
@@ -284,6 +287,7 @@ public class PlayerBehaviour : MonoBehaviour
                 attackedVelocity = new Vector2(dir * bounceWidth, bounceHight);
                 playerRigidBody.AddForce(attackedVelocity, ForceMode2D.Impulse);
                 hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
+                UiManager.GetComponent<Hearts>().HPUpdate(hp);
                 StartCoroutine("NoDmgTime");
                 Debug.Log("몬스터와 부딛힘 hp : " + hp);
             }
@@ -333,6 +337,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 hp -= other.gameObject.GetComponent<Bullit>().CallBullitDmg();
                 StartCoroutine("NoDmgTime");
+                UiManager.GetComponent<Hearts>().HPUpdate(hp);
                 Debug.Log("총알이랑 부딛힘 hp : " + hp);
             }
             if (other.gameObject.layer == LayerMask.NameToLayer("Impediments"))
@@ -347,6 +352,7 @@ public class PlayerBehaviour : MonoBehaviour
 
                 hp -= other.gameObject.GetComponent<Impediments>().CallDmg();
                 StartCoroutine(NoDmgTime());
+                UiManager.GetComponent<Hearts>().HPUpdate(hp);
                 Debug.Log("방해물이랑 부딛힘 hp : " + hp);
             }
         }

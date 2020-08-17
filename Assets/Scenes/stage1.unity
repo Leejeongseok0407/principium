@@ -895,8 +895,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -304, y: 197}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: -244, y: 33}
+  m_SizeDelta: {x: 35.142395, y: 35.261673}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &103318370
 MonoBehaviour:
@@ -32352,6 +32352,57 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &644658736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 644658737}
+  - component: {fileID: 644658738}
+  m_Layer: 0
+  m_Name: UiManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &644658737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644658736}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1202190611}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &644658738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 644658736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpImg:
+  - {fileID: 734576610}
+  - {fileID: 1400682449}
+  - {fileID: 845465296}
+  - {fileID: 1024811939}
+  - {fileID: 815464399}
+  player: {fileID: 2059546039}
+  hp: 0
 --- !u!1 &652391344
 GameObject:
   m_ObjectHideFlags: 0
@@ -33325,7 +33376,6 @@ GameObject:
   - component: {fileID: 734576614}
   - component: {fileID: 734576613}
   - component: {fileID: 734576612}
-  - component: {fileID: 734576611}
   m_Layer: 5
   m_Name: Heart 1
   m_TagString: Untagged
@@ -33333,24 +33383,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &734576611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 734576610}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpImg: []
-  life1: {fileID: 734576610}
-  life2: {fileID: 1400682449}
-  life3: {fileID: 845465296}
-  life4: {fileID: 1024811939}
-  life5: {fileID: 815464399}
 --- !u!114 &734576612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33404,8 +33436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 100, y: 160}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 79.00001, y: -3.600006}
+  m_SizeDelta: {x: 43.928, y: 44.077087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &749937348
 PrefabInstance:
@@ -34123,7 +34155,6 @@ GameObject:
   - component: {fileID: 815464400}
   - component: {fileID: 815464403}
   - component: {fileID: 815464402}
-  - component: {fileID: 815464401}
   m_Layer: 5
   m_Name: Heart 5
   m_TagString: Untagged
@@ -34147,27 +34178,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 380, y: 160}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 325, y: -3.600006}
+  m_SizeDelta: {x: 43.928, y: 44.077087}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &815464401
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 815464399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpImg: []
-  life1: {fileID: 734576610}
-  life2: {fileID: 1400682449}
-  life3: {fileID: 845465296}
-  life4: {fileID: 1024811939}
-  life5: {fileID: 815464399}
 --- !u!114 &815464402
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34376,7 +34389,6 @@ GameObject:
   - component: {fileID: 845465300}
   - component: {fileID: 845465299}
   - component: {fileID: 845465298}
-  - component: {fileID: 845465297}
   m_Layer: 5
   m_Name: Heart 3
   m_TagString: Untagged
@@ -34384,24 +34396,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &845465297
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845465296}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpImg: []
-  life1: {fileID: 734576610}
-  life2: {fileID: 1400682449}
-  life3: {fileID: 845465296}
-  life4: {fileID: 1024811939}
-  life5: {fileID: 815464399}
 --- !u!114 &845465298
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34455,8 +34449,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 240, y: 160}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 202, y: -3.600006}
+  m_SizeDelta: {x: 43.928, y: 44.077087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &857347454 stripped
 Transform:
@@ -35558,6 +35552,11 @@ PrefabInstance:
       propertyPath: playerMaxHp
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 5868960193552643573, guid: 1c35190766d1e834eb92b42f3347e4e4,
+        type: 3}
+      propertyPath: UiManager
+      value: 
+      objectReference: {fileID: 644658736}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c35190766d1e834eb92b42f3347e4e4, type: 3}
 --- !u!1 &951634936
@@ -36180,7 +36179,6 @@ GameObject:
   - component: {fileID: 1024811943}
   - component: {fileID: 1024811942}
   - component: {fileID: 1024811941}
-  - component: {fileID: 1024811940}
   m_Layer: 5
   m_Name: Heart 4
   m_TagString: Untagged
@@ -36188,24 +36186,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1024811940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1024811939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpImg: []
-  life1: {fileID: 734576610}
-  life2: {fileID: 1400682449}
-  life3: {fileID: 845465296}
-  life4: {fileID: 1024811939}
-  life5: {fileID: 815464399}
 --- !u!114 &1024811941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36259,8 +36239,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 310, y: 160}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 263.5, y: -3.600006}
+  m_SizeDelta: {x: 43.928, y: 44.077087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!4 &1028238644 stripped
 Transform:
@@ -124765,6 +124745,7 @@ Transform:
   m_Children:
   - {fileID: 1197935522}
   - {fileID: 943948665}
+  - {fileID: 644658737}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -126408,7 +126389,6 @@ GameObject:
   - component: {fileID: 1400682453}
   - component: {fileID: 1400682452}
   - component: {fileID: 1400682451}
-  - component: {fileID: 1400682450}
   m_Layer: 5
   m_Name: Heart 2
   m_TagString: Untagged
@@ -126416,24 +126396,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1400682450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400682449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd5271279b063e489a838d5253a53c7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpImg: []
-  life1: {fileID: 734576610}
-  life2: {fileID: 1400682449}
-  life3: {fileID: 845465296}
-  life4: {fileID: 1024811939}
-  life5: {fileID: 815464399}
 --- !u!114 &1400682451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126487,8 +126449,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 170, y: 160}
-  m_SizeDelta: {x: 50, y: 50}
+  m_AnchoredPosition: {x: 140.5, y: -3.600006}
+  m_SizeDelta: {x: 43.928, y: 44.077087}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1408090601
 PrefabInstance:
@@ -126688,12 +126650,12 @@ PrefabInstance:
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6952825
+      value: -1.6904969
       objectReference: {fileID: 0}
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -87.4995
+      value: -86.422386
       objectReference: {fileID: 0}
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
