@@ -258,6 +258,10 @@ public class PlayerBehaviour : MonoBehaviour
         return isNoDmgTime;
     }
 
+    public int ReturnPlayerHp() {
+        return playerMaxHp;
+    }
+
     //트리거
     //몬스터는 Collision에 닿을 경우 튕겨 나가고
     //오브젝트는 trigger에 닿으면 튕겨 나감
