@@ -20,3 +20,6 @@ public class SoundManager : MonoBehaviour
             masterMixer.SetFloat("Master", sound);
     }
 }
+
+
+// djfkdjgkjaldjfljajdfl;ajdlgjaldfㅇ하ㅓㅁ아ㅓㄹ;ㅣ머ㅏㅇ러ㅣ마러;
