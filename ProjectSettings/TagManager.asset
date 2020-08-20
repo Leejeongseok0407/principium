@@ -7,6 +7,7 @@ TagManager:
   - Ground
   - Monster
   - player
+  - Trigger
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - TransmissionGround
   - Potal
   - Impediments
-  - 
+  - Trigger
   - 
   - 
   - 

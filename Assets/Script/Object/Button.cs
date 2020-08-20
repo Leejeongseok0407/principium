@@ -16,15 +16,16 @@ public class Button : MonoBehaviour
         }
     }
 
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        WallKeyActive(false);
-    }
-    
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        WallKeyActive(true);
+        if (collision.collider.tag == "Monster" || collision.collider.tag == "Player")
+            WallKeyActive(false);
     }
 
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Monster" || collision.collider.tag == "Player")
+            WallKeyActive(true);
+    }
 }
