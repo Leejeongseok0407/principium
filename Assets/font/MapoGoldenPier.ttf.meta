@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 59e021fdc10864041a5d95ce81cc3d0f
+guid: 3b424a56506567140b598beb01cf429d
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -8,9 +8,9 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: Heir of Light Bold
+  fontName: MapoGoldenPier
   fontNames:
-  - Heir of Light Bold
+  - MapoGoldenPier
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
