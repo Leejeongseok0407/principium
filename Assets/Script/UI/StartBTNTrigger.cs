@@ -9,7 +9,7 @@ public class StartBTNTrigger : MonoBehaviour
 
     public void StartGame() // 시작화면에서 게임 처음부터 시작하는 버튼
     {
-        SceneManager.LoadScene("stage1");
+        SceneManager.LoadScene("prologue");
     }
     public void ExitGame() // 시작화면에서 게임 종료하기
     {
