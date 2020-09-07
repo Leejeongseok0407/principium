@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Synopsis : MonoBehaviour
 {
+    [SerializeField]
     float velocity = 10.0f;
 
     // Update is called once per frame
