@@ -218,6 +218,7 @@ public class PlayerBehaviour : MonoBehaviour
         isDead = true;
         Debug.Log("die");
         ani.SetTrigger("DieTrigger");
+        UiManager.GetComponent<Hearts>().GameOver();
         noDmgTime = 0;
 
     }

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 {
     [SerializeField] GameObject[] hpImg;
     [SerializeField] GameObject player;
+    [SerializeField] GameObject gameOver;
     public int hp; 
 
      void Start()
@@ -14,6 +15,7 @@ using UnityEngine.UI;
         hp = player.gameObject.GetComponent<PlayerBehaviour>().ReturnPlayerHp();
         DisActiveHpImage(hp);
     }
+
     public void HPUpdate(int nowHp)
     {
         hp = nowHp;
@@ -28,6 +30,10 @@ using UnityEngine.UI;
         }
     }
 
+    public void GameOver() {
+        if(gameOver.activeSelf == false)
+        gameOver.SetActive(true);
+    }
    
 
 } 
