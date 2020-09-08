@@ -72,7 +72,7 @@ MonoBehaviour:
   - {fileID: 8217918767596188072}
   - {fileID: 8217918768103312991}
   fireInterval: 2
-  bullitDmg: 2
+  bullitDmg: 1
   bullitDistance: 10
   bullitSpeed: 4
 --- !u!50 &2498596773794351910
