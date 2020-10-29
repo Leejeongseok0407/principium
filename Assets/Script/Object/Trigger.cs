@@ -7,71 +7,69 @@ public class Trigger : MonoBehaviour
 {
     [SerializeField] GameObject pressSprite;
     [SerializeField] GameObject wall;
-    bool coolTime;
-    bool inPlayer = false;
+    [SerializeField] Animator ani = null;
+    [SerializeField] ParticleSystem particle;
+    bool coolTime = false;
+    bool inPlayer =false;
 
     // Start is called before the first frame update
     void Start()
     {
-        pressKeyActive(false);
+        PressImageActive(false);
+        particle.Stop();
     }
 
     // Update is called once per frame
     void Update()
     {
+        PressImageActive(inPlayer);
+
         if (inPlayer == true && Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Debug.Log("Set");
-            WallKeyActive(!wall.activeSelf);
+            WallActive(!wall.activeSelf);
         }
     }
 
-    void pressKeyActive(bool set)
+    void PressImageActive(bool set)
     {
         if (pressSprite != null)
+        {
+            if (coolTime == true)
+            {
+                pressSprite.SetActive(false);
+                return;
+            }
             pressSprite.SetActive(set);
+        }
     }
 
-    void WallKeyActive(bool set)
+    void WallActive(bool wallOn)
     {
         if (coolTime == true)
             return;
         if (wall != null)
         {
-            wall.SetActive(set);
+            if (wallOn == false)
+                particle.Play();
+            ani.SetBool("On", !wallOn);
+            wall.SetActive(wallOn);
             StartCoroutine("CoolTime");
         }
     }
 
     
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            pressKeyActive(true);
             inPlayer = true;
         }
     }
-
-   /* private void OnTriggerStay2D(Collider2D collision)
-    {
-        Debug.Log("in");
-        if (collision.gameObject.tag == "Player")
-        {
-            Debug.Log("PlayerIn");
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                Debug.Log("Set");
-                WallKeyActive(!wall.activeSelf);
-            }
-        }
-    }*/
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            pressKeyActive(false);
             inPlayer = false;
         }
     }
