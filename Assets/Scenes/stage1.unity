@@ -911,9 +911,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OptionDetail: {fileID: 117821565}
-  SoundDetail: {fileID: 0}
-  ShortcutDetail: {fileID: 0}
-  TeamDetail: {fileID: 0}
+  SoundDetail: {fileID: 593182008}
+  ShortcutDetail: {fileID: 918776593}
+  TeamDetail: {fileID: 554984652}
 --- !u!114 &103318371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27529,7 +27529,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1788384490}
   - {fileID: 781891622}
   - {fileID: 717635711}
   - {fileID: 201664195}
@@ -27538,6 +27537,7 @@ RectTransform:
   - {fileID: 593182009}
   - {fileID: 918776594}
   - {fileID: 554984653}
+  - {fileID: 1788384490}
   m_Father: {fileID: 1824012894}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -28662,11 +28662,11 @@ RectTransform:
   m_Children:
   - {fileID: 985950099}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790.1, y: -156.1}
+  m_AnchoredPosition: {x: -793.1, y: 67.937}
   m_SizeDelta: {x: 333.79105, y: 116.45331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &201664196
@@ -31627,7 +31627,7 @@ Transform:
   m_Children:
   - {fileID: 875865656}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &557932264
 PrefabInstance:
@@ -31979,7 +31979,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &593182009
 Transform:
   m_ObjectHideFlags: 0
@@ -31993,7 +31993,7 @@ Transform:
   m_Children:
   - {fileID: 1915456037}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &605656504 stripped
 Transform:
@@ -33173,11 +33173,11 @@ RectTransform:
   m_Children:
   - {fileID: 1838395152}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790.1, y: -39.6}
+  m_AnchoredPosition: {x: -793.1, y: 184.39}
   m_SizeDelta: {x: 333.79105, y: 116.45331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &717635712
@@ -33796,11 +33796,11 @@ RectTransform:
   m_Children:
   - {fileID: 993651569}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790.1, y: 69.1}
+  m_AnchoredPosition: {x: -790.1, y: 300.84}
   m_SizeDelta: {x: 333.79105, y: 116.45331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &781891623
@@ -35135,7 +35135,7 @@ Transform:
   m_LocalScale: {x: 2.086194, y: 3.8817768, z: 1}
   m_Children: []
   m_Father: {fileID: 117821566}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &921005480
 PrefabInstance:
@@ -35355,10 +35355,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b3f6fb352cfb9549b0838d102750234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OptionDetail: {fileID: 0}
-  SoundDetail: {fileID: 0}
-  ShortcutDetail: {fileID: 0}
-  TeamDetail: {fileID: 0}
+  OptionDetail: {fileID: 120492847}
+  SoundDetail: {fileID: 593182008}
+  ShortcutDetail: {fileID: 918776593}
+  TeamDetail: {fileID: 554984652}
 --- !u!4 &943948665
 Transform:
   m_ObjectHideFlags: 0
@@ -125562,11 +125562,11 @@ RectTransform:
   m_Children:
   - {fileID: 526561556}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790.1, y: -392.9}
+  m_AnchoredPosition: {x: -790.1, y: -164.97}
   m_SizeDelta: {x: 333.79105, y: 116.45331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1299801781
@@ -126782,12 +126782,12 @@ PrefabInstance:
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -81.15634
+      value: -77.010605
       objectReference: {fileID: 0}
     - target: {fileID: 4388264182080361581, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8294575
+      value: 1.8494251
       objectReference: {fileID: 0}
     - target: {fileID: 4388264182080361618, guid: f97fecf78515a2542b348b773b184b41,
         type: 3}
@@ -126931,11 +126931,11 @@ RectTransform:
   m_Children:
   - {fileID: 1366094874}
   m_Father: {fileID: 117821566}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -790.1, y: -276.4}
+  m_AnchoredPosition: {x: -793.1, y: -48.516}
   m_SizeDelta: {x: 333.79105, y: 116.45331}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1445892627
@@ -130045,7 +130045,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1788384490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -130053,12 +130053,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1788384489}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 117821566}
-  m_RootOrder: 0
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -131059,7 +131059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 263, y: -28.4}
+  m_AnchoredPosition: {x: 258, y: 25.7}
   m_SizeDelta: {x: 421.74158, y: 22.33152}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1915456038
