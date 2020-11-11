@@ -279,6 +279,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
             {
+                CinemachineShaker.Instance.Shake(5f);
                 Debug.Log("outchi");
                 Vector2 attackedVelocity = Vector2.zero;
                 float dir = (transform.position.x - other.gameObject.transform.position.x)
@@ -327,6 +328,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("Bullit"))
             {
+                CinemachineShaker.Instance.Shake(3f);
                 Vector2 attackedVelocity = Vector2.zero;
                 float dir = other.gameObject.GetComponent<Bullit>().CallDirctionX()
                     / Mathf.Abs(other.gameObject.GetComponent<Bullit>().CallDirctionX());
@@ -343,6 +345,7 @@ public class PlayerBehaviour : MonoBehaviour
             }
             if (other.gameObject.layer == LayerMask.NameToLayer("Impediments"))
             {
+                CinemachineShaker.Instance.Shake(5f);
                 Vector2 attackedVelocity = Vector2.zero;
                 float dir = -playerLookDirction;
 
