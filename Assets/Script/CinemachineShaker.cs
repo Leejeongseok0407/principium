@@ -15,14 +15,15 @@ public class CinemachineShaker : MonoBehaviour
     }
     private void Update()
     {
-        if (timer > 0) {
+        if (timer > 0)
+        {
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
                 CinemachineBasicMultiChannelPerlin cinemachineBasicMultiChannelPerlin =
                  cinemachineVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-
                 cinemachineBasicMultiChannelPerlin.m_AmplitudeGain = 0;
+
             }
         }
     }
