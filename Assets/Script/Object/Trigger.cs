@@ -50,7 +50,15 @@ public class Trigger : MonoBehaviour
         if (wall != null)
         {
             if (wallOn == false)
+            {
                 particle.Play();
+                AudioManager.instance.Play("flowerC");
+            }
+            else
+            {
+                AudioManager.instance.Play("flowerO");
+
+            }
             ani.SetBool("On", !wallOn);
             wall.SetActive(wallOn);
             StartCoroutine("CoolTime");

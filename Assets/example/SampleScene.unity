@@ -121,6 +121,105 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &15193591
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6813828435902621928, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_Name
+      value: Audio
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621934, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: sounds.Array.data[7].name
+      value: flowerC
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: sounds.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ac5722fe0dbe67042b8a42c5504fbedd, type: 3}
+    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: sounds.Array.data[7].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: sounds.Array.data[7].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
+        type: 3}
+      propertyPath: sounds.Array.data[2].name
+      value: flowerO
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0c34d65a57fae2140990932f9f43eb09, type: 3}
 --- !u!1001 &264446294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -152,6 +251,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Snail
+      objectReference: {fileID: 0}
+    - target: {fileID: 4453834237969925315, guid: cc4d95d3dce7c1a4dbba1631f288fdfc,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4453834237969925372, guid: cc4d95d3dce7c1a4dbba1631f288fdfc,
         type: 3}
@@ -535,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &643053058
 Transform:
   m_ObjectHideFlags: 0
@@ -1654,6 +1758,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 2498596773896100681, guid: c44459a67b97269459eb5becfd871188,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c44459a67b97269459eb5becfd871188, type: 3}
 --- !u!4 &1629553550123833813 stripped
@@ -1873,6 +1982,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hojeo
       objectReference: {fileID: 0}
+    - target: {fileID: 4453834237969925315, guid: 006f37d32cd6b6347aacb0c2ccafa319,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4453834237969925372, guid: 006f37d32cd6b6347aacb0c2ccafa319,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1941,6 +2055,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Crotch
+      objectReference: {fileID: 0}
+    - target: {fileID: 1336108973009697304, guid: 714ec33845a9bff4f8e83d01940a19d3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1336108973009697319, guid: 714ec33845a9bff4f8e83d01940a19d3,
         type: 3}

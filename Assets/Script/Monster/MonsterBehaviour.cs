@@ -90,6 +90,21 @@ public class MonsterHaviour : MonoBehaviour
     {
 
     }
+
+    virtual protected void FindPlayerSound()
+    {
+
+    }
+    virtual protected void AttackSound()
+    {
+
+    }
+
+    virtual protected void EndAttackSound()
+    {
+
+    }
+
     void TrackingPlayer()
     {
         //단위 벡터화
@@ -271,14 +286,20 @@ public class MonsterHaviour : MonoBehaviour
         StartCoroutine(stopJump());
     }
 
+    
+
 
     //<콜라이더 충돌 체크>
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            FindPlayerSound();
             if (backGround != null)
                 StartCoroutine("FindEmotion");
+        }
     }
+    
 
     void OnTriggerStay2D(Collider2D other)
     {

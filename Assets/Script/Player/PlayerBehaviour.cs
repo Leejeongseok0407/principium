@@ -118,6 +118,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             if (isSkillCanActive[0] == true)
             {
+                AudioManager.instance.Play("dash");
                 StartCoroutine(Dash());
                 StartCoroutine(CoolTime(skillNum));
 //              ani.SetBool("isDash", true);
@@ -146,6 +147,7 @@ public class PlayerBehaviour : MonoBehaviour
             //키메니저에 있는 input에서 Jump input실행
             if (Input.GetButtonDown("Jump"))
             {
+                AudioManager.instance.Play("jump");
                 if (Input.GetKey(KeyCode.DownArrow) &&
                     Physics2D.Raycast(transform.position, Vector2.down, transform.localScale.y + 0.1f, maskTransmissionGround))
                 {
@@ -280,7 +282,6 @@ public class PlayerBehaviour : MonoBehaviour
             if (other.gameObject.layer == LayerMask.NameToLayer("Monster"))
             {
                 CinemachineShaker.Instance.Shake(5f);
-                Debug.Log("outchi");
                 Vector2 attackedVelocity = Vector2.zero;
                 float dir = (transform.position.x - other.gameObject.transform.position.x)
                               / Mathf.Abs(other.gameObject.transform.position.x - transform.position.x);
@@ -291,7 +292,6 @@ public class PlayerBehaviour : MonoBehaviour
                 hp -= other.gameObject.GetComponent<MonsterHaviour>().dmg;
                 UiManager.GetComponent<Hearts>().HPUpdate(hp);
                 StartCoroutine("NoDmgTime");
-                Debug.Log("몬스터와 부딛힘 hp : " + hp);
             }
         }
         if (hp <= 0)
@@ -367,7 +367,6 @@ public class PlayerBehaviour : MonoBehaviour
     IEnumerator NoDmgTime()
     {
         isNoDmgTime = true;
-        Debug.Log("코루틴중");
         float countTime = 0;
         while (countTime < noDmgTime)
             {

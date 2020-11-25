@@ -48,6 +48,7 @@ public class Crotch : MonsterHaviour
             times += Time.deltaTime;
             yield return null;
         }
+        AudioManager.instance.Play("crotch");
         GetComponent<BoxCollider2D>().isTrigger = false;
         yield return new WaitForSeconds(0.1f);
         GetComponent<BoxCollider2D>().isTrigger = true;

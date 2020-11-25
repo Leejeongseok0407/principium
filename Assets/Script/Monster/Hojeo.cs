@@ -21,6 +21,11 @@ public class Hojeo : MonsterHaviour
     {
 
     }
+    
+    override protected void FindPlayerSound()
+    {
+        AudioManager.instance.Play("hojeo");
+    }
 
     override protected void DetectPlayerAni()
     {
