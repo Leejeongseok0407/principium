@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/stage1.unity
     guid: 856323340fe437d41aad677d9bcab0b0
+  - enabled: 1
+    path: Assets/Scenes/video.unity
+    guid: 04bc9d2533f35704dbb5f5376f3dce3e
   m_configObjects: {}
