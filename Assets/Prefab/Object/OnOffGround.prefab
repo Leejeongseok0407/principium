@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7173310565044168031}
   - component: {fileID: 6705921315808316529}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7434530494064942131}
   - component: {fileID: 7434530494064942130}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -150,7 +150,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7434530494176938593}
   - component: {fileID: 7434530494176938592}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: OnOffGround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
