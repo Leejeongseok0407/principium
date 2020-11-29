@@ -188,36 +188,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
-        type: 3}
-      propertyPath: sounds.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
-        type: 3}
-      propertyPath: sounds.Array.data[7].name
-      value: flowerC
-      objectReference: {fileID: 0}
-    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
-        type: 3}
-      propertyPath: sounds.Array.data[7].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: ac5722fe0dbe67042b8a42c5504fbedd, type: 3}
-    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
-        type: 3}
-      propertyPath: sounds.Array.data[7].volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
-        type: 3}
-      propertyPath: sounds.Array.data[7].pitch
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6813828435902621935, guid: 0c34d65a57fae2140990932f9f43eb09,
-        type: 3}
-      propertyPath: sounds.Array.data[2].name
-      value: flowerO
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c34d65a57fae2140990932f9f43eb09, type: 3}
 --- !u!1001 &264446294
@@ -976,11 +946,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1626252195556348792, guid: 49a3c6dcce1f6814f91d9e9bfd8f72d0,
-        type: 3}
-      propertyPath: particle
-      value: 
-      objectReference: {fileID: 1328896639}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 49a3c6dcce1f6814f91d9e9bfd8f72d0, type: 3}
 --- !u!4 &1061278353 stripped
@@ -1177,12 +1142,6 @@ Transform:
   m_Father: {fileID: 749195310}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -0.50200003, z: 0}
---- !u!198 &1328896639 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 6759854050287966176, guid: 49a3c6dcce1f6814f91d9e9bfd8f72d0,
-    type: 3}
-  m_PrefabInstance: {fileID: 975356427}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1356666726
 PrefabInstance:
   m_ObjectHideFlags: 0

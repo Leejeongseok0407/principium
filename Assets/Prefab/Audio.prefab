@@ -56,7 +56,7 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
-  - name: flower
+  - name: flowerO
     clip: {fileID: 8300000, guid: 0ede5d29a387c9846b8d621468fc35d0, type: 3}
     volume: 1
     pitch: 1
@@ -76,12 +76,18 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: hojeo
     clip: {fileID: 8300000, guid: e1ac13a2a048cda4e9ad0b4d07e13b97, type: 3}
-    volume: 1
+    volume: 0
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: slime
     clip: {fileID: 8300000, guid: ac5722fe0dbe67042b8a42c5504fbedd, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: flowerC
+    clip: {fileID: 8300000, guid: cdd1585e46a7aa54fb9fad09ac799121, type: 3}
     volume: 1
     pitch: 1
     loop: 0
