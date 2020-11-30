@@ -8,6 +8,11 @@ public class StartBTNTrigger : MonoBehaviour
     public GameObject MainMenu;
     public GameObject OptionDetail;
 
+    private void Start()
+    {
+        OptionDetail.SetActive(false);
+    }
+
     void Update()
     {
         if (OptionDetail.activeSelf == false) //Option 창 활성화 안 돼있으면 메인메뉴 창 활성화
