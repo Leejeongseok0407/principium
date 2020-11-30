@@ -910,6 +910,7 @@ GameObject:
   m_Component:
   - component: {fileID: 495250786}
   - component: {fileID: 495250787}
+  - component: {fileID: 495250788}
   m_Layer: 5
   m_Name: StartBackGround
   m_TagString: Untagged
@@ -981,6 +982,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &495250788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 495250785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c06ed53181bd0f43b203eed250f7f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 390635922}
 --- !u!1 &541741912
 GameObject:
   m_ObjectHideFlags: 0
@@ -1200,6 +1214,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 684634281}
   m_CullTransparentMesh: 0
+--- !u!1 &831196381
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 831196383}
+  - component: {fileID: 831196382}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &831196382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831196381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efd41caf3fd03c444b8f683e7b4048d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MainMenu: {fileID: 1156914847}
+  OptionDetail: {fileID: 100722508}
+--- !u!4 &831196383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 831196381}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 41.897186, y: -8.4494295, z: 80.34375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &835986401
 GameObject:
   m_ObjectHideFlags: 0
@@ -1441,7 +1500,6 @@ GameObject:
   - component: {fileID: 1026298240}
   - component: {fileID: 1026298239}
   - component: {fileID: 1026298238}
-  - component: {fileID: 1026298242}
   m_Layer: 5
   m_Name: Exit
   m_TagString: Untagged
@@ -1528,7 +1586,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1026298242}
+      - m_Target: {fileID: 0}
         m_MethodName: ExitGame
         m_Mode: 1
         m_Arguments:
@@ -1576,20 +1634,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1026298236}
   m_CullTransparentMesh: 0
---- !u!114 &1026298242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1026298236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd41caf3fd03c444b8f683e7b4048d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainMenu: {fileID: 1156914847}
-  OptionDetail: {fileID: 100722508}
 --- !u!1 &1055235240
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,7 +2640,6 @@ GameObject:
   - component: {fileID: 1733657652}
   - component: {fileID: 1733657651}
   - component: {fileID: 1733657650}
-  - component: {fileID: 1733657649}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -2624,20 +2667,6 @@ RectTransform:
   m_AnchoredPosition: {x: -264.2, y: -136}
   m_SizeDelta: {x: 133.43173, y: 16.911594}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1733657649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1733657647}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efd41caf3fd03c444b8f683e7b4048d1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MainMenu: {fileID: 1156914847}
-  OptionDetail: {fileID: 100722508}
 --- !u!114 &1733657650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2681,7 +2710,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1733657649}
+      - m_Target: {fileID: 0}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:

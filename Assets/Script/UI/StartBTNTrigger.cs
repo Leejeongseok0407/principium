@@ -22,6 +22,5 @@ public class StartBTNTrigger : MonoBehaviour
     public void ExitGame() // 시작화면에서 게임 종료하기
     {
         Application.Quit();
-        Debug.Log("끄읏");
     }
 }
